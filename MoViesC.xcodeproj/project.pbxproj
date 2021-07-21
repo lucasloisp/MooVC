@@ -14,18 +14,11 @@
 		C21448ED26A8E5E700E72E0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C21448EC26A8E5E700E72E0E /* Assets.xcassets */; };
 		C21448F026A8E5E700E72E0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C21448EE26A8E5E700E72E0E /* LaunchScreen.storyboard */; };
 		C21448FB26A8E5E700E72E0E /* MoViesCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21448FA26A8E5E700E72E0E /* MoViesCTests.swift */; };
-		C214490626A8E5E700E72E0E /* MoViesCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C214490526A8E5E700E72E0E /* MoViesCUITests.swift */; };
+		C214491426A8EAD200E72E0E /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C214491326A8EAD200E72E0E /* LoginViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		C21448F726A8E5E700E72E0E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C21448D826A8E5E600E72E0E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C21448DF26A8E5E600E72E0E;
-			remoteInfo = MoViesC;
-		};
-		C214490226A8E5E700E72E0E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C21448D826A8E5E600E72E0E /* Project object */;
 			proxyType = 1;
@@ -46,9 +39,7 @@
 		C21448F626A8E5E700E72E0E /* MoViesCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoViesCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C21448FA26A8E5E700E72E0E /* MoViesCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoViesCTests.swift; sourceTree = "<group>"; };
 		C21448FC26A8E5E700E72E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C214490126A8E5E700E72E0E /* MoViesCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoViesCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C214490526A8E5E700E72E0E /* MoViesCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoViesCUITests.swift; sourceTree = "<group>"; };
-		C214490726A8E5E700E72E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C214491326A8EAD200E72E0E /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,13 +57,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C21448FE26A8E5E700E72E0E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -81,7 +65,6 @@
 			children = (
 				C21448E226A8E5E600E72E0E /* MoViesC */,
 				C21448F926A8E5E700E72E0E /* MoViesCTests */,
-				C214490426A8E5E700E72E0E /* MoViesCUITests */,
 				C21448E126A8E5E600E72E0E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,7 +74,6 @@
 			children = (
 				C21448E026A8E5E600E72E0E /* MoViesC.app */,
 				C21448F626A8E5E700E72E0E /* MoViesCTests.xctest */,
-				C214490126A8E5E700E72E0E /* MoViesCUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,17 +97,9 @@
 			children = (
 				C21448FA26A8E5E700E72E0E /* MoViesCTests.swift */,
 				C21448FC26A8E5E700E72E0E /* Info.plist */,
+				C214491326A8EAD200E72E0E /* LoginViewControllerTests.swift */,
 			);
 			path = MoViesCTests;
-			sourceTree = "<group>";
-		};
-		C214490426A8E5E700E72E0E /* MoViesCUITests */ = {
-			isa = PBXGroup;
-			children = (
-				C214490526A8E5E700E72E0E /* MoViesCUITests.swift */,
-				C214490726A8E5E700E72E0E /* Info.plist */,
-			);
-			path = MoViesCUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,24 +140,6 @@
 			productReference = C21448F626A8E5E700E72E0E /* MoViesCTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		C214490026A8E5E700E72E0E /* MoViesCUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C214491026A8E5E700E72E0E /* Build configuration list for PBXNativeTarget "MoViesCUITests" */;
-			buildPhases = (
-				C21448FD26A8E5E700E72E0E /* Sources */,
-				C21448FE26A8E5E700E72E0E /* Frameworks */,
-				C21448FF26A8E5E700E72E0E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C214490326A8E5E700E72E0E /* PBXTargetDependency */,
-			);
-			name = MoViesCUITests;
-			productName = MoViesCUITests;
-			productReference = C214490126A8E5E700E72E0E /* MoViesCUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,10 +153,6 @@
 						CreatedOnToolsVersion = 12.5.1;
 					};
 					C21448F526A8E5E700E72E0E = {
-						CreatedOnToolsVersion = 12.5.1;
-						TestTargetID = C21448DF26A8E5E600E72E0E;
-					};
-					C214490026A8E5E700E72E0E = {
 						CreatedOnToolsVersion = 12.5.1;
 						TestTargetID = C21448DF26A8E5E600E72E0E;
 					};
@@ -221,7 +173,6 @@
 			targets = (
 				C21448DF26A8E5E600E72E0E /* MoViesC */,
 				C21448F526A8E5E700E72E0E /* MoViesCTests */,
-				C214490026A8E5E700E72E0E /* MoViesCUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -238,13 +189,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C21448F426A8E5E700E72E0E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C21448FF26A8E5E700E72E0E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -268,15 +212,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C214491426A8EAD200E72E0E /* LoginViewControllerTests.swift in Sources */,
 				C21448FB26A8E5E700E72E0E /* MoViesCTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C21448FD26A8E5E700E72E0E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C214490626A8E5E700E72E0E /* MoViesCUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,11 +224,6 @@
 			isa = PBXTargetDependency;
 			target = C21448DF26A8E5E600E72E0E /* MoViesC */;
 			targetProxy = C21448F726A8E5E700E72E0E /* PBXContainerItemProxy */;
-		};
-		C214490326A8E5E700E72E0E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C21448DF26A8E5E600E72E0E /* MoViesC */;
-			targetProxy = C214490226A8E5E700E72E0E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -511,44 +443,6 @@
 			};
 			name = Release;
 		};
-		C214491126A8E5E700E72E0E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = MoViesCUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lucasloisp.MoViesCUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MoViesC;
-			};
-			name = Debug;
-		};
-		C214491226A8E5E700E72E0E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = MoViesCUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lucasloisp.MoViesCUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MoViesC;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -575,15 +469,6 @@
 			buildConfigurations = (
 				C214490E26A8E5E700E72E0E /* Debug */,
 				C214490F26A8E5E700E72E0E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C214491026A8E5E700E72E0E /* Build configuration list for PBXNativeTarget "MoViesCUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C214491126A8E5E700E72E0E /* Debug */,
-				C214491226A8E5E700E72E0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
