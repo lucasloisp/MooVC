@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78867BC61624D507DC192D11 /* Pods_MoViesC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE11F0C1119F0B5CD4ED81FF /* Pods_MoViesC.framework */; };
 		C21448E426A8E5E600E72E0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21448E326A8E5E600E72E0E /* AppDelegate.swift */; };
 		C21448E626A8E5E600E72E0E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21448E526A8E5E600E72E0E /* SceneDelegate.swift */; };
 		C21448E826A8E5E600E72E0E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21448E726A8E5E600E72E0E /* LoginViewController.swift */; };
@@ -27,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1580DCB23B3FEBF5CD263BEF /* Pods-MoViesC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoViesC.debug.xcconfig"; path = "Target Support Files/Pods-MoViesC/Pods-MoViesC.debug.xcconfig"; sourceTree = "<group>"; };
+		47AA0F744694FAE3B2932722 /* Pods-MoViesC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoViesC.release.xcconfig"; path = "Target Support Files/Pods-MoViesC/Pods-MoViesC.release.xcconfig"; sourceTree = "<group>"; };
 		C21448E026A8E5E600E72E0E /* MoViesC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoViesC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C21448E326A8E5E600E72E0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C21448E526A8E5E600E72E0E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +41,7 @@
 		C21448F626A8E5E700E72E0E /* MoViesCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoViesCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C21448FC26A8E5E700E72E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C214491326A8EAD200E72E0E /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
+		DE11F0C1119F0B5CD4ED81FF /* Pods_MoViesC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoViesC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78867BC61624D507DC192D11 /* Pods_MoViesC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,12 +63,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3830A92B29A4A57E546E860F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1580DCB23B3FEBF5CD263BEF /* Pods-MoViesC.debug.xcconfig */,
+				47AA0F744694FAE3B2932722 /* Pods-MoViesC.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		48C9B9B01B66804E9D62D8EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DE11F0C1119F0B5CD4ED81FF /* Pods_MoViesC.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C21448D726A8E5E600E72E0E = {
 			isa = PBXGroup;
 			children = (
 				C21448E226A8E5E600E72E0E /* MoViesC */,
 				C21448F926A8E5E700E72E0E /* MoViesCTests */,
 				C21448E126A8E5E600E72E0E /* Products */,
+				3830A92B29A4A57E546E860F /* Pods */,
+				48C9B9B01B66804E9D62D8EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,9 +131,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C214490A26A8E5E700E72E0E /* Build configuration list for PBXNativeTarget "MoViesC" */;
 			buildPhases = (
+				61F2E0673041B5DB3FD66588 /* [CP] Check Pods Manifest.lock */,
 				C21448DC26A8E5E600E72E0E /* Sources */,
 				C21448DD26A8E5E600E72E0E /* Frameworks */,
 				C21448DE26A8E5E600E72E0E /* Resources */,
+				80D55781818EBB91850C8418 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -193,6 +220,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		61F2E0673041B5DB3FD66588 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MoViesC-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		80D55781818EBB91850C8418 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MoViesC/Pods-MoViesC-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MoViesC/Pods-MoViesC-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoViesC/Pods-MoViesC-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C21448DC26A8E5E600E72E0E /* Sources */ = {
@@ -361,6 +430,7 @@
 		};
 		C214490B26A8E5E700E72E0E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1580DCB23B3FEBF5CD263BEF /* Pods-MoViesC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -380,6 +450,7 @@
 		};
 		C214490C26A8E5E700E72E0E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47AA0F744694FAE3B2932722 /* Pods-MoViesC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
