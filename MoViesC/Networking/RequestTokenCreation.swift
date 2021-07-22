@@ -7,7 +7,6 @@
 
 import Foundation
 import ObjectMapper
-import AlamofireObjectMapper
 
 struct RequestTokenCreation: ImmutableMappable {
     let requestToken: String

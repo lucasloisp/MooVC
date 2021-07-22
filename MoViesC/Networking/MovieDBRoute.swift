@@ -12,12 +12,15 @@ import AlamofireObjectMapper
 
 enum MovieDBRoute {
     case createRequestToken
+    case getGenres
 }
 
 extension MovieDBRoute: APIRoute {
     var method: HTTPMethod {
         switch self {
         case .createRequestToken:
+            return .get
+        case .getGenres:
             return .get
         }
     }
@@ -30,6 +33,8 @@ extension MovieDBRoute: APIRoute {
         switch self {
         case .createRequestToken:
             return try encoded(path: "/authentication/token/new", params: [:])
+        case .getGenres:
+            return try encoded(path: "/genre/movie/list", params: [:])
         }
     }
 

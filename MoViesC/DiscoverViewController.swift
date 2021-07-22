@@ -11,11 +11,14 @@ class DiscoverViewController: UIViewController {
     private var genres: [Genre]?
 
     @IBOutlet weak var genresTableView: UITableView!
+    @IBOutlet weak var pendingActivityIndicatorView: UIActivityIndicatorView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         prepareTheTableView()
+        loadGenres()
     }
 
     private func prepareTheTableView() {
@@ -23,6 +26,23 @@ class DiscoverViewController: UIViewController {
         let identifier = GenreTableViewCell.identifier
         genresTableView.register(genreNib, forCellReuseIdentifier: identifier)
         genresTableView.dataSource = self
+    }
+
+    private func loadGenres() {
+        pendingActivityIndicatorView.isHidden = false
+        genresTableView.isHidden = true
+        APIClient.shared.requestItem(request: MovieDBRoute.getGenres) { (result: Result<GenresResponse, Error>) in
+            switch result {
+            case .success(let genresResponse):
+                self.genres = genresResponse.genres
+                self.genresTableView.reloadData()
+            case .failure(let err):
+                // TODO: Show the error to the user
+                print(err)
+            }
+            self.genresTableView.isHidden = false
+            self.pendingActivityIndicatorView.isHidden = true
+        }
     }
 
 }

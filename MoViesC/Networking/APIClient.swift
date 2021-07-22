@@ -4,6 +4,7 @@
 //
 //  Created by German Rodriguez on 7/20/21.
 //
+// swiftlint:disable line_length
 
 import Foundation
 import Alamofire
