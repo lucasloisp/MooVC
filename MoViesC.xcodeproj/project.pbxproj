@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -69,7 +69,6 @@
 				1580DCB23B3FEBF5CD263BEF /* Pods-MoViesC.debug.xcconfig */,
 				47AA0F744694FAE3B2932722 /* Pods-MoViesC.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -136,6 +135,7 @@
 				C21448DD26A8E5E600E72E0E /* Frameworks */,
 				C21448DE26A8E5E600E72E0E /* Resources */,
 				80D55781818EBB91850C8418 /* [CP] Embed Pods Frameworks */,
+				C2A3023026A900C9008BBA7D /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -260,6 +260,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoViesC/Pods-MoViesC-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		C2A3023026A900C9008BBA7D /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect && \"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

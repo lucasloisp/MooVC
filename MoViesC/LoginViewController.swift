@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
     }
 }
 
-extension LoginViewController : UITextFieldDelegate {
+extension LoginViewController: UITextFieldDelegate {
     private func formIsFilledIn() -> Bool {
         guard let username = usernameTextField.text,
               let password = passwordTextField.text else {
@@ -31,7 +31,9 @@ extension LoginViewController : UITextFieldDelegate {
         return !username.isEmpty && !password.isEmpty
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
         signInButton.isEnabled = formIsFilledIn()
         return true
     }
