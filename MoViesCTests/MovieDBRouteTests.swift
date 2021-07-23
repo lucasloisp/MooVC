@@ -76,6 +76,12 @@ class MovieDBRouteTests: XCTestCase {
         case .success(let response):
             XCTAssertFalse(response.movies.isEmpty)
             XCTAssertEqual(response.page, 1)
+            response.movies.forEach { someMovie in
+                XCTAssertFalse(someMovie.title.isEmpty)
+                XCTAssertNotNil(someMovie.posterUrl)
+                XCTAssertTrue(someMovie.posterUrl!.hasPrefix("/"), "Pster's url is \(someMovie.posterUrl!)")
+                XCTAssertTrue(someMovie.posterUrl!.hasSuffix(".jpg"), "Pster's url is \(someMovie.posterUrl!)")
+            }
         default:
             print(response!)
             XCTFail("The network request failed")
