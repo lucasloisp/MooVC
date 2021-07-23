@@ -6,7 +6,7 @@ target 'MoViesC' do
   use_frameworks!
 
   # Pods for Test
-  pod 'Alamofire'
+  pod 'Alamofire', '~>5.0.0-rc.2'
   pod 'ObjectMapper'
   pod 'AlamofireObjectMapper'
 
