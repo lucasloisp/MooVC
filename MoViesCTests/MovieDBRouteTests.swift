@@ -11,6 +11,8 @@ import XCTest
 class MovieDBRouteTests: XCTestCase {
     let apiClient = APIClient.shared
 
+    let someGenre = Genre(name: "Action", tmbdId: 28)
+
     func testCanRequestForTokenCreation() throws {
         let expectation = self.expectation(description: "API Request")
         var response: Result<RequestTokenCreation, Error>!
@@ -50,6 +52,30 @@ class MovieDBRouteTests: XCTestCase {
             XCTAssertTrue(response.genres.allSatisfy({ genre in
                 genre.name.count > 0 && genre.tmbdId > 0
             }))
+        default:
+            print(response!)
+            XCTFail("The network request failed")
+        }
+    }
+
+    func testCanRequestMoviesForAGenre() throws {
+        let expectation = self.expectation(description: "API Request")
+        var response: Result<DiscoverMovieResponse, Error>!
+
+        let request = MovieDBRoute.discoverMoviesByGenre(genre: someGenre)
+
+        apiClient
+            .requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
+                response = result
+                expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 5, handler: nil)
+
+        switch response {
+        case .success(let response):
+            XCTAssertFalse(response.movies.isEmpty)
+            XCTAssertEqual(response.page, 1)
         default:
             print(response!)
             XCTFail("The network request failed")
