@@ -7,7 +7,7 @@ PODS:
   - SwiftLint (0.43.1)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (~> 5.0.0-rc.2)
   - AlamofireObjectMapper
   - ObjectMapper
   - SwiftLint
@@ -25,6 +25,6 @@ SPEC CHECKSUMS:
   ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 72aa6f7cbd51baabb39eb5018762e091dac20088
+PODFILE CHECKSUM: 5d9671fd90fc5f17291c63671e7878bf14f9c72f
 
 COCOAPODS: 1.10.1
