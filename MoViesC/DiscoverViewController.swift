@@ -9,6 +9,8 @@ import UIKit
 
 class DiscoverViewController: UIViewController {
     private var genres: [Genre]?
+    // TODO: Build this for every movie
+    private var moviePoster: UIImage?
 
     @IBOutlet weak var genresTableView: UITableView!
     @IBOutlet weak var pendingActivityIndicatorView: UIActivityIndicatorView!
@@ -35,6 +37,7 @@ class DiscoverViewController: UIViewController {
             switch result {
             case .success(let genresResponse):
                 self.genres = genresResponse.genres
+                self.loadMovieImage()
                 self.genresTableView.reloadData()
             case .failure(let err):
                 // TODO: Show the error to the user
@@ -43,6 +46,22 @@ class DiscoverViewController: UIViewController {
             self.genresTableView.isHidden = false
             self.pendingActivityIndicatorView.isHidden = true
         }
+    }
+
+    private func loadMovieImage() {
+        let imageUrl =
+            "https://developer.apple.com/home/images/hero-xcode-13/xcode-13-large.png"
+        guard let url = URL(string: imageUrl) else {
+            return
+        }
+
+        // Create data from url (You can handle exeption with try-catch)
+        guard let data = try? Data(contentsOf: url) else {
+            return
+        }
+
+        // Create image from data
+        self.moviePoster = UIImage(data: data)
     }
 
 }
@@ -58,7 +77,7 @@ extension DiscoverViewController: UITableViewDataSource {
 
         let genre = genres![indexPath.row]
 
-        cell.configure(for: genre.name)
+        cell.configure(for: genre.name, showing: self.moviePoster)
 
         return cell
     }

@@ -11,17 +11,15 @@ class GenreTableViewCell: UITableViewCell {
     static let identifier = "GenreTableViewCell"
 
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var posterImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        // Configure the view for the selected state
-    }
-
-    func configure(for genre: String) {
+    func configure(for genre: String, showing poster: UIImage?) {
         nameLabel.text = genre
+        posterImageView.image = poster
         // TODO: Prepare the collection view for displaying movies
     }
 
