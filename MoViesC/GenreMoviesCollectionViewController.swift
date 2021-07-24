@@ -10,9 +10,8 @@ import UIKit
 class GenreMoviesCollectionViewController: NSObject {
     let genre: Genre
     var movies: [Movie] = []
-    var posterImage: UIImage?
 
-    private var collectionView: UICollectionView!
+    private var collectionView: UICollectionView?
 
     init(for genre: Genre) {
         self.genre = genre
@@ -21,23 +20,26 @@ class GenreMoviesCollectionViewController: NSObject {
     func bind(to cell: GenreTableViewCell) {
         cell.configure(for: genre.name)
         collectionView = cell.moviesCollectionView
-
-        collectionView.dataSource = self
-
         loadMovies()
-        cell.moviesCollectionView.reloadData()
+
+        collectionView?.dataSource = self
+        collectionView?.reloadData()
     }
 
     private func loadMovies() {
-        let someMovie = Movie(title: "Inception", tmbdId: 1, posterUrl: "https://developer.apple.com/home/images/hero-xcode-13/xcode-13-large.png")
+        let request = MovieDBRoute.discoverMoviesByGenre(genre: genre)
 
-        movies = [someMovie, someMovie, someMovie]
-
-        if let posterUrl = someMovie.posterUrl,
-           let url = URL(string: posterUrl),
-           let imageData = try? Data(contentsOf: url) {
-            posterImage = UIImage(data: imageData)
-        }
+        APIClient.shared
+            .requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
+                switch result {
+                case .success(let response):
+                    self.movies = response.movies
+                    self.collectionView?.reloadData()
+                case .failure(let err):
+                    // TODO: Show the error to the user
+                    print(err)
+                }
+            }
     }
 }
 
@@ -50,7 +52,12 @@ extension GenreMoviesCollectionViewController: UICollectionViewDataSource {
         let cell = getGenreMovieCell(collectionView, indexPath)
         let movie = movies[indexPath.row]
 
-        cell.configure(name: movie.title, poster: posterImage)
+        var url: URL?
+        if let posterUrl = movie.posterUrl {
+            url = URL(string: "https://image.tmdb.org/t/p/w500" + posterUrl)
+        }
+
+        cell.configure(name: movie.title, poster: url)
 
         return cell
     }
