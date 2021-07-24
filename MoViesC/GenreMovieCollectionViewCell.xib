@@ -20,6 +20,12 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Lw-uY-wR6">
                         <rect key="frame" x="0.0" y="0.0" width="64" height="128"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Forever Purge" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="mnG-WI-6MI">
+                        <rect key="frame" x="2" y="2" width="60" height="124"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -27,13 +33,18 @@
                 <constraint firstItem="8Lw-uY-wR6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="PAs-Fj-gb6"/>
                 <constraint firstAttribute="trailing" secondItem="8Lw-uY-wR6" secondAttribute="trailing" id="VZZ-6L-MhZ"/>
                 <constraint firstItem="8Lw-uY-wR6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="YbZ-qf-zRF"/>
+                <constraint firstItem="mnG-WI-6MI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="bc1-qq-olq"/>
                 <constraint firstAttribute="bottom" secondItem="8Lw-uY-wR6" secondAttribute="bottom" id="jB4-ic-fnB"/>
+                <constraint firstAttribute="trailing" secondItem="mnG-WI-6MI" secondAttribute="trailing" constant="2" id="nHc-KR-Ycg"/>
+                <constraint firstAttribute="bottom" secondItem="mnG-WI-6MI" secondAttribute="bottom" constant="2" id="rAN-x3-aq5"/>
+                <constraint firstItem="mnG-WI-6MI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="yuP-FR-tED"/>
             </constraints>
             <size key="customSize" width="365" height="234"/>
             <connections>
+                <outlet property="nameLabel" destination="mnG-WI-6MI" id="6h8-Uu-7Ms"/>
                 <outlet property="posterImageView" destination="8Lw-uY-wR6" id="ENv-JV-ydZ"/>
             </connections>
-            <point key="canvasLocation" x="365.94202898550725" y="145.98214285714286"/>
+            <point key="canvasLocation" x="379.71014492753625" y="148.66071428571428"/>
         </collectionViewCell>
     </objects>
 </document>

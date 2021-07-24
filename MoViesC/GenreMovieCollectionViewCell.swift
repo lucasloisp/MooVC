@@ -13,6 +13,7 @@ class GenreMovieCollectionViewCell: UICollectionViewCell {
     static let identifier = "GenreMovieCollectionViewCell"
 
     @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,12 +21,17 @@ class GenreMovieCollectionViewCell: UICollectionViewCell {
 
     func configure(name: String, poster: URL?) {
         guard let url = poster else {
-            posterImageView.image = UIImage(systemName: "xmark.rectangle")
-            // TODO: Set the title as if it were the picture
+            posterImageView.image = nil
+            nameLabel.text = name
+            nameLabel.isHidden = false
+            posterImageView.isHidden = true
             return
         }
         let placeholder = UIImage(systemName: "photo")
         posterImageView.kf.setImage(with: url, placeholder: placeholder, options: nil, completionHandler: nil)
+        nameLabel.text = ""
+        nameLabel.isHidden = true
+        posterImageView.isHidden = false
     }
 
 }
