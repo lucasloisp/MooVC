@@ -11,7 +11,7 @@ class GenreMoviesManager {
     static let shared = GenreMoviesManager()
     private init() {}
 
-    func loadGenres(onSuccess: @escaping (([(Genre, [Movie])]) -> Void)) {
+    func loadGenres(onSuccess: @escaping (([(Genre, [Movie])]) -> Void), onError: (() -> Void)) {
         APIClient.shared.requestItem(request: MovieDBRoute.getGenres) { (result: Result<GenresResponse, Error>) in
             switch result {
             case .success(let genresResponse):
@@ -36,8 +36,7 @@ class GenreMoviesManager {
                   onSuccess(Array(zip(genres, movies)))
                 }
             case .failure(let err):
-                // TODO: Show the error to the user
-                print(err)
+                onError()
             }
         }
 
@@ -73,6 +72,10 @@ class DiscoverViewController: UIViewController {
                 GenreMoviesCollectionViewController(for: genre, with: movies)
             })
             self.genresTableView.reloadData()
+            self.genresTableView.isHidden = false
+            self.pendingActivityIndicatorView.isHidden = true
+        } onError: {
+            // TODO: Indicate that there was an error to the user
             self.genresTableView.isHidden = false
             self.pendingActivityIndicatorView.isHidden = true
         }
