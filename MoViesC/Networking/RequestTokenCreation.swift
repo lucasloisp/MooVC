@@ -2,12 +2,11 @@
 //  Todo.swift
 //  Test
 //
-//  Created by December on 20/7/21.
+//  Created by Lucas Lois on 20/7/21.
 //
 
 import Foundation
 import ObjectMapper
-import AlamofireObjectMapper
 
 struct RequestTokenCreation: ImmutableMappable {
     let requestToken: String
