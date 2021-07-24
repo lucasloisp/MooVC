@@ -11,15 +11,18 @@ class GenreTableViewCell: UITableViewCell {
     static let identifier = "GenreTableViewCell"
 
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var moviesCollectionView: UICollectionView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        let genreMovieNib = UINib(nibName: GenreMovieCollectionViewCell.identifier, bundle: nil)
+        let identifier = GenreMovieCollectionViewCell.identifier
+        moviesCollectionView.register(genreMovieNib, forCellWithReuseIdentifier: identifier)
     }
 
-    func configure(for genre: String, showing poster: UIImage?) {
+    func configure(for genre: String) {
         nameLabel.text = genre
-        posterImageView.image = poster
         // TODO: Prepare the collection view for displaying movies
     }
 

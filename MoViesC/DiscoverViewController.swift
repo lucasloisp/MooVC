@@ -7,10 +7,47 @@
 
 import UIKit
 
+// TODO: Move to another file
+class GenreMoviesCollectionViewController: NSObject {
+    let genre: Genre
+    let movies: [Movie] = [Movie(title: "Inception", tmbdId: 1, posterUrl: "https://developer.apple.com/home/images/hero-xcode-13/xcode-13-large.png")]
+
+    init(for genre: Genre) {
+        self.genre = genre
+    }
+
+    func bind(to cell: GenreTableViewCell) {
+        cell.configure(for: genre.name)
+        cell.moviesCollectionView.dataSource = self
+
+        cell.moviesCollectionView.reloadData()
+    }
+}
+
+extension GenreMoviesCollectionViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return movies.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = getGenreMovieCell(collectionView, indexPath)
+        let movie = movies[indexPath.row]
+
+        cell.configure(name: movie.title)
+
+        return cell
+    }
+
+    private func getGenreMovieCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> GenreMovieCollectionViewCell {
+        let identifier = GenreMovieCollectionViewCell.identifier
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+        // swiftlint:disable:next force_cast
+        return cell as! GenreMovieCollectionViewCell
+    }
+}
+
 class DiscoverViewController: UIViewController {
-    private var genres: [Genre]?
-    // TODO: Build this for every movie
-    private var moviePoster: UIImage?
+    private var genreMoviesControllers: [GenreMoviesCollectionViewController]?
 
     @IBOutlet weak var genresTableView: UITableView!
     @IBOutlet weak var pendingActivityIndicatorView: UIActivityIndicatorView!
@@ -36,8 +73,9 @@ class DiscoverViewController: UIViewController {
         APIClient.shared.requestItem(request: MovieDBRoute.getGenres) { (result: Result<GenresResponse, Error>) in
             switch result {
             case .success(let genresResponse):
-                self.genres = genresResponse.genres
-                self.loadMovieImage()
+                self.genreMoviesControllers = genresResponse.genres.map({ genre in
+                    GenreMoviesCollectionViewController(for: genre)
+                })
                 self.genresTableView.reloadData()
             case .failure(let err):
                 // TODO: Show the error to the user
@@ -48,36 +86,20 @@ class DiscoverViewController: UIViewController {
         }
     }
 
-    private func loadMovieImage() {
-        let imageUrl =
-            "https://developer.apple.com/home/images/hero-xcode-13/xcode-13-large.png"
-        guard let url = URL(string: imageUrl) else {
-            return
-        }
-
-        // Create data from url (You can handle exeption with try-catch)
-        guard let data = try? Data(contentsOf: url) else {
-            return
-        }
-
-        // Create image from data
-        self.moviePoster = UIImage(data: data)
-    }
-
 }
 
 extension DiscoverViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return genres?.count ?? 0
+        return genreMoviesControllers?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = getGenreCell(tableView, for: indexPath)
 
-        let genre = genres![indexPath.row]
+        let genreMoviesController = genreMoviesControllers![indexPath.row]
 
-        cell.configure(for: genre.name, showing: self.moviePoster)
+        genreMoviesController.bind(to: cell)
 
         return cell
     }

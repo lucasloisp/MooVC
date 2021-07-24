@@ -15,6 +15,8 @@
 		C21448ED26A8E5E700E72E0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C21448EC26A8E5E700E72E0E /* Assets.xcassets */; };
 		C21448F026A8E5E700E72E0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C21448EE26A8E5E700E72E0E /* LaunchScreen.storyboard */; };
 		C214491426A8EAD200E72E0E /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C214491326A8EAD200E72E0E /* LoginViewControllerTests.swift */; };
+		C22E222326AB890300201EEC /* GenreMovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22E222126AB890300201EEC /* GenreMovieCollectionViewCell.swift */; };
+		C22E222426AB890300201EEC /* GenreMovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C22E222226AB890300201EEC /* GenreMovieCollectionViewCell.xib */; };
 		C250E46326AA2994008A95AF /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C250E46226AA2994008A95AF /* Genre.swift */; };
 		C250E46526AA2D11008A95AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C250E46426AA2D11008A95AF /* Main.storyboard */; };
 		C250E46726AA2DE4008A95AF /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C250E46626AA2DE4008A95AF /* DiscoverViewController.swift */; };
@@ -54,6 +56,8 @@
 		C21448F626A8E5E700E72E0E /* MoViesCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoViesCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C21448FC26A8E5E700E72E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C214491326A8EAD200E72E0E /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
+		C22E222126AB890300201EEC /* GenreMovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreMovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		C22E222226AB890300201EEC /* GenreMovieCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenreMovieCollectionViewCell.xib; sourceTree = "<group>"; };
 		C250E46226AA2994008A95AF /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		C250E46426AA2D11008A95AF /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C250E46626AA2DE4008A95AF /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 				C250E46626AA2DE4008A95AF /* DiscoverViewController.swift */,
 				C250E46826AA2E78008A95AF /* GenreTableViewCell.swift */,
 				C250E46926AA2E78008A95AF /* GenreTableViewCell.xib */,
+				C22E222126AB890300201EEC /* GenreMovieCollectionViewCell.swift */,
+				C22E222226AB890300201EEC /* GenreMovieCollectionViewCell.xib */,
 			);
 			path = MoViesC;
 			sourceTree = "<group>";
@@ -263,6 +269,7 @@
 			files = (
 				C21448F026A8E5E700E72E0E /* LaunchScreen.storyboard in Resources */,
 				C21448ED26A8E5E700E72E0E /* Assets.xcassets in Resources */,
+				C22E222426AB890300201EEC /* GenreMovieCollectionViewCell.xib in Resources */,
 				C21448EB26A8E5E600E72E0E /* Auth.storyboard in Resources */,
 				C250E46B26AA2E78008A95AF /* GenreTableViewCell.xib in Resources */,
 				C250E46526AA2D11008A95AF /* Main.storyboard in Resources */,
@@ -344,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C250E46F26AA3F0F008A95AF /* DiscoverMovieResponse.swift in Sources */,
+				C22E222326AB890300201EEC /* GenreMovieCollectionViewCell.swift in Sources */,
 				C250E46726AA2DE4008A95AF /* DiscoverViewController.swift in Sources */,
 				C2A3023E26A909A8008BBA7D /* RequestTokenCreation.swift in Sources */,
 				C21448E826A8E5E600E72E0E /* LoginViewController.swift in Sources */,
