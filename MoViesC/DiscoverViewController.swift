@@ -10,6 +10,8 @@ import UIKit
 class DiscoverViewController: UIViewController {
     private var genreMoviesControllers: [GenreMoviesCollectionViewController]?
 
+    fileprivate var storedOffsets = [Int: CGFloat]()
+
     @IBOutlet weak var genresTableView: UITableView!
     @IBOutlet weak var pendingActivityIndicatorView: UIActivityIndicatorView!
 
@@ -26,6 +28,7 @@ class DiscoverViewController: UIViewController {
         let identifier = GenreTableViewCell.identifier
         genresTableView.register(genreNib, forCellReuseIdentifier: identifier)
         genresTableView.dataSource = self
+        genresTableView.delegate = self
     }
 
     private func loadGenres() {
@@ -47,7 +50,7 @@ class DiscoverViewController: UIViewController {
 
 }
 
-extension DiscoverViewController: UITableViewDataSource {
+extension DiscoverViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return genreMoviesControllers?.count ?? 0
@@ -60,7 +63,16 @@ extension DiscoverViewController: UITableViewDataSource {
 
         genreMoviesController.bind(to: cell)
 
+        cell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
+
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? GenreTableViewCell else { return }
+
+        storedOffsets[indexPath.row] = cell.collectionViewOffset
+        cell.stopScrolling()
     }
 
     private func getGenreCell(_ tableView: UITableView, for indexPath: IndexPath) -> GenreTableViewCell {
