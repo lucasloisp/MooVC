@@ -10,7 +10,10 @@ import UIKit
 // TODO: Move to another file
 class GenreMoviesCollectionViewController: NSObject {
     let genre: Genre
-    let movies: [Movie] = [Movie(title: "Inception", tmbdId: 1, posterUrl: "https://developer.apple.com/home/images/hero-xcode-13/xcode-13-large.png")]
+    var movies: [Movie] = []
+    var posterImage: UIImage?
+
+    private var collectionView: UICollectionView!
 
     init(for genre: Genre) {
         self.genre = genre
@@ -18,9 +21,24 @@ class GenreMoviesCollectionViewController: NSObject {
 
     func bind(to cell: GenreTableViewCell) {
         cell.configure(for: genre.name)
-        cell.moviesCollectionView.dataSource = self
+        collectionView = cell.moviesCollectionView
 
+        collectionView.dataSource = self
+
+        loadMovies()
         cell.moviesCollectionView.reloadData()
+    }
+
+    private func loadMovies() {
+        let someMovie = Movie(title: "Inception", tmbdId: 1, posterUrl: "https://developer.apple.com/home/images/hero-xcode-13/xcode-13-large.png")
+
+        movies = [someMovie, someMovie, someMovie]
+
+        if let posterUrl = someMovie.posterUrl,
+           let url = URL(string: posterUrl),
+           let imageData = try? Data(contentsOf: url) {
+            posterImage = UIImage(data: imageData)
+        }
     }
 }
 
@@ -33,7 +51,7 @@ extension GenreMoviesCollectionViewController: UICollectionViewDataSource {
         let cell = getGenreMovieCell(collectionView, indexPath)
         let movie = movies[indexPath.row]
 
-        cell.configure(name: movie.title)
+        cell.configure(name: movie.title, poster: posterImage)
 
         return cell
     }
