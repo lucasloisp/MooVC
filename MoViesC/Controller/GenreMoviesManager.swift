@@ -24,7 +24,7 @@ class GenreMoviesManager {
                     APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
                         switch result {
                         case .success(let response):
-                            movies[index] = response.movies
+                            movies[index] = Array(response.movies.prefix(10))
                         case .failure(let err):
                             // TODO: Show the error to the user
                             print(err)
