@@ -9,6 +9,7 @@ import UIKit
 
 class DiscoverViewController: UIViewController {
     private var genreMoviesControllers: [GenreMoviesCollectionViewController]?
+    private var selectedMovie: Movie?
 
     fileprivate var storedOffsets = [Int: CGFloat]()
 
@@ -21,6 +22,11 @@ class DiscoverViewController: UIViewController {
         // Do any additional setup after loading the view.
         prepareTheTableView()
         loadGenres()
+    }
+
+    @IBSegueAction func makeDiscoverViewController(_ coder: NSCoder) -> MovieDetailsViewController? {
+        guard let movie = selectedMovie else { return nil }
+        return MovieDetailsViewController(coder: coder, for: movie)
     }
 
     private func prepareTheTableView() {
@@ -36,7 +42,9 @@ class DiscoverViewController: UIViewController {
         genresTableView.isHidden = true
         GenreMoviesManager.shared.loadGenres { genreMovies in
             self.genreMoviesControllers = genreMovies.map({ (genre, movies) in
-                GenreMoviesCollectionViewController(for: genre, with: movies)
+                let controller = GenreMoviesCollectionViewController(for: genre, with: movies)
+                controller.delegate = self
+                return controller
             })
             self.genresTableView.reloadData()
             self.genresTableView.isHidden = false
@@ -48,6 +56,13 @@ class DiscoverViewController: UIViewController {
         }
     }
 
+}
+
+extension DiscoverViewController: GenreMoviesCollectionViewControllerDelegate {
+    func didSelect(movie: Movie) {
+        self.selectedMovie = movie
+        performSegue(withIdentifier: "toMovieDetailsViewControllerSegue", sender: nil)
+    }
 }
 
 extension DiscoverViewController: UITableViewDataSource, UITableViewDelegate {

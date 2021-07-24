@@ -32,6 +32,7 @@
 		C2A3023926A90698008BBA7D /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A3023626A90698008BBA7D /* APIClient.swift */; };
 		C2A3023C26A908A5008BBA7D /* MovieDBRouteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A3023B26A908A5008BBA7D /* MovieDBRouteTests.swift */; };
 		C2A3023E26A909A8008BBA7D /* RequestTokenCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A3023D26A909A8008BBA7D /* RequestTokenCreation.swift */; };
+		C2D50BF526AC9AAB00FB6BF0 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D50BF426AC9AAB00FB6BF0 /* MovieDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		C2A3023626A90698008BBA7D /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		C2A3023B26A908A5008BBA7D /* MovieDBRouteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBRouteTests.swift; sourceTree = "<group>"; };
 		C2A3023D26A909A8008BBA7D /* RequestTokenCreation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTokenCreation.swift; sourceTree = "<group>"; };
+		C2D50BF426AC9AAB00FB6BF0 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		DE11F0C1119F0B5CD4ED81FF /* Pods_MoViesC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoViesC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				C20615C226AC7CCE0085DF6F /* GenreMoviesManager.swift */,
+				C2D50BF426AC9AAB00FB6BF0 /* MovieDetailsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				C250E46D26AA38CC008A95AF /* GenresResponse.swift in Sources */,
 				C2A3023926A90698008BBA7D /* APIClient.swift in Sources */,
 				C250E46326AA2994008A95AF /* Genre.swift in Sources */,
+				C2D50BF526AC9AAB00FB6BF0 /* MovieDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
