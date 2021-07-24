@@ -28,7 +28,15 @@ class GenreMovieCollectionViewCell: UICollectionViewCell {
             return
         }
         let placeholder = UIImage(systemName: "photo")
-        posterImageView.kf.setImage(with: url, placeholder: placeholder, options: nil, completionHandler: nil)
+        self.posterImageView.contentMode = .scaleAspectFit
+        posterImageView.kf.setImage(with: url, placeholder: placeholder, options: nil) { result in
+            switch result {
+            case .success(_):
+                self.posterImageView.contentMode = .scaleAspectFill
+            default:
+                return
+            }
+        }
         nameLabel.text = ""
         nameLabel.isHidden = true
         posterImageView.isHidden = false
