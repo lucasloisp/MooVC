@@ -9,37 +9,21 @@ import UIKit
 
 class GenreMoviesCollectionViewController: NSObject {
     let genre: Genre
-    var movies: [Movie] = []
+    let movies: [Movie]
 
     private var collectionView: UICollectionView?
 
-    init(for genre: Genre) {
+    init(for genre: Genre, with movies: [Movie]) {
         self.genre = genre
+        self.movies = movies
     }
 
     func bind(to cell: GenreTableViewCell) {
         cell.configure(for: genre.name)
         collectionView = cell.moviesCollectionView
-        loadMovies()
 
         collectionView?.dataSource = self
         collectionView?.reloadData()
-    }
-
-    private func loadMovies() {
-        let request = MovieDBRoute.discoverMoviesByGenre(genre: genre)
-
-        APIClient.shared
-            .requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
-                switch result {
-                case .success(let response):
-                    self.movies = response.movies
-                    self.collectionView?.reloadData()
-                case .failure(let err):
-                    // TODO: Show the error to the user
-                    print(err)
-                }
-            }
     }
 }
 

@@ -7,6 +7,43 @@
 
 import UIKit
 
+class GenreMoviesManager {
+    static let shared = GenreMoviesManager()
+    private init() {}
+
+    func loadGenres(onSuccess: @escaping (([(Genre, [Movie])]) -> Void)) {
+        APIClient.shared.requestItem(request: MovieDBRoute.getGenres) { (result: Result<GenresResponse, Error>) in
+            switch result {
+            case .success(let genresResponse):
+                let genres = genresResponse.genres
+                var movies: [[Movie]] = Array(repeating: [], count: genres.count)
+                let group = DispatchGroup()
+                genres.enumerated().forEach { (index, genre) in
+                    group.enter()
+                    let request = MovieDBRoute.discoverMoviesByGenre(genre: genre)
+                    APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
+                        switch result {
+                        case .success(let response):
+                            movies[index] = response.movies
+                        case .failure(let err):
+                            // TODO: Show the error to the user
+                            print(err)
+                        }
+                        group.leave()
+                    }
+                }
+                group.notify(queue: .main) {
+                  onSuccess(Array(zip(genres, movies)))
+                }
+            case .failure(let err):
+                // TODO: Show the error to the user
+                print(err)
+            }
+        }
+
+    }
+}
+
 class DiscoverViewController: UIViewController {
     private var genreMoviesControllers: [GenreMoviesCollectionViewController]?
 
@@ -31,17 +68,11 @@ class DiscoverViewController: UIViewController {
     private func loadGenres() {
         pendingActivityIndicatorView.isHidden = false
         genresTableView.isHidden = true
-        APIClient.shared.requestItem(request: MovieDBRoute.getGenres) { (result: Result<GenresResponse, Error>) in
-            switch result {
-            case .success(let genresResponse):
-                self.genreMoviesControllers = genresResponse.genres.map({ genre in
-                    GenreMoviesCollectionViewController(for: genre)
-                })
-                self.genresTableView.reloadData()
-            case .failure(let err):
-                // TODO: Show the error to the user
-                print(err)
-            }
+        GenreMoviesManager.shared.loadGenres { genreMovies in
+            self.genreMoviesControllers = genreMovies.map({ (genre, movies) in
+                GenreMoviesCollectionViewController(for: genre, with: movies)
+            })
+            self.genresTableView.reloadData()
             self.genresTableView.isHidden = false
             self.pendingActivityIndicatorView.isHidden = true
         }
