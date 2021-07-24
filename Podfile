@@ -11,5 +11,6 @@ target 'MoViesC' do
   pod 'AlamofireObjectMapper'
 
   pod 'SwiftLint'
+  pod 'Kingfisher', '~> 6.0'
 
 end
