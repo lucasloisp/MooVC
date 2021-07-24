@@ -17,6 +17,7 @@
 		C214491426A8EAD200E72E0E /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C214491326A8EAD200E72E0E /* LoginViewControllerTests.swift */; };
 		C22E222326AB890300201EEC /* GenreMovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22E222126AB890300201EEC /* GenreMovieCollectionViewCell.swift */; };
 		C22E222426AB890300201EEC /* GenreMovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C22E222226AB890300201EEC /* GenreMovieCollectionViewCell.xib */; };
+		C22E222626AB9DEF00201EEC /* GenreMoviesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22E222526AB9DEF00201EEC /* GenreMoviesCollectionViewController.swift */; };
 		C250E46326AA2994008A95AF /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C250E46226AA2994008A95AF /* Genre.swift */; };
 		C250E46526AA2D11008A95AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C250E46426AA2D11008A95AF /* Main.storyboard */; };
 		C250E46726AA2DE4008A95AF /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C250E46626AA2DE4008A95AF /* DiscoverViewController.swift */; };
@@ -58,6 +59,7 @@
 		C214491326A8EAD200E72E0E /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
 		C22E222126AB890300201EEC /* GenreMovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreMovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		C22E222226AB890300201EEC /* GenreMovieCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenreMovieCollectionViewCell.xib; sourceTree = "<group>"; };
+		C22E222526AB9DEF00201EEC /* GenreMoviesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreMoviesCollectionViewController.swift; sourceTree = "<group>"; };
 		C250E46226AA2994008A95AF /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		C250E46426AA2D11008A95AF /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C250E46626AA2DE4008A95AF /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				C250E46926AA2E78008A95AF /* GenreTableViewCell.xib */,
 				C22E222126AB890300201EEC /* GenreMovieCollectionViewCell.swift */,
 				C22E222226AB890300201EEC /* GenreMovieCollectionViewCell.xib */,
+				C22E222526AB9DEF00201EEC /* GenreMoviesCollectionViewController.swift */,
 			);
 			path = MoViesC;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 			files = (
 				C250E46F26AA3F0F008A95AF /* DiscoverMovieResponse.swift in Sources */,
 				C22E222326AB890300201EEC /* GenreMovieCollectionViewCell.swift in Sources */,
+				C22E222626AB9DEF00201EEC /* GenreMoviesCollectionViewController.swift in Sources */,
 				C250E46726AA2DE4008A95AF /* DiscoverViewController.swift in Sources */,
 				C2A3023E26A909A8008BBA7D /* RequestTokenCreation.swift in Sources */,
 				C21448E826A8E5E600E72E0E /* LoginViewController.swift in Sources */,

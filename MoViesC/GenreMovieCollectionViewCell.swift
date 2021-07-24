@@ -2,7 +2,7 @@
 //  GenreMovieCollectionViewCell.swift
 //  MoViesC
 //
-//  Created by December on 23/7/21.
+//  Created by Lucas Lois on 23/7/21.
 //
 
 import UIKit
