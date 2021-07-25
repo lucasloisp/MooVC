@@ -14,6 +14,7 @@ enum MovieDBRoute {
     case createRequestToken
     case getGenres
     case discoverMoviesByGenre(genre: Genre)
+    case getMovieDetails(movie: Movie)
 }
 
 extension MovieDBRoute: APIRoute {
@@ -24,6 +25,8 @@ extension MovieDBRoute: APIRoute {
         case .getGenres:
             return .get
         case .discoverMoviesByGenre:
+            return .get
+        case .getMovieDetails:
             return .get
         }
     }
@@ -40,6 +43,8 @@ extension MovieDBRoute: APIRoute {
             return try encoded(path: "/genre/movie/list", params: [:])
         case .discoverMoviesByGenre(let genre):
             return try encoded(path: "/discover/movie", params: ["with_genres": "\(genre.tmbdId)"])
+        case .getMovieDetails(let movie):
+            return try encoded(path: "/movie/\(movie.tmbdId)", params: [:])
         }
     }
 

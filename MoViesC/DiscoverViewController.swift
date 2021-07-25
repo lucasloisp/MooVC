@@ -7,8 +7,14 @@
 
 import UIKit
 
-class DiscoverViewController: UIViewController {
+class DiscoverViewController: UIViewController, WithSegues {
+    typealias SegueType = SeguesFromSelf
+    enum SeguesFromSelf: String, PerformableSegue {
+        case toMovieDetailsViewControllerSegue
+    }
+
     private var genreMoviesControllers: [GenreMoviesCollectionViewController]?
+    private var selectedMovie: Movie?
 
     fileprivate var storedOffsets = [Int: CGFloat]()
 
@@ -23,6 +29,11 @@ class DiscoverViewController: UIViewController {
         loadGenres()
     }
 
+    @IBSegueAction func makeDiscoverViewController(_ coder: NSCoder) -> MovieDetailsViewController? {
+        guard let movie = selectedMovie else { return nil }
+        return MovieDetailsViewController(coder: coder, for: movie)
+    }
+
     private func prepareTheTableView() {
         let genreNib = UINib(nibName: GenreTableViewCell.identifier, bundle: nil)
         let identifier = GenreTableViewCell.identifier
@@ -33,21 +44,33 @@ class DiscoverViewController: UIViewController {
 
     private func loadGenres() {
         pendingActivityIndicatorView.isHidden = false
+        pendingActivityIndicatorView.startAnimating()
         genresTableView.isHidden = true
         GenreMoviesManager.shared.loadGenres { genreMovies in
             self.genreMoviesControllers = genreMovies.map({ (genre, movies) in
-                GenreMoviesCollectionViewController(for: genre, with: movies)
+                let controller = GenreMoviesCollectionViewController(for: genre, with: movies)
+                controller.delegate = self
+                return controller
             })
             self.genresTableView.reloadData()
             self.genresTableView.isHidden = false
             self.pendingActivityIndicatorView.isHidden = true
+            self.pendingActivityIndicatorView.stopAnimating()
         } onError: {
             // TODO: Indicate that there was an error to the user
             self.genresTableView.isHidden = false
             self.pendingActivityIndicatorView.isHidden = true
+            self.pendingActivityIndicatorView.stopAnimating()
         }
     }
 
+}
+
+extension DiscoverViewController: GenreMoviesCollectionViewControllerDelegate {
+    func didSelect(movie: Movie) {
+        self.selectedMovie = movie
+        perform(segue: .toMovieDetailsViewControllerSegue)
+    }
 }
 
 extension DiscoverViewController: UITableViewDataSource, UITableViewDelegate {

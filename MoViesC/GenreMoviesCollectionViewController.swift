@@ -7,11 +7,16 @@
 
 import UIKit
 
+protocol GenreMoviesCollectionViewControllerDelegate: AnyObject {
+    func didSelect(movie: Movie)
+}
+
 class GenreMoviesCollectionViewController: NSObject {
     let genre: Genre
     let movies: [Movie]
 
-    private var collectionView: UICollectionView?
+    weak var hostViewController: UIViewController?
+    weak var delegate: GenreMoviesCollectionViewControllerDelegate?
 
     init(for genre: Genre, with movies: [Movie]) {
         self.genre = genre
@@ -20,14 +25,15 @@ class GenreMoviesCollectionViewController: NSObject {
 
     func bind(to cell: GenreTableViewCell) {
         cell.configure(for: genre.name)
-        collectionView = cell.moviesCollectionView
+        let collectionView = cell.moviesCollectionView!
 
-        collectionView?.dataSource = self
-        collectionView?.reloadData()
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.reloadData()
     }
 }
 
-extension GenreMoviesCollectionViewController: UICollectionViewDataSource {
+extension GenreMoviesCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
     }
@@ -44,6 +50,11 @@ extension GenreMoviesCollectionViewController: UICollectionViewDataSource {
         cell.configure(name: movie.title, poster: url)
 
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movies[indexPath.row]
+        delegate?.didSelect(movie: movie)
     }
 
     private func getGenreMovieCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> GenreMovieCollectionViewCell {
