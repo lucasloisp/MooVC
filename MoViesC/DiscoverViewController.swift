@@ -39,6 +39,7 @@ class DiscoverViewController: UIViewController {
 
     private func loadGenres() {
         pendingActivityIndicatorView.isHidden = false
+        pendingActivityIndicatorView.startAnimating()
         genresTableView.isHidden = true
         GenreMoviesManager.shared.loadGenres { genreMovies in
             self.genreMoviesControllers = genreMovies.map({ (genre, movies) in
@@ -49,10 +50,12 @@ class DiscoverViewController: UIViewController {
             self.genresTableView.reloadData()
             self.genresTableView.isHidden = false
             self.pendingActivityIndicatorView.isHidden = true
+            self.pendingActivityIndicatorView.stopAnimating()
         } onError: {
             // TODO: Indicate that there was an error to the user
             self.genresTableView.isHidden = false
             self.pendingActivityIndicatorView.isHidden = true
+            self.pendingActivityIndicatorView.stopAnimating()
         }
     }
 
