@@ -20,6 +20,7 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
 
     required init?(coder: NSCoder) {
       fatalError("init(coder:) is not implemented")
@@ -38,6 +39,7 @@ class MovieDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        hideMovieDetails()
         loadPosterImage()
         loadMovieDetails()
     }
@@ -61,6 +63,7 @@ class MovieDetailsViewController: UIViewController {
     }
 
     func loadMovieDetails() {
+        startLoadingIndicator()
         let request = MovieDBRoute.getMovieDetails(movie: movie)
         APIClient.shared.requestItem(request: request) { (result: Result<MovieDetails, Error>) in
             switch result {
@@ -70,16 +73,16 @@ class MovieDetailsViewController: UIViewController {
                 // TODO: Implement
                 print(err)
             }
+            self.stopLoadingIndicator()
         }
     }
 
     func updateMovieDetails() {
         guard let movieDetails = movieDetails else {
-            taglineLabel.isHidden = true
-            statusLabel.isHidden = true
-            releaseDateLabel.isHidden = true
+            hideMovieDetails()
             return
         }
+        showMovieDetails()
         taglineLabel.text = movieDetails.tagline
         statusLabel.text = movieDetails.status
         if let releaseDate = movieDetails.releaseDate {
@@ -87,6 +90,30 @@ class MovieDetailsViewController: UIViewController {
         } else {
             releaseDateLabel.text = "Unknown"
         }
+    }
+
+    private func startLoadingIndicator() {
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
+    }
+
+    private func stopLoadingIndicator() {
+        activityIndicatorView.isHidden = true
+        activityIndicatorView.stopAnimating()
+    }
+
+    private func hideMovieDetails() {
+        setMovieDetailsVisibility(isHidden: true)
+    }
+
+    private func showMovieDetails() {
+        setMovieDetailsVisibility(isHidden: false)
+    }
+
+    private func setMovieDetailsVisibility(isHidden: Bool) {
+        taglineLabel.isHidden = isHidden
+        statusLabel.isHidden = isHidden
+        releaseDateLabel.isHidden = isHidden
     }
 
     /*
