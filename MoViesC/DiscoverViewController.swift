@@ -69,7 +69,7 @@ class DiscoverViewController: UIViewController, WithSegues {
 extension DiscoverViewController: GenreMoviesCollectionViewControllerDelegate {
     func didSelect(movie: Movie) {
         self.selectedMovie = movie
-        performSegue(.toMovieDetailsViewControllerSegue)
+        perform(segue: .toMovieDetailsViewControllerSegue)
     }
 }
 

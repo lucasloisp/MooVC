@@ -16,7 +16,7 @@ protocol WithSegues: UIViewController {
 }
 
 extension WithSegues {
-    func performSegue(_ segue: SegueType) {
+    func perform(segue: SegueType) {
         performSegue(withIdentifier: segue.identifier, sender: nil)
     }
 }
