@@ -7,7 +7,12 @@
 
 import UIKit
 
-class DiscoverViewController: UIViewController {
+class DiscoverViewController: UIViewController, WithSegues {
+    typealias SegueType = SeguesFromSelf
+    enum SeguesFromSelf: String, PerformableSegue {
+        case toMovieDetailsViewControllerSegue
+    }
+
     private var genreMoviesControllers: [GenreMoviesCollectionViewController]?
     private var selectedMovie: Movie?
 
@@ -64,7 +69,7 @@ class DiscoverViewController: UIViewController {
 extension DiscoverViewController: GenreMoviesCollectionViewControllerDelegate {
     func didSelect(movie: Movie) {
         self.selectedMovie = movie
-        performSegue(withIdentifier: "toMovieDetailsViewControllerSegue", sender: nil)
+        performSegue(.toMovieDetailsViewControllerSegue)
     }
 }
 
