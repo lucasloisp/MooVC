@@ -61,15 +61,16 @@ class MovieDetailsViewController: UIViewController {
     }
 
     func loadMovieDetails() {
-        {
-            self.movieDetails = MovieDetails(
-                movie: self.movie,
-                tagline: "A short description of the film",
-                status: "Released",
-                releaseDate: Date()
-            )
-            self.updateMovieDetails()
-        }()
+        let request = MovieDBRoute.getMovieDetails(movie: movie)
+        APIClient.shared.requestItem(request: request) { (result: Result<MovieDetails, Error>) in
+            switch result {
+            case .success(let movieDetails):
+                self.movieDetails = movieDetails
+            case .failure(let err):
+                // TODO: Implement
+                print(err)
+            }
+        }
     }
 
     func updateMovieDetails() {
@@ -81,7 +82,11 @@ class MovieDetailsViewController: UIViewController {
         }
         taglineLabel.text = movieDetails.tagline
         statusLabel.text = movieDetails.status
-        releaseDateLabel.text = formatter.string(from: movieDetails.releaseDate)
+        if let releaseDate = movieDetails.releaseDate {
+            releaseDateLabel.text = formatter.string(from: releaseDate)
+        } else {
+            releaseDateLabel.text = "Unknown"
+        }
     }
 
     /*
