@@ -82,13 +82,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="PkJ-4I-PAt">
+                                <rect key="frame" x="146" y="98" width="258" height="192"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7Y9-DE-nZz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="7Y9-DE-nZz" firstAttribute="trailing" secondItem="PkJ-4I-PAt" secondAttribute="trailing" constant="10" id="3UP-LT-L6Q"/>
                             <constraint firstItem="hug-TF-OCY" firstAttribute="top" secondItem="7Y9-DE-nZz" secondAttribute="top" constant="10" id="59v-QK-9Jo"/>
                             <constraint firstItem="Jdt-wq-SXJ" firstAttribute="top" secondItem="hug-TF-OCY" secondAttribute="top" id="5Zf-kU-OmS"/>
                             <constraint firstItem="Jdt-wq-SXJ" firstAttribute="leading" secondItem="oKx-vc-pMY" secondAttribute="leading" id="AHp-Da-7TB"/>
+                            <constraint firstItem="PkJ-4I-PAt" firstAttribute="top" secondItem="hug-TF-OCY" secondAttribute="top" id="HP1-c7-Cd1"/>
                             <constraint firstItem="7Y9-DE-nZz" firstAttribute="trailing" secondItem="P1d-Sq-b8f" secondAttribute="trailing" constant="10" id="PZE-vJ-zua"/>
                             <constraint firstItem="Jdt-wq-SXJ" firstAttribute="width" secondItem="oKx-vc-pMY" secondAttribute="width" id="UTi-By-mNS"/>
                             <constraint firstItem="hug-TF-OCY" firstAttribute="leading" secondItem="7Y9-DE-nZz" secondAttribute="leading" constant="10" id="Yvb-nF-dbK"/>
@@ -98,10 +103,13 @@
                             <constraint firstItem="P1d-Sq-b8f" firstAttribute="top" secondItem="oKx-vc-pMY" secondAttribute="bottom" constant="4" id="jzx-fF-Jqe"/>
                             <constraint firstItem="P1d-Sq-b8f" firstAttribute="leading" secondItem="hug-TF-OCY" secondAttribute="trailing" constant="8" id="kdL-7j-GvZ"/>
                             <constraint firstItem="oKx-vc-pMY" firstAttribute="leading" secondItem="P1d-Sq-b8f" secondAttribute="leading" id="l60-pw-SVp"/>
+                            <constraint firstItem="PkJ-4I-PAt" firstAttribute="leading" secondItem="hug-TF-OCY" secondAttribute="trailing" constant="8" id="vQD-PI-M7c"/>
+                            <constraint firstItem="PkJ-4I-PAt" firstAttribute="bottom" secondItem="hug-TF-OCY" secondAttribute="bottom" id="yKx-uF-q1T"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Movie" id="J5v-E1-pEz"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="PkJ-4I-PAt" id="5iT-3b-Vxi"/>
                         <outlet property="posterImageView" destination="hug-TF-OCY" id="0Og-hj-ewA"/>
                         <outlet property="releaseDateLabel" destination="P1d-Sq-b8f" id="8X8-nu-yQO"/>
                         <outlet property="statusLabel" destination="oKx-vc-pMY" id="ghj-ZV-LIe"/>
