@@ -44,7 +44,7 @@ class MovieDetailsViewController: UIViewController {
         loadMovieDetails()
     }
 
-    func loadPosterImage() {
+    private func loadPosterImage() {
         guard let posterUrl = movie.posterUrl else {
             posterImageView.image = UIImage(systemName: "xmark.rectangle")
             return
@@ -62,7 +62,7 @@ class MovieDetailsViewController: UIViewController {
         }
     }
 
-    func loadMovieDetails() {
+    private func loadMovieDetails() {
         startLoadingIndicator()
         let request = MovieDBRoute.getMovieDetails(movie: movie)
         APIClient.shared.requestItem(request: request) { (result: Result<MovieDetails, Error>) in
@@ -77,7 +77,7 @@ class MovieDetailsViewController: UIViewController {
         }
     }
 
-    func updateMovieDetails() {
+    private func updateMovieDetails() {
         guard let movieDetails = movieDetails else {
             hideMovieDetails()
             return
