@@ -63,19 +63,20 @@
                                     <constraint firstAttribute="height" constant="192" id="zO1-hU-niI"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A short description of the film. Lorem Ipsum dolor sit amet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jdt-wq-SXJ" userLabel="Movie Tagline">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jdt-wq-SXJ" userLabel="Movie Tagline">
                                 <rect key="frame" x="146" y="98" width="258" height="138"/>
+                                <string key="text">A short description of the film. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac mi nulla. Vestibulum iaculis molestie sodales. Donec efficitur purus nisi, et semper est feugiat id.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="MM/DD/YYY" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1d-Sq-b8f" userLabel="Movie Release Date">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="MM/DD/YYY" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1d-Sq-b8f" userLabel="Movie Release Date">
                                 <rect key="frame" x="146" y="269" width="258" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Released" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKx-vc-pMY" userLabel="Movie Status">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Released" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKx-vc-pMY" userLabel="Movie Status">
                                 <rect key="frame" x="146" y="244" width="258" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -92,7 +93,7 @@
                             <constraint firstItem="Jdt-wq-SXJ" firstAttribute="width" secondItem="oKx-vc-pMY" secondAttribute="width" id="UTi-By-mNS"/>
                             <constraint firstItem="hug-TF-OCY" firstAttribute="leading" secondItem="7Y9-DE-nZz" secondAttribute="leading" constant="10" id="Yvb-nF-dbK"/>
                             <constraint firstItem="oKx-vc-pMY" firstAttribute="width" secondItem="P1d-Sq-b8f" secondAttribute="width" id="eIX-68-nd6"/>
-                            <constraint firstItem="oKx-vc-pMY" firstAttribute="top" secondItem="Jdt-wq-SXJ" secondAttribute="bottom" constant="8" id="eJh-0R-TyT"/>
+                            <constraint firstItem="oKx-vc-pMY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Jdt-wq-SXJ" secondAttribute="bottom" constant="8" id="eJh-0R-TyT"/>
                             <constraint firstItem="P1d-Sq-b8f" firstAttribute="bottom" secondItem="hug-TF-OCY" secondAttribute="bottom" id="fOJ-Sv-qFe"/>
                             <constraint firstItem="P1d-Sq-b8f" firstAttribute="top" secondItem="oKx-vc-pMY" secondAttribute="bottom" constant="4" id="jzx-fF-Jqe"/>
                             <constraint firstItem="P1d-Sq-b8f" firstAttribute="leading" secondItem="hug-TF-OCY" secondAttribute="trailing" constant="8" id="kdL-7j-GvZ"/>
