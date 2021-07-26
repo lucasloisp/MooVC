@@ -17,8 +17,10 @@ class GenreTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         let genreMovieNib = UINib(nibName: GenreMovieCollectionViewCell.identifier, bundle: nil)
+        let genreMovieFooterNib = UINib(nibName: GenreMovieCollectionReusableView.identifier, bundle: nil)
         let identifier = GenreMovieCollectionViewCell.identifier
         moviesCollectionView.register(genreMovieNib, forCellWithReuseIdentifier: identifier)
+        moviesCollectionView.register(genreMovieFooterNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GenreMovieCollectionReusableView.identifier)
     }
 
     var collectionViewOffset: CGFloat {
