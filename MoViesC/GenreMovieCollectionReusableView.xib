@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="GenreMovieCollectionReusableView" customModule="MoViesC" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="64" height="128"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wzN-67-Yq1">
+                    <rect key="frame" x="8" y="53" width="48" height="22"/>
+                    <state key="normal">
+                        <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
+                    </state>
+                    <connections>
+                        <action selector="requestMore:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="TOG-Xh-5y0"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <constraints>
+                <constraint firstItem="wzN-67-Yq1" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" id="6K1-Ak-SNH"/>
+                <constraint firstItem="wzN-67-Yq1" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="EhD-eB-0tX"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="wzN-67-Yq1" secondAttribute="trailing" constant="8" id="yef-l6-acY"/>
+                <constraint firstItem="wzN-67-Yq1" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="8" id="zhR-Up-Qjs"/>
+            </constraints>
+            <point key="canvasLocation" x="-17.39130434782609" y="87.723214285714278"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
+    </resources>
+</document>

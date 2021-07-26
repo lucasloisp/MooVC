@@ -9,6 +9,7 @@ import UIKit
 
 protocol GenreMoviesCollectionViewControllerDelegate: AnyObject {
     func didSelect(movie: Movie)
+    func loadMore(of genre: Genre)
 }
 
 class GenreMoviesCollectionViewController: NSObject {
@@ -33,7 +34,11 @@ class GenreMoviesCollectionViewController: NSObject {
     }
 }
 
-extension GenreMoviesCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension GenreMoviesCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, GenreMovieCollectionReusableViewDelegate {
+    func didTap() {
+        delegate?.loadMore(of: genre)
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
     }
@@ -50,6 +55,24 @@ extension GenreMoviesCollectionViewController: UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = movies[indexPath.row]
         delegate?.didSelect(movie: movie)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionFooter:
+            let footerView = getFooterView(collectionView, at: indexPath)
+            footerView.delegate = self
+            return footerView
+        default:
+            fatalError("Invalid element type")
+        }
+    }
+
+    private func getFooterView(_ collectionView: UICollectionView, at indexPath: IndexPath) -> GenreMovieCollectionReusableView {
+        let identifier = GenreMovieCollectionReusableView.identifier
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: identifier, for: indexPath)
+        // swiftlint:disable:next force_cast
+        return view as! GenreMovieCollectionReusableView
     }
 
     private func getGenreMovieCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> GenreMovieCollectionViewCell {
