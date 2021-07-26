@@ -11,13 +11,19 @@ import ObjectMapper
 struct Movie {
     let title: String
     let tmbdId: Int
-    let posterUrl: String?
+    let posterUrl: URL?
 }
 
 extension Movie: ImmutableMappable {
     init(map: Map) throws {
         title = try map.value("title")
         tmbdId = try map.value("id")
-        posterUrl = try map.value("poster_path")
+        let posterPath: String? = try map.value("poster_path")
+        if let posterPath = posterPath {
+            posterUrl = TheMovieDatabase.shared.imageUrl(for: posterPath)
+        } else {
+            posterUrl = nil
+        }
+
     }
 }

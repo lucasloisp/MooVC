@@ -79,8 +79,8 @@ class MovieDBRouteTests: XCTestCase {
             response.movies.forEach { someMovie in
                 XCTAssertFalse(someMovie.title.isEmpty)
                 XCTAssertNotNil(someMovie.posterUrl)
-                XCTAssertTrue(someMovie.posterUrl!.hasPrefix("/"), "Pster's url is \(someMovie.posterUrl!)")
-                XCTAssertTrue(someMovie.posterUrl!.hasSuffix(".jpg"), "Pster's url is \(someMovie.posterUrl!)")
+                let posterUrl = someMovie.posterUrl!.absoluteString
+                XCTAssertTrue(posterUrl.hasSuffix(".jpg"), "Pster's url is \(someMovie.posterUrl!)")
             }
         default:
             print(response!)
