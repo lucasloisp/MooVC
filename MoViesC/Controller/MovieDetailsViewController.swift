@@ -51,8 +51,7 @@ class MovieDetailsViewController: UIViewController {
         }
         let placeholder = UIImage(systemName: "photo")
         posterImageView.contentMode = .scaleAspectFit
-        let url = URL(string: "https://image.tmdb.org/t/p/w500" + posterUrl)
-        posterImageView.kf.setImage(with: url, placeholder: placeholder, options: nil) { result in
+        posterImageView.kf.setImage(with: posterUrl, placeholder: placeholder, options: nil) { result in
             switch result {
             case .success(_):
                 self.posterImageView.contentMode = .scaleAspectFill

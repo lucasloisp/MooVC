@@ -42,12 +42,7 @@ extension GenreMoviesCollectionViewController: UICollectionViewDataSource, UICol
         let cell = getGenreMovieCell(collectionView, indexPath)
         let movie = movies[indexPath.row]
 
-        var url: URL?
-        if let posterUrl = movie.posterUrl {
-            url = URL(string: "https://image.tmdb.org/t/p/w500" + posterUrl)
-        }
-
-        cell.configure(name: movie.title, poster: url)
+        cell.configure(name: movie.title, poster: movie.posterUrl)
 
         return cell
     }
