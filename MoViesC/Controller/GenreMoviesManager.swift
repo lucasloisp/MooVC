@@ -25,6 +25,21 @@ class GenreMoviesManager {
         }
     }
 
+    func searchMovies(named query: String, completionHandler: @escaping (([Movie]?) -> Void)) {
+        // FIXME: Implement
+        let request = MovieDBRoute.discoverMoviesByGenre(genre: Genre(name: "Action", tmbdId: 28))
+        APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
+            switch result {
+            case .success(let response):
+                completionHandler(response.movies)
+            case .failure(let err):
+                // TODO: Show the error to the user
+                print(err)
+                completionHandler(nil)
+            }
+        }
+    }
+
     func loadGenres(onSuccess: @escaping (([(Genre, [Movie])]) -> Void), onError: @escaping (() -> Void)) {
         APIClient.shared.requestItem(request: MovieDBRoute.getGenres) { (result: Result<GenresResponse, Error>) in
             switch result {

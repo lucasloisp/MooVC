@@ -12,18 +12,54 @@
         <!--Search-->
         <scene sceneID="orx-XS-99T">
             <objects>
-                <viewController id="wgB-Kv-E8u" sceneMemberID="viewController">
+                <viewController id="wgB-Kv-E8u" customClass="SearchViewController" customModule="MoViesC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Rx-jv-ZGA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aI2-kK-oMp">
+                                <rect key="frame" x="8" y="104" width="398" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8K9-9H-cMl">
+                                <rect key="frame" x="0.0" y="146" width="414" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MsF-kV-azQ">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="saw-xp-ZKZ">
+                                <rect key="frame" x="188.5" y="432" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Awx-IO-Ek0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8K9-9H-cMl" firstAttribute="leading" secondItem="Awx-IO-Ek0" secondAttribute="leading" id="7Dm-eg-447"/>
+                            <constraint firstItem="Awx-IO-Ek0" firstAttribute="bottom" secondItem="8K9-9H-cMl" secondAttribute="bottom" id="KUo-4i-cRh"/>
+                            <constraint firstItem="saw-xp-ZKZ" firstAttribute="centerY" secondItem="Awx-IO-Ek0" secondAttribute="centerY" id="OmE-zd-ozP"/>
+                            <constraint firstItem="Awx-IO-Ek0" firstAttribute="trailing" secondItem="aI2-kK-oMp" secondAttribute="trailing" constant="8" id="QO6-7F-J7D"/>
+                            <constraint firstItem="Awx-IO-Ek0" firstAttribute="trailing" secondItem="8K9-9H-cMl" secondAttribute="trailing" id="Sm0-wW-KBb"/>
+                            <constraint firstItem="saw-xp-ZKZ" firstAttribute="centerX" secondItem="Awx-IO-Ek0" secondAttribute="centerX" id="h0V-FQ-Og2"/>
+                            <constraint firstItem="aI2-kK-oMp" firstAttribute="top" secondItem="Awx-IO-Ek0" secondAttribute="top" constant="16" id="nJW-xe-WQz"/>
+                            <constraint firstItem="8K9-9H-cMl" firstAttribute="top" secondItem="aI2-kK-oMp" secondAttribute="bottom" constant="8" id="sAx-Dj-BiP"/>
+                            <constraint firstItem="aI2-kK-oMp" firstAttribute="leading" secondItem="Awx-IO-Ek0" secondAttribute="leading" constant="8" id="t28-u1-zBe"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="isc-je-JDB"/>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="saw-xp-ZKZ" id="hkK-9J-ded"/>
+                        <outlet property="moviesCollectionView" destination="8K9-9H-cMl" id="Zet-UD-bBg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Hy-NB-qTj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1952" y="-613"/>
+            <point key="canvasLocation" x="1950.7246376811595" y="-613.39285714285711"/>
         </scene>
         <!--Discover-->
         <scene sceneID="s0d-6b-0kx">
