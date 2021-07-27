@@ -159,11 +159,12 @@
                     <connections>
                         <outlet property="activityIndicatorView" destination="nuJ-yO-wtc" id="MEd-bq-I5P"/>
                         <outlet property="moviesCollectionView" destination="Ote-Ah-tXn" id="clu-kp-RIo"/>
+                        <segue destination="w6a-oe-kEE" kind="show" identifier="toMovieDetailsViewControllerSegue" destinationCreationSelector="makeMovieDetailsViewController:" id="MIU-5Y-9N7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jqR-u1-oF3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1854" y="818"/>
+            <point key="canvasLocation" x="1042" y="786"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="d6G-kG-Ikv">
@@ -184,6 +185,9 @@
             <point key="canvasLocation" x="131.8840579710145" y="75.669642857142847"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="MIU-5Y-9N7"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

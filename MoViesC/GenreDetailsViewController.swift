@@ -7,9 +7,15 @@
 
 import UIKit
 
-class GenreDetailsViewController: UIViewController, WithLoadingIndicator {
+class GenreDetailsViewController: UIViewController, WithLoadingIndicator, WithSegues {
+    typealias SegueType = SeguesFromSelf
+    enum SeguesFromSelf: String, PerformableSegue {
+        case toMovieDetailsViewControllerSegue
+    }
+
     let genre: Genre
     var genreMoviesController: GenreMoviesCollectionViewController?
+    var selectedMovie: Movie?
 
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var moviesCollectionView: UICollectionView!
@@ -44,11 +50,17 @@ class GenreDetailsViewController: UIViewController, WithLoadingIndicator {
 
     }
 
+    @IBSegueAction func makeMovieDetailsViewController(_ coder: NSCoder) -> MovieDetailsViewController? {
+        guard let movie = selectedMovie else { return nil }
+        return MovieDetailsViewController(coder: coder, for: movie)
+    }
+
 }
 
 extension GenreDetailsViewController: GenreMoviesCollectionViewControllerDelegate {
     func didSelect(movie: Movie) {
-        // TODO: Implement
+        self.selectedMovie = movie
+        perform(segue: .toMovieDetailsViewControllerSegue)
     }
 
     func loadMore(of genre: Genre) {
