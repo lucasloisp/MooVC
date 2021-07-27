@@ -128,10 +128,38 @@
                     <view key="view" contentMode="scaleToFill" id="lDY-VX-ufu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ote-Ah-tXn">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uKA-U9-sdO">
+                                    <size key="itemSize" width="128" height="192"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="nuJ-yO-wtc">
+                                <rect key="frame" x="188.5" y="456.5" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="58j-eG-sMA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nuJ-yO-wtc" firstAttribute="centerY" secondItem="58j-eG-sMA" secondAttribute="centerY" id="8Ao-pd-7fU"/>
+                            <constraint firstItem="58j-eG-sMA" firstAttribute="trailing" secondItem="Ote-Ah-tXn" secondAttribute="trailing" id="ETZ-PT-8Jz"/>
+                            <constraint firstItem="nuJ-yO-wtc" firstAttribute="centerX" secondItem="58j-eG-sMA" secondAttribute="centerX" id="SCI-HN-24g"/>
+                            <constraint firstItem="Ote-Ah-tXn" firstAttribute="top" secondItem="58j-eG-sMA" secondAttribute="top" id="YNb-uk-9vd"/>
+                            <constraint firstItem="Ote-Ah-tXn" firstAttribute="leading" secondItem="58j-eG-sMA" secondAttribute="leading" id="dmh-Xb-Yiy"/>
+                            <constraint firstItem="58j-eG-sMA" firstAttribute="bottom" secondItem="Ote-Ah-tXn" secondAttribute="bottom" id="xxO-Da-PQ0"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1d0-MJ-ftE"/>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="nuJ-yO-wtc" id="MEd-bq-I5P"/>
+                        <outlet property="moviesCollectionView" destination="Ote-Ah-tXn" id="clu-kp-RIo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jqR-u1-oF3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

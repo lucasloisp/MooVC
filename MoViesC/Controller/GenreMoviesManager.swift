@@ -11,6 +11,20 @@ class GenreMoviesManager {
     static let shared = GenreMoviesManager()
     private init() {}
 
+    func loadMovies(for genre: Genre, completionHandler: @escaping (([Movie]?) -> Void)) {
+        let request = MovieDBRoute.discoverMoviesByGenre(genre: genre)
+        APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
+            switch result {
+            case .success(let response):
+                completionHandler(response.movies)
+            case .failure(let err):
+                // TODO: Show the error to the user
+                print(err)
+                completionHandler(nil)
+            }
+        }
+    }
+
     func loadGenres(onSuccess: @escaping (([(Genre, [Movie])]) -> Void), onError: @escaping (() -> Void)) {
         APIClient.shared.requestItem(request: MovieDBRoute.getGenres) { (result: Result<GenresResponse, Error>) in
             switch result {
@@ -20,14 +34,9 @@ class GenreMoviesManager {
                 let group = DispatchGroup()
                 genres.enumerated().forEach { (index, genre) in
                     group.enter()
-                    let request = MovieDBRoute.discoverMoviesByGenre(genre: genre)
-                    APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
-                        switch result {
-                        case .success(let response):
-                            movies[index] = Array(response.movies.prefix(10))
-                        case .failure(let err):
-                            // TODO: Show the error to the user
-                            print(err)
+                    self.loadMovies(for: genre) {
+                        if let apiMovies = $0 {
+                            movies[index] = Array(apiMovies.prefix(10))
                         }
                         group.leave()
                     }
@@ -39,6 +48,5 @@ class GenreMoviesManager {
                 onError()
             }
         }
-
     }
 }
