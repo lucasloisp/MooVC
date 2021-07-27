@@ -8,7 +8,6 @@
 import UIKit
 
 class SearchViewController: UIViewController, WithLoadingIndicator {
-    private var moviesController: MoviesCollectionViewController?
 
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
