@@ -9,7 +9,23 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Discover View Controller-->
+        <!--Search-->
+        <scene sceneID="orx-XS-99T">
+            <objects>
+                <viewController id="wgB-Kv-E8u" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Rx-jv-ZGA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Awx-IO-Ek0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="isc-je-JDB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Hy-NB-qTj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1952" y="-613"/>
+        </scene>
+        <!--Discover-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="DiscoverViewController" customModule="MoViesC" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,7 +34,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vel-gR-w68">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="GzH-mA-K6b">
@@ -37,6 +53,7 @@
                             <constraint firstItem="Vel-gR-w68" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="fEt-jA-8Kq"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Discover" image="star" catalog="system" id="KTb-qf-EDp"/>
                     <navigationItem key="navigationItem" id="4Uc-Wo-XBw"/>
                     <connections>
                         <outlet property="genresTableView" destination="Vel-gR-w68" id="Rjn-yn-Hay"/>
@@ -47,7 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042.0289855072465" y="75.669642857142847"/>
+            <point key="canvasLocation" x="1952.1739130434785" y="75.669642857142847"/>
         </scene>
         <!--Movie-->
         <scene sceneID="nYN-Z2-Q4j">
@@ -119,7 +136,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jaP-Rh-tIV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1853.6231884057972" y="75.669642857142847"/>
+            <point key="canvasLocation" x="3474" y="76"/>
         </scene>
         <!--Genre Details View Controller-->
         <scene sceneID="WUy-oc-5UM">
@@ -164,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jqR-u1-oF3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042" y="786"/>
+            <point key="canvasLocation" x="3474" y="-687"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="d6G-kG-Ikv">
@@ -177,18 +194,39 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="YNW-iM-TLy"/>
+                        <segue destination="GUo-fh-GLI" kind="relationship" relationship="rootViewController" id="YNW-iM-TLy"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JHH-by-zdB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="75.669642857142847"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="msQ-Lf-TFb">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="GUo-fh-GLI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="TDp-Ba-zye"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KrX-ZM-pLv">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="viewControllers" id="XAb-hy-HmG"/>
+                        <segue destination="wgB-Kv-E8u" kind="relationship" relationship="viewControllers" id="xuP-0m-afo"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HNb-oj-JLS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042.0289855072465" y="75.669642857142847"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="MIU-5Y-9N7"/>
+        <segue reference="ADG-Xy-seT"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="star" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
