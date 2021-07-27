@@ -23,16 +23,16 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
 
     required init?(coder: NSCoder) {
-      fatalError("init(coder:) is not implemented")
+        fatalError("init(coder:) is not implemented")
     }
 
     init?(coder: NSCoder, for movie: Movie) {
-      self.movie = movie
-      self.formatter = DateFormatter()
-      self.formatter.dateStyle = .medium
-      self.formatter.timeStyle = .none
-      super.init(coder: coder)
-      self.title = movie.title
+        self.movie = movie
+        self.formatter = DateFormatter()
+        self.formatter.dateStyle = .medium
+        self.formatter.timeStyle = .none
+        super.init(coder: coder)
+        self.title = movie.title
     }
 
     override func viewDidLoad() {
