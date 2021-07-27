@@ -11,10 +11,12 @@ class DiscoverViewController: UIViewController, WithSegues {
     typealias SegueType = SeguesFromSelf
     enum SeguesFromSelf: String, PerformableSegue {
         case toMovieDetailsViewControllerSegue
+        case toGenreDetailsViewControllerSegue
     }
 
     private var genreMoviesControllers: [GenreMoviesCollectionViewController]?
     private var selectedMovie: Movie?
+    private var selectedGenre: Genre?
 
     fileprivate var storedOffsets = [Int: CGFloat]()
 
@@ -32,6 +34,11 @@ class DiscoverViewController: UIViewController, WithSegues {
     @IBSegueAction func makeDiscoverViewController(_ coder: NSCoder) -> MovieDetailsViewController? {
         guard let movie = selectedMovie else { return nil }
         return MovieDetailsViewController(coder: coder, for: movie)
+    }
+
+    @IBSegueAction func makeGenreDetailsViewController(_ coder: NSCoder) -> GenreDetailsViewController? {
+        guard let genre = selectedGenre else { return nil }
+        return GenreDetailsViewController(coder: coder, for: genre)
     }
 
     private func prepareTheTableView() {
@@ -63,12 +70,12 @@ class DiscoverViewController: UIViewController, WithSegues {
             self.pendingActivityIndicatorView.stopAnimating()
         }
     }
-
 }
 
 extension DiscoverViewController: GenreMoviesCollectionViewControllerDelegate {
     func loadMore(of genre: Genre) {
-        // TODO: Implement
+        self.selectedGenre = genre
+        perform(segue: .toGenreDetailsViewControllerSegue)
     }
 
     func didSelect(movie: Movie) {

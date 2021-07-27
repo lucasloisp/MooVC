@@ -42,6 +42,7 @@
                         <outlet property="genresTableView" destination="Vel-gR-w68" id="Rjn-yn-Hay"/>
                         <outlet property="pendingActivityIndicatorView" destination="GzH-mA-K6b" id="Erj-bH-x7s"/>
                         <segue destination="w6a-oe-kEE" kind="show" identifier="toMovieDetailsViewControllerSegue" destinationCreationSelector="makeDiscoverViewController:" id="ADG-Xy-seT"/>
+                        <segue destination="Hfe-Zb-nRS" kind="show" identifier="toGenreDetailsViewControllerSegue" destinationCreationSelector="makeGenreDetailsViewController:" id="bTo-E8-ytV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -119,6 +120,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jaP-Rh-tIV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1853.6231884057972" y="75.669642857142847"/>
+        </scene>
+        <!--Genre Details View Controller-->
+        <scene sceneID="WUy-oc-5UM">
+            <objects>
+                <viewController id="Hfe-Zb-nRS" customClass="GenreDetailsViewController" customModule="MoViesC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lDY-VX-ufu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="58j-eG-sMA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="1d0-MJ-ftE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jqR-u1-oF3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1854" y="818"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="d6G-kG-Ikv">
