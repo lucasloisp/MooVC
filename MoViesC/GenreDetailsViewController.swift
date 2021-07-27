@@ -7,8 +7,12 @@
 
 import UIKit
 
-class GenreDetailsViewController: UIViewController {
+class GenreDetailsViewController: UIViewController, WithLoadingIndicator {
     let genre: Genre
+    var genreMoviesController: GenreMoviesCollectionViewController?
+
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var moviesCollectionView: UICollectionView!
 
     required init?(coder: NSCoder) {
       fatalError("init(coder:) is not implemented")
@@ -23,17 +27,31 @@ class GenreDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let genreMovieNib = UINib(nibName: GenreMovieCollectionViewCell.identifier, bundle: nil)
+        let identifier = GenreMovieCollectionViewCell.identifier
+        moviesCollectionView.register(genreMovieNib, forCellWithReuseIdentifier: identifier)
+
+        self.startLoadingIndicator()
+        GenreMoviesManager.shared.loadMovies(for: genre) { movies in
+            if let movies = movies {
+                let genreMoviesController = GenreMoviesCollectionViewController(for: self.genre, with: movies)
+                genreMoviesController.delegate = self
+                genreMoviesController.bind(to: self.moviesCollectionView)
+                self.genreMoviesController = genreMoviesController
+            }
+            self.stopLoadingIndicator()
+        }
+
     }
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension GenreDetailsViewController: GenreMoviesCollectionViewControllerDelegate {
+    func didSelect(movie: Movie) {
+        // TODO: Implement
     }
-    */
 
+    func loadMore(of genre: Genre) {
+        // TODO: Implement
+    }
 }

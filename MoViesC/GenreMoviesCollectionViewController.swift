@@ -24,13 +24,15 @@ class GenreMoviesCollectionViewController: NSObject {
         self.movies = movies
     }
 
-    func bind(to cell: GenreTableViewCell) {
-        cell.configure(for: genre.name)
-        let collectionView = cell.moviesCollectionView!
-
+    func bind(to collectionView: UICollectionView) {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.reloadData()
+    }
+
+    func bind(to cell: GenreTableViewCell) {
+        cell.configure(for: genre.name)
+        self.bind(to: cell.moviesCollectionView!)
     }
 }
 
