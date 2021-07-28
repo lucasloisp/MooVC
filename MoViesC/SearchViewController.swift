@@ -12,13 +12,24 @@ class SearchViewController: UIViewController, WithLoadingIndicator {
 
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var searchBar: UISearchBar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         registerCellOnCollectionView()
+        searchBar.delegate = self
+    }
+
+    private func registerCellOnCollectionView() {
+        let identifier = GenreMovieCollectionViewCell.identifier
+        let movieNib = UINib(nibName: identifier, bundle: nil)
+        moviesCollectionView.register(movieNib, forCellWithReuseIdentifier: identifier)
+    }
+
+    fileprivate func performSearch(query: String) {
         self.startLoadingIndicator()
-        GenreMoviesManager.shared.searchMovies(named: "Incep") { movies in
+        GenreMoviesManager.shared.searchMovies(named: query) { movies in
             if let movies = movies {
                 let movieController = MovieListingController(for: movies)
                 movieController.bind(to: self.moviesCollectionView)
@@ -27,12 +38,6 @@ class SearchViewController: UIViewController, WithLoadingIndicator {
             }
             self.stopLoadingIndicator()
         }
-    }
-
-    private func registerCellOnCollectionView() {
-        let identifier = GenreMovieCollectionViewCell.identifier
-        let movieNib = UINib(nibName: identifier, bundle: nil)
-        moviesCollectionView.register(movieNib, forCellWithReuseIdentifier: identifier)
     }
 
 }
@@ -44,5 +49,11 @@ extension SearchViewController: MovieListingControllerDelegate {
 
     func loadMore(of genre: Genre) {
         // TODO: This should not be here
+    }
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        performSearch(query: searchBar.text!)
     }
 }
