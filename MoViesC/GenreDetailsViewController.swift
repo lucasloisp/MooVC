@@ -14,7 +14,7 @@ class GenreDetailsViewController: UIViewController, WithLoadingIndicator, WithSe
     }
 
     let genre: Genre
-    var genreMoviesController: GenreMoviesCollectionViewController?
+    var genreMoviesController: MovieListingController?
     var selectedMovie: Movie?
 
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
@@ -40,7 +40,7 @@ class GenreDetailsViewController: UIViewController, WithLoadingIndicator, WithSe
         self.startLoadingIndicator()
         GenreMoviesManager.shared.loadMovies(for: genre) { movies in
             if let movies = movies {
-                let genreMoviesController = GenreMoviesCollectionViewController(for: self.genre, with: movies)
+                let genreMoviesController = MovieListingController(for: self.genre, with: movies)
                 genreMoviesController.delegate = self
                 genreMoviesController.bind(to: self.moviesCollectionView)
                 self.genreMoviesController = genreMoviesController

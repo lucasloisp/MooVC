@@ -12,7 +12,7 @@ protocol GenreMoviesCollectionViewControllerDelegate: AnyObject {
     func loadMore(of genre: Genre)
 }
 
-class GenreMoviesCollectionViewController: NSObject {
+class MovieListingController: NSObject {
     let genre: Genre
     let movies: [Movie]
 
@@ -36,7 +36,7 @@ class GenreMoviesCollectionViewController: NSObject {
     }
 }
 
-extension GenreMoviesCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, GenreMovieCollectionReusableViewDelegate {
+extension MovieListingController: UICollectionViewDataSource, UICollectionViewDelegate, GenreMovieCollectionReusableViewDelegate {
     func didTap() {
         delegate?.loadMore(of: genre)
     }
