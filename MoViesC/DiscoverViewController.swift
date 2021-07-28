@@ -14,7 +14,7 @@ class DiscoverViewController: UIViewController, WithSegues {
         case toGenreDetailsViewControllerSegue
     }
 
-    private var genreMoviesControllers: [MovieListingController]?
+    private var genreMoviesControllers: [GenreMovieListingController]?
     private var selectedMovie: Movie?
     private var selectedGenre: Genre?
 
@@ -55,7 +55,7 @@ class DiscoverViewController: UIViewController, WithSegues {
         genresTableView.isHidden = true
         GenreMoviesManager.shared.loadGenres { genreMovies in
             self.genreMoviesControllers = genreMovies.map({ (genre, movies) in
-                let controller = MovieListingController(for: genre, with: movies)
+                let controller = GenreMovieListingController(for: genre, with: movies)
                 controller.delegate = self
                 return controller
             })
@@ -72,7 +72,7 @@ class DiscoverViewController: UIViewController, WithSegues {
     }
 }
 
-extension DiscoverViewController: GenreMoviesCollectionViewControllerDelegate {
+extension DiscoverViewController: MovieListingControllerDelegate {
     func loadMore(of genre: Genre) {
         self.selectedGenre = genre
         perform(segue: .toGenreDetailsViewControllerSegue)

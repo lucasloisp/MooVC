@@ -40,7 +40,7 @@ class GenreDetailsViewController: UIViewController, WithLoadingIndicator, WithSe
         self.startLoadingIndicator()
         GenreMoviesManager.shared.loadMovies(for: genre) { movies in
             if let movies = movies {
-                let genreMoviesController = MovieListingController(for: self.genre, with: movies)
+                let genreMoviesController = MovieListingController(for: movies)
                 genreMoviesController.delegate = self
                 genreMoviesController.bind(to: self.moviesCollectionView)
                 self.genreMoviesController = genreMoviesController
@@ -57,7 +57,7 @@ class GenreDetailsViewController: UIViewController, WithLoadingIndicator, WithSe
 
 }
 
-extension GenreDetailsViewController: GenreMoviesCollectionViewControllerDelegate {
+extension GenreDetailsViewController: MovieListingControllerDelegate {
     func didSelect(movie: Movie) {
         self.selectedMovie = movie
         perform(segue: .toMovieDetailsViewControllerSegue)

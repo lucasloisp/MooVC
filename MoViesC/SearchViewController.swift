@@ -2,7 +2,7 @@
 //  SearchViewController.swift
 //  MoViesC
 //
-//  Created by December on 27/7/21.
+//  Created by Lucas Lois on 27/7/21.
 //
 
 import UIKit
@@ -39,7 +39,7 @@ class SearchViewController: UIViewController, WithLoadingIndicator {
 
 }
 
-extension SearchViewController: GenreMoviesCollectionViewControllerDelegate {
+extension SearchViewController: MovieListingControllerDelegate {
     func didSelect(movie: Movie) {
         // TODO: Implement
     }
