@@ -24,7 +24,7 @@ class SearchViewController: UIViewController, WithLoadingIndicator {
     }
 
     private func registerCellOnCollectionView() {
-        let identifier = GenreMovieCollectionViewCell.identifier
+        let identifier = RatedMovieCollectionViewCell.identifier
         let movieNib = UINib(nibName: identifier, bundle: nil)
         moviesCollectionView.register(movieNib, forCellWithReuseIdentifier: identifier)
     }
@@ -33,7 +33,7 @@ class SearchViewController: UIViewController, WithLoadingIndicator {
         self.startLoadingIndicator()
         GenreMoviesManager.shared.searchMovies(named: query) { movies in
             if let movies = movies {
-                let movieController = MovieListingController(for: movies)
+                let movieController = MovieListingController(for: movies, detailedMovieCells: true)
                 movieController.bind(to: self.moviesCollectionView)
                 movieController.delegate = self
                 self.movieController = movieController
