@@ -26,8 +26,7 @@ class GenreMoviesManager {
     }
 
     func searchMovies(named query: String, completionHandler: @escaping (([Movie]?) -> Void)) {
-        // FIXME: Implement
-        let request = MovieDBRoute.discoverMoviesByGenre(genre: Genre(name: "Action", tmbdId: 28))
+        let request = MovieDBRoute.searchMovies(named: query)
         APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
             switch result {
             case .success(let response):
