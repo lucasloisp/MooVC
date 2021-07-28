@@ -54,6 +54,7 @@
                     <connections>
                         <outlet property="activityIndicatorView" destination="saw-xp-ZKZ" id="hkK-9J-ded"/>
                         <outlet property="moviesCollectionView" destination="8K9-9H-cMl" id="Zet-UD-bBg"/>
+                        <outlet property="searchBar" destination="byx-AT-8yq" id="8F5-wl-IIQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Hy-NB-qTj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
