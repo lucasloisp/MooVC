@@ -14,6 +14,8 @@ class SearchViewController: UIViewController, WithLoadingIndicator {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
 
+    var viewThatHidesOnLoading: UIView? { return searchBar }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
