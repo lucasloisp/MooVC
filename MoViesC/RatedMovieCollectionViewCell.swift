@@ -21,29 +21,26 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
     }
 
     func configure(name: String, poster: URL?, starCount: Int) {
-        guard let url = poster else {
-            posterImageView.image = nil
-            nameLabel.text = name
-            nameLabel.isHidden = false
-            posterImageView.isHidden = true
-            return
-        }
-        let placeholder = UIImage(systemName: "photo")
         self.posterImageView.contentMode = .scaleAspectFit
-        posterImageView.kf.setImage(with: url, placeholder: placeholder, options: nil) { result in
-            switch result {
-            case .success(_):
-                self.posterImageView.contentMode = .scaleAspectFill
-            default:
-                return
+        if let url = poster {
+            let placeholder = UIImage(systemName: "photo")
+            posterImageView.kf.setImage(with: url, placeholder: placeholder, options: nil) { result in
+                switch result {
+                case .success(_):
+                    self.posterImageView.contentMode = .scaleAspectFill
+                default:
+                    return
+                }
             }
+        } else {
+            self.posterImageView.image = UIImage(systemName: "xmark.rectangle.fill")
         }
-        nameLabel.text = ""
-        nameLabel.isHidden = true
-        posterImageView.isHidden = false
+        nameLabel.text = name
         ratingStackView.arrangedSubviews.enumerated().forEach { (index, view) in
-            let starValue = index + 1
-            view.isHidden = starValue > starCount
+            let thisStarIsMet = index < starCount
+            if let starImageView = view as? UIImageView {
+                starImageView.image = UIImage(systemName: thisStarIsMet ? "star.fill" : "star")
+            }
         }
     }
 
