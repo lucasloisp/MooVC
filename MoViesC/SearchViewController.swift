@@ -20,6 +20,7 @@ class SearchViewController: UIViewController, WithLoadingIndicator {
         super.viewDidLoad()
 
         registerCellOnCollectionView()
+        stopLoadingIndicator()
         searchBar.delegate = self
     }
 
