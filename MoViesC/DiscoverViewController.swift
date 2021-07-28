@@ -14,7 +14,7 @@ class DiscoverViewController: UIViewController, WithSegues {
         case toGenreDetailsViewControllerSegue
     }
 
-    private var genreMoviesControllers: [GenreMoviesCollectionViewController]?
+    private var genreMoviesControllers: [MovieListingController]?
     private var selectedMovie: Movie?
     private var selectedGenre: Genre?
 
@@ -55,7 +55,7 @@ class DiscoverViewController: UIViewController, WithSegues {
         genresTableView.isHidden = true
         GenreMoviesManager.shared.loadGenres { genreMovies in
             self.genreMoviesControllers = genreMovies.map({ (genre, movies) in
-                let controller = GenreMoviesCollectionViewController(for: genre, with: movies)
+                let controller = MovieListingController(for: genre, with: movies)
                 controller.delegate = self
                 return controller
             })
