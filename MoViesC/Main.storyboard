@@ -55,6 +55,7 @@
                         <outlet property="activityIndicatorView" destination="saw-xp-ZKZ" id="hkK-9J-ded"/>
                         <outlet property="moviesCollectionView" destination="8K9-9H-cMl" id="Zet-UD-bBg"/>
                         <outlet property="searchBar" destination="byx-AT-8yq" id="8F5-wl-IIQ"/>
+                        <segue destination="w6a-oe-kEE" kind="show" identifier="toMovieDetailsViewControllerSegue" destinationCreationSelector="makeMovieDetailsViewController:" id="xNH-88-SdA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Hy-NB-qTj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -259,7 +260,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="MIU-5Y-9N7"/>
+        <segue reference="ADG-Xy-seT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>

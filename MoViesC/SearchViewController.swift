@@ -7,8 +7,14 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, WithLoadingIndicator {
+class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
+    typealias SegueType = SeguesFromSelf
+    enum SeguesFromSelf: String, PerformableSegue {
+        case toMovieDetailsViewControllerSegue
+    }
+
     private var movieController: MovieListingController?
+    private var selectedMovie: Movie?
 
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
@@ -22,6 +28,11 @@ class SearchViewController: UIViewController, WithLoadingIndicator {
         registerCellOnCollectionView()
         stopLoadingIndicator()
         searchBar.delegate = self
+    }
+
+    @IBSegueAction func makeMovieDetailsViewController(_ coder: NSCoder) -> MovieDetailsViewController? {
+        guard let movie = selectedMovie else { return nil }
+        return MovieDetailsViewController(coder: coder, for: movie)
     }
 
     private func registerCellOnCollectionView() {
@@ -47,7 +58,8 @@ class SearchViewController: UIViewController, WithLoadingIndicator {
 
 extension SearchViewController: MovieListingControllerDelegate {
     func didSelect(movie: Movie) {
-        // TODO: Implement
+        selectedMovie = movie
+        perform(segue: .toMovieDetailsViewControllerSegue)
     }
 }
 
