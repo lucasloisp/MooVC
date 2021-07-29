@@ -28,7 +28,7 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="byx-AT-8yq">
+                            <searchBar contentMode="redraw" placeholder="Start typing..." translatesAutoresizingMaskIntoConstraints="NO" id="byx-AT-8yq">
                                 <rect key="frame" x="0.0" y="88" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -260,7 +260,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ADG-Xy-seT"/>
+        <segue reference="xNH-88-SdA"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
