@@ -44,6 +44,7 @@
 		C2A3023C26A908A5008BBA7D /* MovieDBRouteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A3023B26A908A5008BBA7D /* MovieDBRouteTests.swift */; };
 		C2A3023E26A909A8008BBA7D /* RequestTokenCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A3023D26A909A8008BBA7D /* RequestTokenCreation.swift */; };
 		C2D50BF526AC9AAB00FB6BF0 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D50BF426AC9AAB00FB6BF0 /* MovieDetailsViewController.swift */; };
+		C2F01D7726B2378C00D457F8 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F01D7626B2378C00D457F8 /* SessionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		C2A3023B26A908A5008BBA7D /* MovieDBRouteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBRouteTests.swift; sourceTree = "<group>"; };
 		C2A3023D26A909A8008BBA7D /* RequestTokenCreation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTokenCreation.swift; sourceTree = "<group>"; };
 		C2D50BF426AC9AAB00FB6BF0 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
+		C2F01D7626B2378C00D457F8 /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		DE11F0C1119F0B5CD4ED81FF /* Pods_MoViesC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoViesC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -221,6 +223,7 @@
 		C250E46126AA2985008A95AF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C2F01D7626B2378C00D457F8 /* SessionManager.swift */,
 				C250E46226AA2994008A95AF /* Genre.swift */,
 				C250E46C26AA38CC008A95AF /* GenresResponse.swift */,
 				C250E46E26AA3F0F008A95AF /* DiscoverMovieResponse.swift */,
@@ -421,6 +424,7 @@
 				C21448E426A8E5E600E72E0E /* AppDelegate.swift in Sources */,
 				C2A3023726A90698008BBA7D /* APIRoute.swift in Sources */,
 				C2A3023826A90698008BBA7D /* MovieDBRoute.swift in Sources */,
+				C2F01D7726B2378C00D457F8 /* SessionManager.swift in Sources */,
 				C21448E626A8E5E600E72E0E /* SceneDelegate.swift in Sources */,
 				C273254B26B0D7C9000D4AD0 /* GenreMovieListingController.swift in Sources */,
 				C28C45CE26AF8468005BE8AA /* GenreDetailsViewController.swift in Sources */,
