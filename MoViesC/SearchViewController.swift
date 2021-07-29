@@ -13,7 +13,7 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
         case toMovieDetailsViewControllerSegue
     }
 
-    private var movieController: MovieListingController?
+    private let movieController: MovieListingController = MovieListingController(for: [])
     private var selectedMovie: Movie?
 
     @IBOutlet weak var moviesCollectionView: UICollectionView!
@@ -25,9 +25,12 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        movieController.bind(to: self.moviesCollectionView)
+        movieController.delegate = self
         registerCellOnCollectionView()
         stopLoadingIndicator()
         searchBar.delegate = self
+        showResults(movies: [])
     }
 
     @IBSegueAction func makeMovieDetailsViewController(_ coder: NSCoder) -> MovieDetailsViewController? {
@@ -42,16 +45,26 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
     }
 
     fileprivate func performSearch(query: String) {
-        self.startLoadingIndicator()
+        startLoadingIndicator()
+        emptyResults()
         GenreMoviesManager.shared.searchMovies(named: query) { movies in
             if let movies = movies {
-                let movieController = MovieListingController(for: movies)
-                movieController.bind(to: self.moviesCollectionView)
-                movieController.delegate = self
-                self.movieController = movieController
+                self.showResults(movies: movies)
             }
             self.stopLoadingIndicator()
         }
+    }
+
+    fileprivate func showResults(movies: [Movie]) {
+        movieController.updateData(movies: movies)
+        moviesCollectionView.reloadData()
+        self.moviesCollectionView.isHidden = false
+    }
+
+    fileprivate func emptyResults() {
+        movieController.updateData(movies: [])
+        moviesCollectionView.reloadData()
+        moviesCollectionView.isHidden = true
     }
 
 }
@@ -65,6 +78,15 @@ extension SearchViewController: MovieListingControllerDelegate {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        performSearch(query: searchBar.text!)
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            emptyResults()
+            return
+        }
+
         performSearch(query: searchBar.text!)
     }
 }
