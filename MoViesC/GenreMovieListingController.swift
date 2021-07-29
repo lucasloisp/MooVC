@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol GenreMovieListingControllerDelegate: MovieListingControllerDelegate {
+protocol GenreMovieListingControllerDelegate: AnyObject {
     func loadMore(of genre: Genre)
 }
 
