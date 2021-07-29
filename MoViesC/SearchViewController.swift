@@ -49,10 +49,6 @@ extension SearchViewController: MovieListingControllerDelegate {
     func didSelect(movie: Movie) {
         // TODO: Implement
     }
-
-    func loadMore(of genre: Genre) {
-        // TODO: This should not be here
-    }
 }
 
 extension SearchViewController: UISearchBarDelegate {

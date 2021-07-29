@@ -62,8 +62,4 @@ extension GenreDetailsViewController: MovieListingControllerDelegate {
         self.selectedMovie = movie
         perform(segue: .toMovieDetailsViewControllerSegue)
     }
-
-    func loadMore(of genre: Genre) {
-        // TODO: Implement
-    }
 }

@@ -9,7 +9,6 @@ import UIKit
 
 protocol MovieListingControllerDelegate: AnyObject {
     func didSelect(movie: Movie)
-    func loadMore(of genre: Genre)
 }
 
 class MovieListingController: NSObject {

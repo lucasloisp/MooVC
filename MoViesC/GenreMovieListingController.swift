@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol GenreMovieListingControllerDelegate: MovieListingControllerDelegate {
+    func loadMore(of genre: Genre)
+}
+
 class GenreMovieListingController: MovieListingController {
     let genre: Genre
+
+    weak var genreDelegate: GenreMovieListingControllerDelegate?
 
     init(for genre: Genre, with movies: [Movie]) {
         self.genre = genre
@@ -54,6 +60,6 @@ class GenreMovieListingController: MovieListingController {
 
 extension GenreMovieListingController: GenreMovieCollectionReusableViewDelegate {
     func didTap() {
-        delegate?.loadMore(of: genre)
+        genreDelegate?.loadMore(of: genre)
     }
 }
