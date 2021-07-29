@@ -57,6 +57,7 @@ class DiscoverViewController: UIViewController, WithSegues {
             self.genreMoviesControllers = genreMovies.map({ (genre, movies) in
                 let controller = GenreMovieListingController(for: genre, with: movies)
                 controller.delegate = self
+                controller.genreDelegate = self
                 return controller
             })
             self.genresTableView.reloadData()
@@ -72,7 +73,7 @@ class DiscoverViewController: UIViewController, WithSegues {
     }
 }
 
-extension DiscoverViewController: MovieListingControllerDelegate {
+extension DiscoverViewController: GenreMovieListingControllerDelegate {
     func loadMore(of genre: Genre) {
         self.selectedGenre = genre
         perform(segue: .toGenreDetailsViewControllerSegue)
