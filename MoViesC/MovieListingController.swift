@@ -12,12 +12,15 @@ protocol MovieListingControllerDelegate: AnyObject {
 }
 
 class MovieListingController: NSObject {
-    let movies: [Movie]
+    private var movies: [Movie]
 
-    weak var hostViewController: UIViewController?
     weak var delegate: MovieListingControllerDelegate?
 
     init(for movies: [Movie]) {
+        self.movies = movies
+    }
+
+    func updateData(movies: [Movie]) {
         self.movies = movies
     }
 
