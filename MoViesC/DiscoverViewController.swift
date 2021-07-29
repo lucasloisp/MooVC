@@ -73,7 +73,7 @@ class DiscoverViewController: UIViewController, WithSegues {
     }
 }
 
-extension DiscoverViewController: GenreMovieListingControllerDelegate {
+extension DiscoverViewController: GenreMovieListingControllerDelegate, MovieListingControllerDelegate {
     func loadMore(of genre: Genre) {
         self.selectedGenre = genre
         perform(segue: .toGenreDetailsViewControllerSegue)
