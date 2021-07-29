@@ -33,9 +33,9 @@ class GenreDetailsViewController: UIViewController, WithLoadingIndicator, WithSe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let genreMovieNib = UINib(nibName: GenreMovieCollectionViewCell.identifier, bundle: nil)
-        let identifier = GenreMovieCollectionViewCell.identifier
-        moviesCollectionView.register(genreMovieNib, forCellWithReuseIdentifier: identifier)
+        let identifier = RatedMovieCollectionViewCell.identifier
+        let movieNib = UINib(nibName: identifier, bundle: nil)
+        moviesCollectionView.register(movieNib, forCellWithReuseIdentifier: identifier)
 
         self.startLoadingIndicator()
         GenreMoviesManager.shared.loadMovies(for: genre) { movies in

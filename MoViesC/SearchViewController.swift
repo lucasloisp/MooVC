@@ -34,7 +34,7 @@ class SearchViewController: UIViewController, WithLoadingIndicator {
         self.startLoadingIndicator()
         GenreMoviesManager.shared.searchMovies(named: query) { movies in
             if let movies = movies {
-                let movieController = MovieListingController(for: movies, detailedMovieCells: true)
+                let movieController = MovieListingController(for: movies)
                 movieController.bind(to: self.moviesCollectionView)
                 movieController.delegate = self
                 self.movieController = movieController
