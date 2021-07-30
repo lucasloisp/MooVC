@@ -9,6 +9,7 @@ import Foundation
 
 extension Notification.Name {
     static let didRequestLogout = Notification.Name("didRequestLogout")
+    static let didAuthenticate = Notification.Name("didAuthenticate")
 }
 
 class SessionManager {
@@ -16,16 +17,16 @@ class SessionManager {
 
     fileprivate init() {}
 
-    func login(as username: String, with password: String, onSuccess: () -> Void) {
+    func login(as username: String, with password: String) {
         // TODO: Validate credentials through the API
-        if username == "lucasloisp" && password == "password" {
-            onSuccess()
+        if username == "user" && password == "password" {
+            NotificationCenter.default.post(name: .didAuthenticate, object: nil)
         }
     }
 
     func checkIsLoggedIn() -> Bool {
         // TODO: Implement with local storage
-        return true
+        return false
     }
 
     func logout() {

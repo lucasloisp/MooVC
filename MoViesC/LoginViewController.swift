@@ -19,6 +19,12 @@ class LoginViewController: UIViewController {
         usernameTextField.delegate = self
         passwordTextField.delegate = self
     }
+
+    @IBAction func loginButtonPress(_ sender: Any) {
+        let username = usernameTextField.text!
+        let password = passwordTextField.text!
+        SessionManager.share.login(as: username, with: password)
+    }
 }
 
 extension LoginViewController: UITextFieldDelegate {
