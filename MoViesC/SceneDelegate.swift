@@ -8,6 +8,11 @@
 // swiftlint:disable line_length
 import UIKit
 
+enum DefinedStoryboard: String {
+    case main = "Main"
+    case authentication = "Auth"
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -16,7 +21,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        if (scene as? UIWindowScene) != nil { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: windowScene)
+
+        if SessionManager.share.checkIsLoggedIn() {
+            prepareStoryboardAsRoot(named: .main)
+        } else {
+            prepareStoryboardAsRoot(named: .authentication)
+        }
+        window?.makeKeyAndVisible()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidAuthenticate(_:)), name: .didAuthenticate, object: nil)
+    }
+
+    @objc private func onDidAuthenticate(_ notification: Notification) {
+            prepareStoryboardAsRoot(named: .main)
+    }
+
+    private func prepareStoryboardAsRoot(named name: DefinedStoryboard) {
+        let storyboard = UIStoryboard(name: name.rawValue, bundle: nil)
+        let initialViewcontroller = storyboard.instantiateInitialViewController()
+        window?.rootViewController = initialViewcontroller
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
