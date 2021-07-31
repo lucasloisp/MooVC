@@ -277,12 +277,18 @@
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="75.669642857142847"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="msQ-Lf-TFb">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="GUo-fh-GLI" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="GUo-fh-GLI" customClass="MainTabBarController" customModule="MoViesC" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="TDp-Ba-zye"/>
+                    <navigationItem key="navigationItem" id="TDp-Ba-zye">
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="GdY-Uk-bcS">
+                            <connections>
+                                <action selector="onTapLogOut:" destination="GUo-fh-GLI" id="JRa-pD-g3d"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KrX-ZM-pLv">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -300,7 +306,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="iQR-BH-pQ4"/>
+        <segue reference="ADG-Xy-seT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="heart.fill" catalog="system" width="128" height="109"/>

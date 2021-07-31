@@ -50,6 +50,7 @@
 		C2F01D7726B2378C00D457F8 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F01D7626B2378C00D457F8 /* SessionManager.swift */; };
 		C2FFB2F426B58B700008F3E9 /* AccountDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FFB2F326B58B700008F3E9 /* AccountDetails.swift */; };
 		C2FFB2F626B5902C0008F3E9 /* MarkFavouriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FFB2F526B5902C0008F3E9 /* MarkFavouriteResponse.swift */; };
+		C2FFB2FA26B5A35D0008F3E9 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FFB2F926B5A35D0008F3E9 /* MainTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		C2F01D7626B2378C00D457F8 /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		C2FFB2F326B58B700008F3E9 /* AccountDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetails.swift; sourceTree = "<group>"; };
 		C2FFB2F526B5902C0008F3E9 /* MarkFavouriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkFavouriteResponse.swift; sourceTree = "<group>"; };
+		C2FFB2F926B5A35D0008F3E9 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		DE11F0C1119F0B5CD4ED81FF /* Pods_MoViesC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoViesC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -207,6 +209,7 @@
 				C273254A26B0D7C9000D4AD0 /* GenreMovieListingController.swift */,
 				C273254C26B0E335000D4AD0 /* RatedMovieCollectionViewCell.swift */,
 				C273254D26B0E335000D4AD0 /* RatedMovieCollectionViewCell.xib */,
+				C2FFB2F926B5A35D0008F3E9 /* MainTabBarController.swift */,
 			);
 			path = MoViesC;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 			files = (
 				C250E46F26AA3F0F008A95AF /* DiscoverMovieResponse.swift in Sources */,
 				C270630F26ADB5F7005F1470 /* WithSegues.swift in Sources */,
+				C2FFB2FA26B5A35D0008F3E9 /* MainTabBarController.swift in Sources */,
 				C22E222326AB890300201EEC /* GenreMovieCollectionViewCell.swift in Sources */,
 				C20615C326AC7CCE0085DF6F /* MovieManager.swift in Sources */,
 				C22E222626AB9DEF00201EEC /* MovieListingController.swift in Sources */,
