@@ -7,12 +7,23 @@
 
 import UIKit
 
-class FavouritesViewController: UIViewController {
+class FavouritesViewController: UIViewController, WithSegues {
+    @IBOutlet weak var moviesCollectionView: UICollectionView!
 
-    private var movies: [Movie]?
+    typealias SegueType = SeguesFromSelf
+    enum SeguesFromSelf: String, PerformableSegue {
+        case toMovieDetailsViewControllerSegue
+    }
+
+    private let movieController: MovieListingController = MovieListingController(for: [])
+    var selectedMovie: Movie?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        movieController.bind(to: self.moviesCollectionView)
+        movieController.delegate = self
+        registerCellOnCollectionView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -21,9 +32,28 @@ class FavouritesViewController: UIViewController {
         loadAccountFavourites()
     }
 
+    @IBSegueAction func buildMovieDetailsViewController(_ coder: NSCoder) -> MovieDetailsViewController? {
+        guard let movie = selectedMovie else { return nil }
+        return MovieDetailsViewController(coder: coder, for: movie)
+    }
+
+    private func registerCellOnCollectionView() {
+        let identifier = RatedMovieCollectionViewCell.identifier
+        let movieNib = UINib(nibName: identifier, bundle: nil)
+        moviesCollectionView.register(movieNib, forCellWithReuseIdentifier: identifier)
+    }
+
     private func loadAccountFavourites() {
         MovieManager.shared.loadFavourites { movies in
-            self.movies = movies
+            self.movieController.updateData(movies: movies ?? [])
+            self.moviesCollectionView.reloadData()
         }
+    }
+}
+
+extension FavouritesViewController: MovieListingControllerDelegate {
+    func didSelect(movie: Movie) {
+        selectedMovie = movie
+        perform(segue: .toMovieDetailsViewControllerSegue)
     }
 }

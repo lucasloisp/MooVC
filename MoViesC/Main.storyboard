@@ -110,10 +110,33 @@
                     <view key="view" contentMode="scaleToFill" id="Bmg-wm-fh4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cTB-xD-saq">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="H69-fI-igx">
+                                    <size key="itemSize" width="128" height="256"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Tiv-Zd-epV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cTB-xD-saq" firstAttribute="top" secondItem="Tiv-Zd-epV" secondAttribute="top" id="ABz-bo-n1c"/>
+                            <constraint firstItem="cTB-xD-saq" firstAttribute="leading" secondItem="Tiv-Zd-epV" secondAttribute="leading" id="GP2-2P-kXJ"/>
+                            <constraint firstItem="Tiv-Zd-epV" firstAttribute="trailing" secondItem="cTB-xD-saq" secondAttribute="trailing" id="J2S-tI-sm3"/>
+                            <constraint firstItem="Tiv-Zd-epV" firstAttribute="bottom" secondItem="cTB-xD-saq" secondAttribute="bottom" id="LEJ-IR-RDo"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="heart.fill" catalog="system" id="Cau-Cz-Kdh"/>
+                    <connections>
+                        <outlet property="moviesCollectionView" destination="cTB-xD-saq" id="uSY-0x-ONp"/>
+                        <segue destination="w6a-oe-kEE" kind="show" identifier="toMovieDetailsViewControllerSegue" destinationCreationSelector="buildMovieDetailsViewController:" id="iQR-BH-pQ4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v9U-Vc-OUG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -277,7 +300,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="MIU-5Y-9N7"/>
+        <segue reference="iQR-BH-pQ4"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
