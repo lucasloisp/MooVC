@@ -13,11 +13,18 @@ protocol MovieListingControllerDelegate: AnyObject {
 
 class MovieListingController: NSObject {
     private var movies: [Movie]
+    private let emptyMessage: String
 
     weak var delegate: MovieListingControllerDelegate?
 
     init(for movies: [Movie]) {
         self.movies = movies
+        self.emptyMessage = ""
+    }
+
+    init(emptyMessage: String) {
+        self.emptyMessage = emptyMessage
+        self.movies = []
     }
 
     func updateData(movies: [Movie]) {
@@ -45,8 +52,27 @@ class MovieListingController: NSObject {
 }
 
 extension MovieListingController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    var emptyStateLabel: UILabel? {
+        if self.emptyMessage.isEmpty {
+            return nil
+        }
+        let messageLabel = UILabel()
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.textColor = .darkGray
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont.systemFont(ofSize: 15)
+        messageLabel.sizeToFit()
+        messageLabel.text = self.emptyMessage
+        return messageLabel
+    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if movies.isEmpty {
+            collectionView.backgroundView = emptyStateLabel
+        } else {
+            collectionView.backgroundView = nil
+        }
         return movies.count
     }
 
