@@ -8,6 +8,10 @@
 import UIKit
 
 class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
+    @IBOutlet weak var moviesCollectionView: UICollectionView!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var searchBar: UISearchBar!
+
     typealias SegueType = SeguesFromSelf
     enum SeguesFromSelf: String, PerformableSegue {
         case toMovieDetailsViewControllerSegue
@@ -15,10 +19,6 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
 
     private let movieController: MovieListingController = MovieListingController(for: [])
     private var selectedMovie: Movie?
-
-    @IBOutlet weak var moviesCollectionView: UICollectionView!
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-    @IBOutlet weak var searchBar: UISearchBar!
 
     var viewsThatHideOnLoading: [UIView] { return [searchBar] }
 
