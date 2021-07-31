@@ -13,7 +13,7 @@ class MovieDetailsViewController: UIViewController {
     let formatter: DateFormatter
     var movieDetails: MovieDetails? {
         didSet {
-            self.updateMovieDetails()
+            self.updateMovieDetailsShowing()
         }
     }
     @IBOutlet weak var taglineLabel: UILabel!
@@ -76,7 +76,7 @@ class MovieDetailsViewController: UIViewController {
         }
     }
 
-    private func updateMovieDetails() {
+    private func updateMovieDetailsShowing() {
         guard let movieDetails = movieDetails else {
             hideMovieDetails()
             return
