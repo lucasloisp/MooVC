@@ -56,7 +56,7 @@ class DiscoverViewController: UIViewController, WithSegues {
         pendingActivityIndicatorView.isHidden = false
         pendingActivityIndicatorView.startAnimating()
         genresTableView.isHidden = true
-        GenreMoviesManager.shared.loadGenres { genreMovies in
+        MovieManager.shared.loadGenres { genreMovies in
             self.genreMoviesControllers = genreMovies.map({ (genre, movies) in
                 let controller = GenreMovieListingController(for: genre, with: movies)
                 controller.delegate = self
