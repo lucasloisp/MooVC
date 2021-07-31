@@ -15,6 +15,21 @@ class MovieManager {
 
     private init() {}
 
+    func loadFavourites(completionHandler: @escaping Handle<[Movie]?>) {
+        let accountId = SessionManager.share.accountId!
+        let request = MovieDBRoute.loadFavourites(accountId: accountId)
+        APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
+            switch result {
+            case .success(let response):
+                completionHandler(response.movies)
+            case .failure(let err):
+                // TODO: Show the error to the user
+                print(err)
+                completionHandler(nil)
+            }
+        }
+    }
+
     func loadMovies(for genre: Genre, completionHandler: @escaping Handle<[Movie]?>) {
         let request = MovieDBRoute.discoverMoviesByGenre(genre: genre)
         APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in

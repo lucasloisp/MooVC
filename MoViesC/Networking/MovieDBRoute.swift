@@ -20,6 +20,7 @@ enum MovieDBRoute {
     case validateTokenWithLogin(username: String, password: String, accessToken: AccessToken)
     case loadAccountDetails
     case markAsFavourite(movie: Movie, accountId: Int, mark: Bool)
+    case loadFavourites(accountId: Int)
 }
 
 extension MovieDBRoute: APIRoute {
@@ -38,6 +39,7 @@ extension MovieDBRoute: APIRoute {
         switch self {
         case .loadAccountDetails,
              .markAsFavourite,
+             .loadFavourites,
              .getMovieDetails:
             return .privateDomain
         default:
@@ -63,6 +65,8 @@ extension MovieDBRoute: APIRoute {
             return try encoded(path: "/movie/\(movie.tmbdId)", params: ["append_to_response": "account_states"])
         case .searchMovies(let named):
             return try encoded(path: "/search/movie", params: ["query": named])
+        case .loadFavourites(let accountId):
+            return try encoded(path: "/account/\(accountId)/favorite/movies", params: [:])
         case .loadAccountDetails:
             return try encoded(path: "/account", params: [:])
         }
