@@ -20,12 +20,43 @@ struct UserCredentials {
 typealias SessionID = String
 typealias AccountID = Int
 
+struct Session {
+    let sessionId: SessionID
+    let accountId: AccountID
+}
+
+class LocalKeychainManager {
+    static let shared = LocalKeychainManager()
+
+    private let defaults = UserDefaults.standard
+
+    private init() {}
+
+    private let sessionIDKey = "SessionID"
+    private let accountIDKey = "AccountID"
+
+    func storeUserSession(_ session: Session) {
+        defaults.setValue(session.sessionId, forKey: sessionIDKey)
+        defaults.setValue(session.accountId, forKey: accountIDKey)
+    }
+
+    func getUserSession() -> Session? {
+        let sessionId = defaults.string(forKey: sessionIDKey)
+        let accountId = defaults.integer(forKey: accountIDKey)
+        guard let sessionId = sessionId, accountId != 0 else {
+            return nil
+        }
+        return Session(sessionId: sessionId, accountId: accountId)
+    }
+}
+
 class SessionManager {
     typealias VoidHandler = () -> Void
     typealias Handler<T> = (T) -> Void
 
     static let share = SessionManager()
 
+    private let keychain = LocalKeychainManager.shared
     var sessionId: SessionID? {
         didSet {
             onSessionIDChange()
@@ -33,7 +64,12 @@ class SessionManager {
     }
     var accountId: AccountID?
 
-    fileprivate init() {}
+    fileprivate init() {
+        if let session = keychain.getUserSession() {
+            sessionId = session.sessionId
+            accountId = session.accountId
+        }
+    }
 
     func login(with credentials: UserCredentials) {
         obtainValidatedRequestToken(credentials: credentials) { accessToken in
@@ -46,8 +82,7 @@ class SessionManager {
     }
 
     func checkIsLoggedIn() -> Bool {
-        // TODO: Implement with local storage
-        return false
+        return sessionId != nil
     }
 
     func logout() {
@@ -70,6 +105,7 @@ class SessionManager {
                 return
             }
             self.accountId = accountDetails.accountId
+            self.keychain.storeUserSession(Session(sessionId: self.sessionId!, accountId: self.accountId!))
             NotificationCenter.default.post(name: .didAuthenticate, object: nil)
         }
     }
