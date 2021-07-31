@@ -39,7 +39,7 @@ class GenreDetailsViewController: UIViewController, WithLoadingIndicator, WithSe
         moviesCollectionView.register(movieNib, forCellWithReuseIdentifier: identifier)
 
         self.startLoadingIndicator()
-        GenreMoviesManager.shared.loadMovies(for: genre) { movies in
+        MovieManager.shared.loadMovies(for: genre) { movies in
             if let movies = movies {
                 let genreMoviesController = MovieListingController(for: movies)
                 genreMoviesController.delegate = self

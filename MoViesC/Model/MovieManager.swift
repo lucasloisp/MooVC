@@ -1,5 +1,5 @@
 //
-//  GenreMoviesManager.swift
+//  MovieManager.swift
 //  MoViesC
 //
 //  Created by Lucas Lois on 24/7/21.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-class GenreMoviesManager {
+class MovieManager {
     typealias VoidHandler = () -> Void
 
-    static let shared = GenreMoviesManager()
+    static let shared = MovieManager()
 
     private init() {}
 

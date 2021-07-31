@@ -51,7 +51,7 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
     fileprivate func performSearch(query: String) {
         startLoadingIndicator()
         emptyResults()
-        GenreMoviesManager.shared.searchMovies(named: query) { movies in
+        MovieManager.shared.searchMovies(named: query) { movies in
             if let movies = movies {
                 self.showResults(movies: movies)
             }
