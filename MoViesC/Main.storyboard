@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search-->
+        <!--Search View Controller-->
         <scene sceneID="orx-XS-99T">
             <objects>
                 <viewController id="wgB-Kv-E8u" customClass="SearchViewController" customModule="MoViesC" customModuleProvider="target" sceneMemberID="viewController">
@@ -50,7 +50,7 @@
                             <constraint firstItem="byx-AT-8yq" firstAttribute="top" secondItem="Awx-IO-Ek0" secondAttribute="top" id="ozG-I7-RLr"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="isc-je-JDB"/>
+                    <tabBarItem key="tabBarItem" title="" image="magnifyingglass" catalog="system" id="isc-je-JDB"/>
                     <connections>
                         <outlet property="activityIndicatorView" destination="saw-xp-ZKZ" id="hkK-9J-ded"/>
                         <outlet property="moviesCollectionView" destination="8K9-9H-cMl" id="Zet-UD-bBg"/>
@@ -62,7 +62,7 @@
             </objects>
             <point key="canvasLocation" x="1950.7246376811595" y="-613.39285714285711"/>
         </scene>
-        <!--Discover-->
+        <!--Discover View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="DiscoverViewController" customModule="MoViesC" customModuleProvider="target" sceneMemberID="viewController">
@@ -90,7 +90,7 @@
                             <constraint firstItem="Vel-gR-w68" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="fEt-jA-8Kq"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Discover" image="star" catalog="system" id="KTb-qf-EDp"/>
+                    <tabBarItem key="tabBarItem" title="" image="star" catalog="system" id="KTb-qf-EDp"/>
                     <navigationItem key="navigationItem" id="4Uc-Wo-XBw"/>
                     <connections>
                         <outlet property="genresTableView" destination="Vel-gR-w68" id="Rjn-yn-Hay"/>
@@ -260,7 +260,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xNH-88-SdA"/>
+        <segue reference="ADG-Xy-seT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>

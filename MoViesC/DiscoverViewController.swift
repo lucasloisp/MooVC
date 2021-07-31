@@ -26,7 +26,7 @@ class DiscoverViewController: UIViewController, WithSegues {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tabBarController?.title = "Discover"
         prepareTheTableView()
         loadGenres()
     }
