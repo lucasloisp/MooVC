@@ -26,9 +26,12 @@ class DiscoverViewController: UIViewController, WithSegues {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tabBarController?.title = "Discover"
         prepareTheTableView()
         loadGenres()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.title = "Discover"
     }
 
     @IBSegueAction func makeDiscoverViewController(_ coder: NSCoder) -> MovieDetailsViewController? {
