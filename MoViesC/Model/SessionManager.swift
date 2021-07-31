@@ -33,11 +33,9 @@ class SessionManager {
         obtainValidatedRequestToken(credentials: credentials) { accessToken in
             self.obtainSessionId(accessToken) { sessionId in
                 self.putSessionId(sessionId)
-                NotificationCenter.default.post(name: .didAuthenticate, object: nil)
             } onError: {
                 self.handleLoginError()
             }
-
         }
     }
 
@@ -48,6 +46,7 @@ class SessionManager {
 
     private func putSessionId(_ sessionId: SessionID) {
         self.sessionId = sessionId
+        NotificationCenter.default.post(name: .didAuthenticate, object: nil)
     }
 
     private func obtainSessionId(_ accessToken: AccessToken, onSuccess: @escaping Handler<SessionID>, onError: @escaping VoidHandler) {
