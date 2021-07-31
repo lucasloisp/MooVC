@@ -14,14 +14,14 @@ class DiscoverViewController: UIViewController, WithSegues {
         case toGenreDetailsViewControllerSegue
     }
 
+    @IBOutlet weak var genresTableView: UITableView!
+    @IBOutlet weak var pendingActivityIndicatorView: UIActivityIndicatorView!
+
     private var genreMoviesControllers: [GenreMovieListingController]?
     private var selectedMovie: Movie?
     private var selectedGenre: Genre?
 
     fileprivate var storedOffsets = [Int: CGFloat]()
-
-    @IBOutlet weak var genresTableView: UITableView!
-    @IBOutlet weak var pendingActivityIndicatorView: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
