@@ -39,16 +39,24 @@ enum FavouriteImages {
     }
 }
 
-class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
+class MovieDetailsViewController: UIViewController, WithLoadingIndicator, WithSegues {
     @IBOutlet weak var taglineLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
 
-    let movie: Movie
-    let formatter: DateFormatter
-    var movieDetails: MovieDetails? {
+    typealias SegueType = SeguesFromSelf
+    enum SeguesFromSelf: String, PerformableSegue {
+        case toMovieDetailsViewControllerSegue
+    }
+
+    private let movie: Movie
+    private var selectedMovie: Movie?
+    private let formatter: DateFormatter
+    private let movieController = MovieListingController()
+    private var movieDetails: MovieDetails? {
         didSet {
             self.updateMovieDetailsShowing()
         }
@@ -70,9 +78,23 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let identifier = RatedMovieCollectionViewCell.identifier
+        let movieNib = UINib(nibName: identifier, bundle: nil)
+        moviesCollectionView.register(movieNib, forCellWithReuseIdentifier: identifier)
+
+        movieController.delegate = self
+        movieController.bind(to: moviesCollectionView)
+
         loadPosterImage()
         startLoadingIndicator()
         loadMovieDetails()
+        loadSimilarMovies()
+    }
+
+    private func loadSimilarMovies() {
+        MovieManager.shared.loadSimilarMovies(to: movie) { movies in
+            self.movieController.updateData(movies: movies)
+        }
     }
 
     private func updateFavouriteButtonIcon() {
@@ -168,5 +190,12 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
         viewsThatHideOnLoading.forEach { view in
             view.isHidden = true
         }
+    }
+}
+
+extension MovieDetailsViewController: MovieListingControllerDelegate {
+    func didSelect(movie: Movie) {
+        selectedMovie = movie
+        perform(segue: .toMovieDetailsViewControllerSegue)
     }
 }

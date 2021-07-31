@@ -21,6 +21,7 @@ enum MovieDBRoute {
     case loadAccountDetails
     case markAsFavourite(movie: Movie, accountId: Int, mark: Bool)
     case loadFavourites(accountId: Int)
+    case loadSimilarMovies(movie: Movie)
 }
 
 extension MovieDBRoute: APIRoute {
@@ -49,6 +50,8 @@ extension MovieDBRoute: APIRoute {
 
     func asURLRequest() throws -> URLRequest {
         switch self {
+        case .loadSimilarMovies(let movie):
+            return try encoded(path: "/movie/\(movie.tmbdId)/similar", params: [:])
         case .createRequestToken:
             return try encoded(path: "/authentication/token/new", params: [:])
         case .markAsFavourite(let movie, let accountId, let mark):
