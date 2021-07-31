@@ -7,8 +7,9 @@
 
 import UIKit
 
-class FavouritesViewController: UIViewController, WithSegues {
+class FavouritesViewController: UIViewController, WithSegues, WithLoadingIndicator {
     @IBOutlet weak var moviesCollectionView: UICollectionView!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
 
     typealias SegueType = SeguesFromSelf
     enum SeguesFromSelf: String, PerformableSegue {
@@ -17,6 +18,9 @@ class FavouritesViewController: UIViewController, WithSegues {
 
     private let movieController: MovieListingController = MovieListingController(for: [])
     var selectedMovie: Movie?
+    var viewsThatHideOnLoading: [UIView] {
+        return [moviesCollectionView]
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +48,11 @@ class FavouritesViewController: UIViewController, WithSegues {
     }
 
     private func loadAccountFavourites() {
+        startLoadingIndicator()
         MovieManager.shared.loadFavourites { movies in
             self.movieController.updateData(movies: movies ?? [])
             self.moviesCollectionView.reloadData()
+            self.stopLoadingIndicator()
         }
     }
 }

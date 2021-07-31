@@ -122,6 +122,9 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="al4-aE-sy9">
+                                <rect key="frame" x="188.5" y="432" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Tiv-Zd-epV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -130,10 +133,13 @@
                             <constraint firstItem="cTB-xD-saq" firstAttribute="leading" secondItem="Tiv-Zd-epV" secondAttribute="leading" id="GP2-2P-kXJ"/>
                             <constraint firstItem="Tiv-Zd-epV" firstAttribute="trailing" secondItem="cTB-xD-saq" secondAttribute="trailing" id="J2S-tI-sm3"/>
                             <constraint firstItem="Tiv-Zd-epV" firstAttribute="bottom" secondItem="cTB-xD-saq" secondAttribute="bottom" id="LEJ-IR-RDo"/>
+                            <constraint firstItem="al4-aE-sy9" firstAttribute="centerX" secondItem="Tiv-Zd-epV" secondAttribute="centerX" id="h4V-S9-vFh"/>
+                            <constraint firstItem="al4-aE-sy9" firstAttribute="centerY" secondItem="Tiv-Zd-epV" secondAttribute="centerY" id="ksU-Qp-sKc"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="heart.fill" catalog="system" id="Cau-Cz-Kdh"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="al4-aE-sy9" id="oC3-dI-Ch8"/>
                         <outlet property="moviesCollectionView" destination="cTB-xD-saq" id="uSY-0x-ONp"/>
                         <segue destination="w6a-oe-kEE" kind="show" identifier="toMovieDetailsViewControllerSegue" destinationCreationSelector="buildMovieDetailsViewController:" id="iQR-BH-pQ4"/>
                     </connections>
@@ -306,7 +312,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ADG-Xy-seT"/>
+        <segue reference="iQR-BH-pQ4"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
