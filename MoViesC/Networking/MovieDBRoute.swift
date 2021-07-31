@@ -18,14 +18,16 @@ enum MovieDBRoute {
     case createRequestToken
     case createSession(accessToken: AccessToken)
     case validateTokenWithLogin(username: String, password: String, accessToken: AccessToken)
+    case loadAccountDetails
+    case markAsFavourite(movie: Movie, accountId: Int, mark: Bool)
 }
 
 extension MovieDBRoute: APIRoute {
     var method: HTTPMethod {
         switch self {
-        case .createSession:
-            return .post
-        case .validateTokenWithLogin:
+        case .createSession,
+             .validateTokenWithLogin,
+             .markAsFavourite:
             return .post
         default:
             return .get
@@ -33,13 +35,21 @@ extension MovieDBRoute: APIRoute {
     }
 
     var sessionPolicy: APIRouteSessionPolicy {
-        return .privateDomain
+        switch self {
+        case .loadAccountDetails,
+             .markAsFavourite:
+            return .privateDomain
+        default:
+            return .publicDomain
+        }
     }
 
     func asURLRequest() throws -> URLRequest {
         switch self {
         case .createRequestToken:
             return try encoded(path: "/authentication/token/new", params: [:])
+        case .markAsFavourite(let movie, let accountId, let mark):
+            return try encoded(path: "/account/\(accountId)/favorite", params: ["media_type": "movie", "media_id": movie.tmbdId, "favorite": mark])
         case .createSession(let accessToken):
             return try encoded(path: "/authentication/session/new", params: ["request_token": accessToken])
         case .validateTokenWithLogin(let username, let password, let accessToken):
@@ -52,6 +62,8 @@ extension MovieDBRoute: APIRoute {
             return try encoded(path: "/movie/\(movie.tmbdId)", params: [:])
         case .searchMovies(let named):
             return try encoded(path: "/search/movie", params: ["query": named])
+        case .loadAccountDetails:
+            return try encoded(path: "/account", params: [:])
         }
     }
 
