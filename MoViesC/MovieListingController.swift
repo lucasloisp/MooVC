@@ -12,10 +12,12 @@ protocol MovieListingControllerDelegate: AnyObject {
 }
 
 class MovieListingController: NSObject {
-    private var movies: [Movie]
-    private let emptyMessage: String
+    private var movies: [Movie] = []
+    var emptyMessage: String = ""
 
     weak var delegate: MovieListingControllerDelegate?
+
+    override init() {}
 
     init(for movies: [Movie]) {
         self.movies = movies

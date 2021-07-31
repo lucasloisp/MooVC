@@ -17,10 +17,10 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
         case toMovieDetailsViewControllerSegue
     }
 
-    private let movieController: MovieListingController = MovieListingController(for: [])
+    private let movieController: MovieListingController = MovieListingController()
     private var selectedMovie: Movie?
 
-    var viewsThatHideOnLoading: [UIView] { return [searchBar] }
+    var viewsThatHideOnLoading: [UIView] { return [moviesCollectionView] }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,7 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
 
     fileprivate func performSearch(query: String) {
         startLoadingIndicator()
-        emptyResults()
+        movieController.emptyMessage = "No results for \"\(query)\""
         MovieManager.shared.searchMovies(named: query) { movies in
             if let movies = movies {
                 self.showResults(movies: movies)
