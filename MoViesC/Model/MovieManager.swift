@@ -30,6 +30,15 @@ class MovieManager {
         }
     }
 
+    func loadSimilarMovies(to movie: Movie, onSuccess: @escaping Handle<[Movie]>) {
+        let request = MovieDBRoute.loadSimilarMovies(movie: movie)
+        APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
+            if case .success(let response) = result {
+                onSuccess(response.movies)
+            }
+        }
+    }
+
     func loadMovies(for genre: Genre, completionHandler: @escaping Handle<[Movie]?>) {
         let request = MovieDBRoute.discoverMoviesByGenre(genre: genre)
         APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
