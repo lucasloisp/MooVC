@@ -8,8 +8,10 @@
 import Foundation
 import ObjectMapper
 
+typealias AccessToken = String
+
 struct RequestTokenCreation: ImmutableMappable {
-    let requestToken: String
+    let requestToken: AccessToken
     let success: Bool
 
     init(map: Map) throws {

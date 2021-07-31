@@ -11,16 +11,25 @@ import ObjectMapper
 import AlamofireObjectMapper
 
 enum MovieDBRoute {
-    case createRequestToken
     case getGenres
     case discoverMoviesByGenre(genre: Genre)
     case getMovieDetails(movie: Movie)
     case searchMovies(named: String)
+    case createRequestToken
+    case createSession(accessToken: AccessToken)
+    case validateTokenWithLogin(username: String, password: String, accessToken: AccessToken)
 }
 
 extension MovieDBRoute: APIRoute {
     var method: HTTPMethod {
-        return .get
+        switch self {
+        case .createSession:
+            return .post
+        case .validateTokenWithLogin:
+            return .post
+        default:
+            return .get
+        }
     }
 
     var sessionPolicy: APIRouteSessionPolicy {
@@ -31,6 +40,10 @@ extension MovieDBRoute: APIRoute {
         switch self {
         case .createRequestToken:
             return try encoded(path: "/authentication/token/new", params: [:])
+        case .createSession(let accessToken):
+            return try encoded(path: "/authentication/session/new", params: ["request_token": accessToken])
+        case .validateTokenWithLogin(let username, let password, let accessToken):
+        return try encoded(path: "/authentication/token/validate_with_login", params: ["username": username, "password": password, "request_token": accessToken])
         case .getGenres:
             return try encoded(path: "/genre/movie/list", params: [:])
         case .discoverMoviesByGenre(let genre):

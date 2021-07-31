@@ -21,6 +21,8 @@ protocol APIRoute: URLRequestConvertible {
 }
 
 extension APIRoute {
+    typealias JSONDictionary = [String: Any]
+
     var baseURL: String { "https://api.themoviedb.org/3" }
 
     var encoding: Alamofire.ParameterEncoding {
@@ -30,16 +32,27 @@ extension APIRoute {
         }
     }
 
-    func encoded(path: String, params: [String: Any]) throws -> URLRequest {
+    func encoded(path: String, params: JSONDictionary) throws -> URLRequest {
         let encodedPath = path.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-        var urlRequest = URLRequest(url: URL(string: baseURL + encodedPath)!)
-        urlRequest.httpMethod = self.method.rawValue
-
         var params = params
-        if sessionPolicy == .privateDomain {
-            params["api_key"] = apiKey
+        var url = URL(string: baseURL + encodedPath)!
+            switch self.method {
+            case .get, .delete, .patch:
+                params["api_key"] = apiKey
+                if sessionPolicy == .privateDomain {
+                    params["session_id"] = "" // TODO: SESSION ID
+                }
+            default:
+                var urlComponents = URLComponents(string: baseURL + encodedPath)!
+                urlComponents.queryItems = [URLQueryItem(name: "api_key", value: apiKey)]
+                if sessionPolicy == .privateDomain {
+                    urlComponents.queryItems?.append(URLQueryItem(name: "session_id", value: "" /* SESSION ID */))
+                }
+                url = try urlComponents.asURL()
         }
 
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = self.method.rawValue
         return try self.encoding.encode(urlRequest, with: params)
     }
 }
