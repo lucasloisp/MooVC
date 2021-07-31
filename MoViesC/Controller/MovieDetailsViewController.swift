@@ -25,7 +25,7 @@ enum FavouriteImages: String {
     }
 }
 
-class MovieDetailsViewController: UIViewController {
+class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     @IBOutlet weak var taglineLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
@@ -134,16 +134,6 @@ class MovieDetailsViewController: UIViewController {
         } else {
             releaseDateLabel.text = "Unknown"
         }
-    }
-
-    private func startLoadingIndicator() {
-        activityIndicatorView.isHidden = false
-        activityIndicatorView.startAnimating()
-    }
-
-    private func stopLoadingIndicator() {
-        activityIndicatorView.isHidden = true
-        activityIndicatorView.stopAnimating()
     }
 
     private func hideMovieDetails() {
