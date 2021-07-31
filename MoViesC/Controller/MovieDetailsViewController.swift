@@ -8,7 +8,30 @@
 import UIKit
 import Kingfisher
 
+enum FavouriteImages: String {
+    case markedFavourite = "heart.fill"
+    case notMarkedFavourite = "heart"
+
+    var uiImage: UIImage {
+        return UIImage(systemName: self.rawValue)!
+    }
+
+    static func select(isFavourite: Bool) -> Self {
+        if isFavourite {
+            return .markedFavourite
+        } else {
+            return  .notMarkedFavourite
+        }
+    }
+}
+
 class MovieDetailsViewController: UIViewController {
+    @IBOutlet weak var taglineLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+
     let movie: Movie
     let formatter: DateFormatter
     var movieDetails: MovieDetails? {
@@ -16,11 +39,11 @@ class MovieDetailsViewController: UIViewController {
             self.updateMovieDetailsShowing()
         }
     }
-    @IBOutlet weak var taglineLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var releaseDateLabel: UILabel!
-    @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    var movieIsFavourite: Bool! {
+        didSet {
+            self.updateFavouriteButtonIcon()
+        }
+    }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) is not implemented")
@@ -38,10 +61,30 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         hideMovieDetails()
         loadPosterImage()
         loadMovieDetails()
+    }
+
+    private func updateFavouriteButtonIcon() {
+        let favImage = FavouriteImages.select(isFavourite: movieIsFavourite)
+        let image = favImage.uiImage
+        guard let buttonItem = navigationItem.rightBarButtonItem else {
+            setUpTheMarkAsFavouriteButton()
+            return
+        }
+        buttonItem.image = image
+    }
+
+    private func setUpTheMarkAsFavouriteButton() {
+        let favouriteIcon = FavouriteImages.select(isFavourite: movieIsFavourite)
+        let image = favouriteIcon.uiImage
+        let button = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(toggleIsFavourite))
+        navigationItem.rightBarButtonItem = button
+    }
+
+    @objc private func toggleIsFavourite() {
+        // TODO: Implement
     }
 
     private func loadPosterImage() {
@@ -68,6 +111,8 @@ class MovieDetailsViewController: UIViewController {
             switch result {
             case .success(let movieDetails):
                 self.movieDetails = movieDetails
+                // TODO: Load movieIsFavourite from API
+                self.movieIsFavourite = false
             case .failure(let err):
                 // TODO: Implement
                 print(err)
@@ -114,15 +159,4 @@ class MovieDetailsViewController: UIViewController {
         statusLabel.isHidden = isHidden
         releaseDateLabel.isHidden = isHidden
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
