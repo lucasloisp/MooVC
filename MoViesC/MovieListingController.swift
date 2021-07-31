@@ -14,6 +14,7 @@ protocol MovieListingControllerDelegate: AnyObject {
 class MovieListingController: NSObject {
     private var movies: [Movie] = []
     var emptyMessage: String = ""
+    var showingRating: Bool = true
 
     weak var delegate: MovieListingControllerDelegate?
     weak var collectionView: UICollectionView?
@@ -33,7 +34,8 @@ class MovieListingController: NSObject {
 
     func prepareMovieCell(_ collectionView: UICollectionView, _ indexPath: IndexPath, _ movie: Movie) -> UICollectionViewCell {
         let cell = getRatedMovieCell(collectionView, indexPath)
-        cell.configure(name: movie.title, poster: movie.posterUrl, starCount: movie.rating)
+        let starCount = showingRating ? movie.rating : nil
+        cell.configure(name: movie.title, poster: movie.posterUrl, starCount: starCount)
         return cell
     }
 
