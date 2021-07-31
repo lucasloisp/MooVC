@@ -16,27 +16,19 @@ class MovieListingController: NSObject {
     var emptyMessage: String = ""
 
     weak var delegate: MovieListingControllerDelegate?
+    weak var collectionView: UICollectionView?
 
     override init() {}
 
-    init(for movies: [Movie]) {
-        self.movies = movies
-        self.emptyMessage = ""
-    }
-
-    init(emptyMessage: String) {
-        self.emptyMessage = emptyMessage
-        self.movies = []
-    }
-
     func updateData(movies: [Movie]) {
         self.movies = movies
+        collectionView?.reloadData()
     }
 
     func bind(to collectionView: UICollectionView) {
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.reloadData()
+        self.collectionView = collectionView
     }
 
     func prepareMovieCell(_ collectionView: UICollectionView, _ indexPath: IndexPath, _ movie: Movie) -> UICollectionViewCell {

@@ -58,7 +58,8 @@ class DiscoverViewController: UIViewController, WithSegues {
         genresTableView.isHidden = true
         MovieManager.shared.loadGenres { genreMovies in
             self.genreMoviesControllers = genreMovies.map({ (genre, movies) in
-                let controller = GenreMovieListingController(for: genre, with: movies)
+                let controller = GenreMovieListingController(for: genre)
+                controller.updateData(movies: movies)
                 controller.delegate = self
                 controller.genreDelegate = self
                 return controller

@@ -61,13 +61,11 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
 
     fileprivate func showResults(movies: [Movie]) {
         movieController.updateData(movies: movies)
-        moviesCollectionView.reloadData()
         self.moviesCollectionView.isHidden = false
     }
 
     fileprivate func emptyResults() {
         movieController.updateData(movies: [])
-        moviesCollectionView.reloadData()
         moviesCollectionView.isHidden = true
     }
 

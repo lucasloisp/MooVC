@@ -16,7 +16,7 @@ class FavouritesViewController: UIViewController, WithSegues, WithLoadingIndicat
         case toMovieDetailsViewControllerSegue
     }
 
-    private let movieController = MovieListingController(emptyMessage: "You have not marked any movies as favourites")
+    private let movieController = MovieListingController()
     var selectedMovie: Movie?
     var viewsThatHideOnLoading: [UIView] {
         return [moviesCollectionView]
@@ -25,6 +25,7 @@ class FavouritesViewController: UIViewController, WithSegues, WithLoadingIndicat
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        movieController.emptyMessage = "You have not marked any movies as favourites"
         movieController.bind(to: self.moviesCollectionView)
         movieController.delegate = self
         registerCellOnCollectionView()
@@ -51,7 +52,6 @@ class FavouritesViewController: UIViewController, WithSegues, WithLoadingIndicat
         startLoadingIndicator()
         MovieManager.shared.loadFavourites { movies in
             self.movieController.updateData(movies: movies ?? [])
-            self.moviesCollectionView.reloadData()
             self.stopLoadingIndicator()
         }
     }
