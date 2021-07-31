@@ -9,12 +9,13 @@ import Foundation
 
 class MovieManager {
     typealias VoidHandler = () -> Void
+    typealias Handle<T> = (T) -> Void
 
     static let shared = MovieManager()
 
     private init() {}
 
-    func loadMovies(for genre: Genre, completionHandler: @escaping (([Movie]?) -> Void)) {
+    func loadMovies(for genre: Genre, completionHandler: @escaping Handle<[Movie]?>) {
         let request = MovieDBRoute.discoverMoviesByGenre(genre: genre)
         APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
             switch result {
@@ -28,18 +29,33 @@ class MovieManager {
         }
     }
 
+    func loadMovieDetails(of movie: Movie, completionHandler: @escaping Handle<MovieDetails?>) {
+        let request = MovieDBRoute.getMovieDetails(movie: movie)
+        APIClient.shared.requestItem(request: request) { (result: Result<MovieDetails, Error>) in
+            switch result {
+            case .success(let movieDetails):
+                completionHandler(movieDetails)
+            case .failure(let err):
+                // TODO: Implement
+                print(err)
+                completionHandler(nil)
+            }
+        }
+    }
+
     func markMovieAsFavourite(_ movie: Movie, as favourite: Bool, onSuccess: @escaping VoidHandler, onError: @escaping VoidHandler) {
         let accountId = SessionManager.share.accountId!
         let request: MovieDBRoute = .markAsFavourite(movie: movie, accountId: accountId, mark: favourite)
         APIClient.shared.requestItem(request: request) { (result: Result<MarkFavouriteResponse, Error>) in
             if case .success = result {
                 onSuccess()
+            } else {
+                onError()
             }
-            onError()
         }
     }
 
-    func searchMovies(named query: String, completionHandler: @escaping (([Movie]?) -> Void)) {
+    func searchMovies(named query: String, completionHandler: @escaping Handle<[Movie]?>) {
         let request = MovieDBRoute.searchMovies(named: query)
         APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
             switch result {

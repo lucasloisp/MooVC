@@ -8,12 +8,26 @@
 import UIKit
 import Kingfisher
 
-enum FavouriteImages: String {
-    case markedFavourite = "heart.fill"
-    case notMarkedFavourite = "heart"
+enum FavouriteImages {
+    case markedFavourite
+    case notMarkedFavourite
 
     var uiImage: UIImage {
-        return UIImage(systemName: self.rawValue)!
+        switch self {
+        case .markedFavourite:
+            return UIImage(systemName: "heart.fill")!
+        case .notMarkedFavourite:
+            return UIImage(systemName: "heart")!
+        }
+    }
+
+    var toggle: Self {
+        switch self {
+        case .markedFavourite:
+            return .notMarkedFavourite
+        case .notMarkedFavourite:
+            return .markedFavourite
+        }
     }
 
     static func select(isFavourite: Bool) -> Self {
@@ -39,11 +53,6 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
             self.updateMovieDetailsShowing()
         }
     }
-    var movieIsFavourite: Bool! {
-        didSet {
-            self.updateFavouriteButtonIcon()
-        }
-    }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) is not implemented")
@@ -62,11 +71,12 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
         super.viewDidLoad()
 
         loadPosterImage()
+        startLoadingIndicator()
         loadMovieDetails()
     }
 
     private func updateFavouriteButtonIcon() {
-        let favImage = FavouriteImages.select(isFavourite: movieIsFavourite)
+        let favImage = FavouriteImages.select(isFavourite: movieDetails!.isFavourite)
         let image = favImage.uiImage
         guard let buttonItem = navigationItem.rightBarButtonItem else {
             setUpTheMarkAsFavouriteButton()
@@ -76,15 +86,22 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     }
 
     private func setUpTheMarkAsFavouriteButton() {
-        let favouriteIcon = FavouriteImages.select(isFavourite: movieIsFavourite)
+        let favouriteIcon = FavouriteImages.select(isFavourite: movieDetails!.isFavourite)
         let image = favouriteIcon.uiImage
         let button = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(toggleIsFavourite))
         navigationItem.rightBarButtonItem = button
     }
 
+    private func toggleFavouriteButtonImage() {
+        let favImage = FavouriteImages.select(isFavourite: movieDetails!.isFavourite).toggle
+        let image = favImage.uiImage
+        navigationItem.rightBarButtonItem?.image = image
+    }
+
     @objc private func toggleIsFavourite() {
-        MovieManager.shared.markMovieAsFavourite(movie, as: !movieIsFavourite) {
-            self.movieIsFavourite = !self.movieIsFavourite
+        toggleFavouriteButtonImage()
+        MovieManager.shared.markMovieAsFavourite(movie, as: !movieDetails!.isFavourite) {
+            self.loadMovieDetails()
         } onError: {
             // TODO: Show an error prompt
             print("Error during marking movie as favourite")
@@ -109,14 +126,16 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     }
 
     private func loadMovieDetails() {
-        startLoadingIndicator()
+        MovieManager.shared.loadMovieDetails(of: movie) { movieDetails in
+            if let movieDetails = movieDetails {
+                self.movieDetails = movieDetails
+            }
+        }
         let request = MovieDBRoute.getMovieDetails(movie: movie)
         APIClient.shared.requestItem(request: request) { (result: Result<MovieDetails, Error>) in
             switch result {
             case .success(let movieDetails):
                 self.movieDetails = movieDetails
-                // TODO: Load movieIsFavourite from API
-                self.movieIsFavourite = false
             case .failure(let err):
                 // TODO: Implement
                 print(err)
@@ -126,6 +145,8 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     }
 
     private func updateMovieDetailsShowing() {
+        // Optimistic rendering of the UI
+        self.updateFavouriteButtonIcon()
         guard let movieDetails = movieDetails else {
             hideMovieDetails()
             return

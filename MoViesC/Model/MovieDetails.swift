@@ -13,6 +13,7 @@ struct MovieDetails {
     let tagline: String
     let status: String // TODO: one of: Rumored, Planned, In Production, Post Production, Released, Canceled
     let releaseDate: Date?
+    let isFavourite: Bool
 }
 
 extension MovieDetails: ImmutableMappable {
@@ -24,6 +25,6 @@ extension MovieDetails: ImmutableMappable {
 
         let dateFormatter = DateFormatter(withFormat: "YYYY-MM-DD", locale: Locale.current.identifier)
         releaseDate = dateFormatter.date(from: releaseDateString)
-
+        isFavourite = try map.value("account_states.favorite")
     }
 }
