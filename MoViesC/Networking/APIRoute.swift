@@ -40,13 +40,13 @@ extension APIRoute {
             case .get, .delete, .patch:
                 params["api_key"] = apiKey
                 if sessionPolicy == .privateDomain {
-                    params["session_id"] = "" // TODO: SESSION ID
+                    params["session_id"] = SessionManager.share.sessionId
                 }
             default:
                 var urlComponents = URLComponents(string: baseURL + encodedPath)!
                 urlComponents.queryItems = [URLQueryItem(name: "api_key", value: apiKey)]
                 if sessionPolicy == .privateDomain {
-                    urlComponents.queryItems?.append(URLQueryItem(name: "session_id", value: "" /* SESSION ID */))
+                    urlComponents.queryItems?.append(URLQueryItem(name: "session_id", value: SessionManager.share.sessionId))
                 }
                 url = try urlComponents.asURL()
         }

@@ -83,7 +83,12 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     }
 
     @objc private func toggleIsFavourite() {
-        // TODO: Implement
+        GenreMoviesManager.shared.markMovieAsFavourite(movie, as: !movieIsFavourite) {
+            self.movieIsFavourite = !self.movieIsFavourite
+        } onError: {
+            // TODO: Show an error prompt
+            print("Error during marking movie as favourite")
+        }
     }
 
     private func loadPosterImage() {

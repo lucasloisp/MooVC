@@ -8,7 +8,7 @@
 import Foundation
 
 extension Notification.Name {
-    static let didRequestLogout = Notification.Name("didRequestLogout")
+    static let didLogout = Notification.Name("didRequestLogout")
     static let didAuthenticate = Notification.Name("didAuthenticate")
 }
 
@@ -18,6 +18,7 @@ struct UserCredentials {
 }
 
 typealias SessionID = String
+typealias AccountID = Int
 
 class SessionManager {
     typealias VoidHandler = () -> Void
@@ -25,15 +26,19 @@ class SessionManager {
 
     static let share = SessionManager()
 
-    var sessionId: SessionID?
+    var sessionId: SessionID? {
+        didSet {
+            onSessionIDChange()
+        }
+    }
+    var accountId: AccountID?
 
     fileprivate init() {}
 
     func login(with credentials: UserCredentials) {
-        return self.putSessionId("MOCK SESSION ID")
         obtainValidatedRequestToken(credentials: credentials) { accessToken in
             self.obtainSessionId(accessToken) { sessionId in
-                self.putSessionId(sessionId)
+                self.sessionId = sessionId
             } onError: {
                 self.handleLoginError()
             }
@@ -45,9 +50,31 @@ class SessionManager {
         print("Error on login...")
     }
 
-    private func putSessionId(_ sessionId: SessionID) {
-        self.sessionId = sessionId
-        NotificationCenter.default.post(name: .didAuthenticate, object: nil)
+    private func onSessionIDChange() {
+        guard sessionId != nil else {
+            NotificationCenter.default.post(name: .didLogout, object: nil)
+            return
+        }
+        getAccountId { accountDetails in
+            guard let accountDetails = accountDetails else {
+                NotificationCenter.default.post(name: .didLogout, object: nil)
+                return
+            }
+            self.accountId = accountDetails.accountId
+            NotificationCenter.default.post(name: .didAuthenticate, object: nil)
+        }
+    }
+
+    private func getAccountId(completionHandler: @escaping Handler<AccountDetails?>) {
+        let request = MovieDBRoute.loadAccountDetails
+        APIClient.shared.requestItem(request: request) { (result: Result<AccountDetails, Error>) in
+            switch result {
+            case .success(let accountDetails):
+                completionHandler(accountDetails)
+            default:
+                completionHandler(nil)
+            }
+        }
     }
 
     private func obtainSessionId(_ accessToken: AccessToken, onSuccess: @escaping Handler<SessionID>, onError: @escaping VoidHandler) {
@@ -106,6 +133,6 @@ class SessionManager {
     }
 
     func logout() {
-        NotificationCenter.default.post(name: .didRequestLogout, object: nil)
+        self.sessionId = nil
     }
 }
