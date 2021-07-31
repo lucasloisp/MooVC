@@ -25,14 +25,16 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tabBarController?.title = "Search"
-
         movieController.bind(to: self.moviesCollectionView)
         movieController.delegate = self
         registerCellOnCollectionView()
         stopLoadingIndicator()
         searchBar.delegate = self
         showResults(movies: [])
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.title = "Search"
     }
 
     @IBSegueAction func makeMovieDetailsViewController(_ coder: NSCoder) -> MovieDetailsViewController? {
