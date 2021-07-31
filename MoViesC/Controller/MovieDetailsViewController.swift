@@ -39,7 +39,7 @@ enum FavouriteImages {
     }
 }
 
-class MovieDetailsViewController: UIViewController, WithLoadingIndicator, WithSegues {
+class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     @IBOutlet weak var taglineLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
@@ -47,13 +47,7 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator, WithSe
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
 
-    typealias SegueType = SeguesFromSelf
-    enum SeguesFromSelf: String, PerformableSegue {
-        case toMovieDetailsViewControllerSegue
-    }
-
     private let movie: Movie
-    private var selectedMovie: Movie?
     private let formatter: DateFormatter
     private let movieController = MovieListingController()
     private var movieDetails: MovieDetails? {
@@ -195,7 +189,9 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator, WithSe
 
 extension MovieDetailsViewController: MovieListingControllerDelegate {
     func didSelect(movie: Movie) {
-        selectedMovie = movie
-        perform(segue: .toMovieDetailsViewControllerSegue)
+        let vc = self.storyboard!.instantiateViewController(identifier: "MovieDetailsViewController", creator: { coder in
+            MovieDetailsViewController(coder: coder, for: movie)
+        })
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
