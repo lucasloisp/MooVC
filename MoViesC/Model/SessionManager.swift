@@ -45,6 +45,15 @@ class SessionManager {
         }
     }
 
+    func checkIsLoggedIn() -> Bool {
+        // TODO: Implement with local storage
+        return false
+    }
+
+    func logout() {
+        self.sessionId = nil
+    }
+
     private func handleLoginError() {
         // TODO: Implement
         print("Error on login...")
@@ -125,14 +134,5 @@ class SessionManager {
                 onError()
             }
         }
-    }
-
-    func checkIsLoggedIn() -> Bool {
-        // TODO: Implement with local storage
-        return false
-    }
-
-    func logout() {
-        self.sessionId = nil
     }
 }

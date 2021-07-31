@@ -32,10 +32,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
 
         NotificationCenter.default.addObserver(self, selector: #selector(onDidAuthenticate(_:)), name: .didAuthenticate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidLogout(_:)), name: .didLogout, object: nil)
+    }
+
+    @objc private func onDidLogout(_ notification: Notification) {
+        prepareStoryboardAsRoot(named: .authentication)
     }
 
     @objc private func onDidAuthenticate(_ notification: Notification) {
-            prepareStoryboardAsRoot(named: .main)
+        prepareStoryboardAsRoot(named: .main)
     }
 
     private func prepareStoryboardAsRoot(named name: DefinedStoryboard) {
