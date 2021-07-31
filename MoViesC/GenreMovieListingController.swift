@@ -16,9 +16,9 @@ class GenreMovieListingController: MovieListingController {
 
     weak var genreDelegate: GenreMovieListingControllerDelegate?
 
-    init(for genre: Genre, with movies: [Movie]) {
+    init(for genre: Genre) {
         self.genre = genre
-        super.init(for: movies)
+        super.init()
     }
 
     func bind(to cell: GenreTableViewCell) {

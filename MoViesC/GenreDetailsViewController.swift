@@ -16,9 +16,9 @@ class GenreDetailsViewController: UIViewController, WithLoadingIndicator, WithSe
         case toMovieDetailsViewControllerSegue
     }
 
-    let genre: Genre
-    var genreMoviesController: MovieListingController?
-    var selectedMovie: Movie?
+    private let genre: Genre
+    private let genreMoviesController = MovieListingController()
+    private var selectedMovie: Movie?
     var viewsThatHideOnLoading: [UIView] { return [moviesCollectionView] }
 
     required init?(coder: NSCoder) {
@@ -34,6 +34,9 @@ class GenreDetailsViewController: UIViewController, WithLoadingIndicator, WithSe
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        genreMoviesController.delegate = self
+        genreMoviesController.bind(to: moviesCollectionView)
+
         let identifier = RatedMovieCollectionViewCell.identifier
         let movieNib = UINib(nibName: identifier, bundle: nil)
         moviesCollectionView.register(movieNib, forCellWithReuseIdentifier: identifier)
@@ -41,10 +44,7 @@ class GenreDetailsViewController: UIViewController, WithLoadingIndicator, WithSe
         self.startLoadingIndicator()
         MovieManager.shared.loadMovies(for: genre) { movies in
             if let movies = movies {
-                let genreMoviesController = MovieListingController(for: movies)
-                genreMoviesController.delegate = self
-                genreMoviesController.bind(to: self.moviesCollectionView)
-                self.genreMoviesController = genreMoviesController
+                self.genreMoviesController.updateData(movies: movies)
             }
             self.stopLoadingIndicator()
         }
