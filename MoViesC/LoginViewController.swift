@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonPress(_ sender: Any) {
         let username = usernameTextField.text!
         let password = passwordTextField.text!
-        SessionManager.share.login(as: username, with: password)
+        SessionManager.share.login(with: UserCredentials(username: username, password: password))
     }
 }
 

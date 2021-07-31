@@ -34,6 +34,65 @@ class MovieDBRouteTests: XCTestCase {
         }
     }
 
+    func testCanValidateToken() throws {
+        let expectation = self.expectation(description: "API Request")
+        var response: Result<TokenValidationResponse, Error>!
+
+        apiClient
+            .requestItem(request: MovieDBRoute.createRequestToken) { (result: Result<RequestTokenCreation, Error>) in
+                if case .success(let token) = result {
+                    let request = MovieDBRoute.validateTokenWithLogin(username: "lucasloisucudal", password: "AYNtGqxJ9UaagtN", accessToken: token.requestToken)
+                    self.apiClient.requestItem(request: request) { (result: Result<TokenValidationResponse, Error>) in
+                        response = result
+                        expectation.fulfill()
+                    }
+                }
+        }
+
+        waitForExpectations(timeout: 6, handler: nil)
+
+        switch response! {
+        case .success(let response):
+            XCTAssertTrue(response.success)
+        case .failure(let error):
+            print(error)
+            XCTFail("The network request failed")
+        }
+    }
+
+    func testCanCreateSession() throws {
+        let expectation = self.expectation(description: "API Request")
+        var response: Result<SessionIdCreation, Error>!
+
+        apiClient
+            .requestItem(request: MovieDBRoute.createRequestToken) { (result: Result<RequestTokenCreation, Error>) in
+                if case .success(let requestTokenCreation) = result {
+                    let token = requestTokenCreation.requestToken
+                    let request = MovieDBRoute.validateTokenWithLogin(username: "lucasloisucudal", password: "AYNtGqxJ9UaagtN", accessToken: token)
+                    self.apiClient.requestItem(request: request) { (result: Result<TokenValidationResponse, Error>) in
+                        if case .success(_) = result {
+                            let request = MovieDBRoute.createSession(accessToken: token)
+                            self.apiClient.requestItem(request: request) { (result: Result<SessionIdCreation, Error>) in
+                                response = result
+                                expectation.fulfill()
+                            }
+                        }
+                    }
+                }
+            }
+
+        waitForExpectations(timeout: 15, handler: nil)
+
+        switch response! {
+        case .success(let response):
+            XCTAssertTrue(response.success)
+            XCTAssertFalse(response.sessionId.isEmpty)
+        case .failure(let error):
+            print(error)
+            XCTFail("The network request failed")
+        }
+    }
+
     func testCanRequestGenres() throws {
         let expectation = self.expectation(description: "API Request")
         var response: Result<GenresResponse, Error>!
