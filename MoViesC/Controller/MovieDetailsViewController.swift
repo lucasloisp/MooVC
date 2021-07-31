@@ -76,6 +76,8 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
         let movieNib = UINib(nibName: identifier, bundle: nil)
         moviesCollectionView.register(movieNib, forCellWithReuseIdentifier: identifier)
 
+        movieController.emptyMessage = "No similar movies were found"
+        movieController.showingRating = false
         movieController.delegate = self
         movieController.bind(to: moviesCollectionView)
 
