@@ -61,7 +61,6 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        hideMovieDetails()
         loadPosterImage()
         loadMovieDetails()
     }
@@ -126,7 +125,6 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
             hideMovieDetails()
             return
         }
-        showMovieDetails()
         taglineLabel.text = movieDetails.tagline
         statusLabel.text = movieDetails.status
         if let releaseDate = movieDetails.releaseDate {
@@ -136,17 +134,13 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
         }
     }
 
-    private func hideMovieDetails() {
-        setMovieDetailsVisibility(isHidden: true)
+    var viewsThatHideOnLoading: [UIView] {
+        return [taglineLabel, statusLabel, releaseDateLabel]
     }
 
-    private func showMovieDetails() {
-        setMovieDetailsVisibility(isHidden: false)
-    }
-
-    private func setMovieDetailsVisibility(isHidden: Bool) {
-        taglineLabel.isHidden = isHidden
-        statusLabel.isHidden = isHidden
-        releaseDateLabel.isHidden = isHidden
+    func hideMovieDetails() {
+        viewsThatHideOnLoading.forEach { view in
+            view.isHidden = true
+        }
     }
 }

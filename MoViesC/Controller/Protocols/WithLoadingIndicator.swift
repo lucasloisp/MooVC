@@ -9,20 +9,19 @@ import UIKit
 
 protocol WithLoadingIndicator {
     var activityIndicatorView: UIActivityIndicatorView! { get }
-    var viewThatHidesOnLoading: UIView? { get }
+    var viewsThatHideOnLoading: [UIView] { get }
 }
 
 extension WithLoadingIndicator {
-    var viewThatHidesOnLoading: UIView? { return nil }
 
     func startLoadingIndicator() {
-        viewThatHidesOnLoading?.isHidden = true
+        viewsThatHideOnLoading.forEach { $0.isHidden = true }
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
     }
 
     func stopLoadingIndicator() {
-        viewThatHidesOnLoading?.isHidden = false
+        viewsThatHideOnLoading.forEach { $0.isHidden = false }
         activityIndicatorView.isHidden = true
         activityIndicatorView.stopAnimating()
     }
