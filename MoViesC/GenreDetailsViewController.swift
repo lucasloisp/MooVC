@@ -8,6 +8,9 @@
 import UIKit
 
 class GenreDetailsViewController: UIViewController, WithLoadingIndicator, WithSegues {
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var moviesCollectionView: UICollectionView!
+
     typealias SegueType = SeguesFromSelf
     enum SeguesFromSelf: String, PerformableSegue {
         case toMovieDetailsViewControllerSegue
@@ -16,9 +19,7 @@ class GenreDetailsViewController: UIViewController, WithLoadingIndicator, WithSe
     let genre: Genre
     var genreMoviesController: MovieListingController?
     var selectedMovie: Movie?
-
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-    @IBOutlet weak var moviesCollectionView: UICollectionView!
+    var viewsThatHideOnLoading: [UIView] { return [moviesCollectionView] }
 
     required init?(coder: NSCoder) {
       fatalError("init(coder:) is not implemented")
