@@ -37,7 +37,8 @@ extension MovieDBRoute: APIRoute {
     var sessionPolicy: APIRouteSessionPolicy {
         switch self {
         case .loadAccountDetails,
-             .markAsFavourite:
+             .markAsFavourite,
+             .getMovieDetails:
             return .privateDomain
         default:
             return .publicDomain
@@ -59,7 +60,7 @@ extension MovieDBRoute: APIRoute {
         case .discoverMoviesByGenre(let genre):
             return try encoded(path: "/discover/movie", params: ["with_genres": "\(genre.tmbdId)"])
         case .getMovieDetails(let movie):
-            return try encoded(path: "/movie/\(movie.tmbdId)", params: [:])
+            return try encoded(path: "/movie/\(movie.tmbdId)", params: ["append_to_response": "account_states"])
         case .searchMovies(let named):
             return try encoded(path: "/search/movie", params: ["query": named])
         case .loadAccountDetails:
