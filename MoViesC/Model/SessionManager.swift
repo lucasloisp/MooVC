@@ -30,6 +30,7 @@ class SessionManager {
     fileprivate init() {}
 
     func login(with credentials: UserCredentials) {
+        return self.putSessionId("MOCK SESSION ID")
         obtainValidatedRequestToken(credentials: credentials) { accessToken in
             self.obtainSessionId(accessToken) { sessionId in
                 self.putSessionId(sessionId)
