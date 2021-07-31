@@ -48,6 +48,11 @@ class LocalKeychainManager {
         }
         return Session(sessionId: sessionId, accountId: accountId)
     }
+
+    func clearStoredSession() {
+        defaults.removeObject(forKey: sessionIDKey)
+        defaults.removeObject(forKey: accountIDKey)
+    }
 }
 
 class SessionManager {
@@ -57,6 +62,9 @@ class SessionManager {
     static let share = SessionManager()
 
     private let keychain = LocalKeychainManager.shared
+
+    private let errorMessageInvalidCredentials = "Invalid credentials"
+
     var sessionId: SessionID? {
         didSet {
             onSessionIDChange()
@@ -71,12 +79,12 @@ class SessionManager {
         }
     }
 
-    func login(with credentials: UserCredentials) {
-        obtainValidatedRequestToken(credentials: credentials) { accessToken in
+    func login(with credentials: UserCredentials, onError: @escaping Handler<String?>) {
+        obtainValidatedRequestToken(credentials: credentials, onError: onError) { accessToken in
             self.obtainSessionId(accessToken) { sessionId in
                 self.sessionId = sessionId
             } onError: {
-                self.handleLoginError()
+                onError(self.errorMessageInvalidCredentials)
             }
         }
     }
@@ -89,13 +97,10 @@ class SessionManager {
         self.sessionId = nil
     }
 
-    private func handleLoginError() {
-        // TODO: Implement
-        print("Error on login...")
-    }
-
     private func onSessionIDChange() {
         guard sessionId != nil else {
+            keychain.clearStoredSession()
+            self.accountId = nil
             NotificationCenter.default.post(name: .didLogout, object: nil)
             return
         }
@@ -135,15 +140,15 @@ class SessionManager {
         }
     }
 
-    private func obtainValidatedRequestToken(credentials: UserCredentials, onSuccess: @escaping Handler<AccessToken>) {
+    private func obtainValidatedRequestToken(credentials: UserCredentials, onError: @escaping Handler<String>, onSuccess: @escaping Handler<AccessToken>) {
         obtainRequestToken { accessToken in
             self.validateAccessToken(accessToken, credentials: credentials) {
                 onSuccess(accessToken)
             } onError: {
-                self.handleLoginError()
+                onError(self.errorMessageInvalidCredentials)
             }
         } onError: {
-            self.handleLoginError()
+            onError(self.errorMessageInvalidCredentials)
         }
 
     }
