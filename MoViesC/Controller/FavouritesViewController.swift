@@ -16,7 +16,7 @@ class FavouritesViewController: UIViewController, WithSegues, WithLoadingIndicat
         case toMovieDetailsViewControllerSegue
     }
 
-    private let movieController: MovieListingController = MovieListingController(for: [])
+    private let movieController = MovieListingController(emptyMessage: "You have not marked any movies as favourites")
     var selectedMovie: Movie?
     var viewsThatHideOnLoading: [UIView] {
         return [moviesCollectionView]
