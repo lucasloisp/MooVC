@@ -53,8 +53,10 @@ class MovieManager {
         }
     }
 
-    func loadMovies(for genre: Genre, completionHandler: @escaping Handle<DiscoverMovieResponse?>) {
-        self.loadMovies(for: genre, page: 1, completionHandler: completionHandler)
+    func loadMovies(for genre: Genre, completionHandler: @escaping Handle<[Movie]?>) {
+        self.loadMovies(for: genre, page: 1) { response in
+            completionHandler(response.map { $0.movies })
+        }
     }
 
     func loadMovieDetails(of movie: Movie, completionHandler: @escaping Handle<MovieDetails?>) {
@@ -108,7 +110,7 @@ class MovieManager {
                     group.enter()
                     self.loadMovies(for: genre) {
                         if let apiMovies = $0 {
-                            movies[index] = Array(apiMovies.movies.prefix(10))
+                            movies[index] = Array(apiMovies.prefix(10))
                         }
                         group.leave()
                     }
