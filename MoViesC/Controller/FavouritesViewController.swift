@@ -7,18 +7,6 @@
 
 import UIKit
 
-class FavouritesPager: MovieListingPager {
-    func fetchPage(page: Int, onSuccess: @escaping ((MoviePage?) -> Void)) {
-        MovieManager.shared.loadFavourites(page: page) { response in
-            if let response = response {
-                onSuccess(MoviePage(movies: response.movies, totalResults: response.totalResults, isFirst: response.page == 1))
-            } else {
-                onSuccess(nil)
-            }
-        }
-    }
-}
-
 class FavouritesViewController: UIViewController, WithSegues, WithLoadingIndicator {
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
