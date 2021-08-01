@@ -7,6 +7,19 @@
 
 import UIKit
 
+class MovieSearchPager: MovieListingPager {
+    private var query: String = "the"
+
+    func fetchPage(page: Int, onSuccess: @escaping ((MoviePage?) -> Void)) {
+        MovieManager.shared.searchMovies(named: query, page: page) { response in
+            if let response = response {
+                let total = response.totalResults
+                onSuccess(MoviePage(movies: response.movies, page: response.page, total: total))
+            }
+        }
+    }
+}
+
 class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
@@ -17,7 +30,7 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
         case toMovieDetailsViewControllerSegue
     }
 
-    private let movieController: MovieListingController = MovieListingController()
+    private let movieController = InfiniteMovieListingController(pager: MovieSearchPager())
     private var selectedMovie: Movie?
 
     var viewsThatHideOnLoading: [UIView] { return [moviesCollectionView] }
@@ -27,10 +40,11 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
 
         movieController.bind(to: self.moviesCollectionView)
         movieController.delegate = self
+        movieController.pagerDelegate = self
         registerCellOnCollectionView()
         stopLoadingIndicator()
         searchBar.delegate = self
-        showResults(movies: [])
+        emptyResults()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -51,17 +65,8 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
     fileprivate func performSearch(query: String) {
         startLoadingIndicator()
         movieController.emptyMessage = "No results for \"\(query)\""
-        MovieManager.shared.searchMovies(named: query) { movies in
-            if let movies = movies {
-                self.showResults(movies: movies)
-            }
-            self.stopLoadingIndicator()
-        }
-    }
-
-    fileprivate func showResults(movies: [Movie]) {
-        movieController.updateData(movies: movies)
-        self.moviesCollectionView.isHidden = false
+        movieController.fetchMovies()
+        // TODO: Reset the search pager
     }
 
     fileprivate func emptyResults() {
@@ -69,6 +74,29 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
         moviesCollectionView.isHidden = true
     }
 
+}
+
+extension SearchViewController: InfiniteMovieListingControllerDelegate {
+    func onFetchSucceeded(for indexes: [Int]?) {
+        guard let indexes = indexes else {
+            stopLoadingIndicator()
+            moviesCollectionView.reloadData()
+            return
+        }
+        let newIndexPathsToReload = indexes.map { IndexPath(row: $0, section: 0) }
+        let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
+        moviesCollectionView.reloadItems(at: indexPathsToReload)
+    }
+
+    private func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
+        let indexPathsForVisibleRows = moviesCollectionView.indexPathsForVisibleItems
+        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
+        return Array(indexPathsIntersection)
+    }
+
+    func onFetchFailed() {
+        // TODO: Indicate the error to the user
+    }
 }
 
 extension SearchViewController: MovieListingControllerDelegate {

@@ -85,12 +85,12 @@ class MovieManager {
         }
     }
 
-    func searchMovies(named query: String, completionHandler: @escaping Handle<[Movie]?>) {
-        let request = MovieDBRoute.searchMovies(named: query)
+    func searchMovies(named query: String, page: Int, completionHandler: @escaping Handle<DiscoverMovieResponse?>) {
+        let request = MovieDBRoute.searchMovies(named: query, page: page)
         APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
             switch result {
             case .success(let response):
-                completionHandler(response.movies)
+                completionHandler(response)
             case .failure(let err):
                 // TODO: Show the error to the user
                 print(err)
