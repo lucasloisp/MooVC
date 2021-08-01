@@ -130,6 +130,11 @@ class InfiniteMovieListingController: MovieListingController {
         collectionView.showsVerticalScrollIndicator = false
     }
 
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if isLoadingCell(for: indexPath) { return }
+        super.collectionView(collectionView, didSelectItemAt: indexPath)
+    }
+
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if isLoadingCell(for: indexPath) {
             let cell = self.getRatedMovieCell(collectionView, indexPath)
