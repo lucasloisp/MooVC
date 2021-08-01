@@ -9,5 +9,6 @@ import Foundation
 
 struct MoviePage {
     let movies: [Movie]
+    let totalResults: Int
     let isFirst: Bool
 }

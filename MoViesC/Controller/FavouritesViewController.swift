@@ -8,36 +8,14 @@
 import UIKit
 
 class FavouritesPager: MovieListingPager {
-    var totalItems: Int { return totalMovies }
-    var isFetchInProgress: Bool { return _isFetchInProgress }
-
-    private var currentPage = 1
-    private var totalMovies = 0
-    private var _isFetchInProgress: Bool = false
-
-    func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void)) {
-        guard !_isFetchInProgress else {
-            return
-        }
-        _isFetchInProgress = true
-
-        let page = currentPage
-
+    func fetchPage(page: Int, onSuccess: @escaping ((MoviePage?) -> Void)) {
         MovieManager.shared.loadFavourites(page: page) { response in
-            self._isFetchInProgress = false
             if let response = response {
-                self.currentPage += 1
-                self.totalMovies = response.totalResults
-                onSuccess(MoviePage(movies: response.movies, isFirst: response.page == 1))
+                onSuccess(MoviePage(movies: response.movies, totalResults: response.totalResults, isFirst: response.page == 1))
             } else {
                 onSuccess(nil)
             }
         }
-    }
-
-    func restart() {
-        currentPage = 1
-        totalMovies = 0
     }
 }
 
