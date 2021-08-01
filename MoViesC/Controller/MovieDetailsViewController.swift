@@ -47,6 +47,9 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
 
+    var viewsThatHideOnLoading: [UIView] {
+        return [taglineLabel, statusLabel, releaseDateLabel]
+    }
     private let movie: Movie
     private let formatter: DateFormatter
     private let movieController = MovieListingController()
@@ -85,6 +88,12 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
         startLoadingIndicator()
         loadMovieDetails()
         loadSimilarMovies()
+    }
+
+    func hideMovieDetails() {
+        viewsThatHideOnLoading.forEach { view in
+            view.isHidden = true
+        }
     }
 
     private func loadSimilarMovies() {
@@ -163,12 +172,11 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     }
 
     private func updateMovieDetailsShowing() {
-        // Optimistic rendering of the UI
-        self.updateFavouriteButtonIcon()
         guard let movieDetails = movieDetails else {
             hideMovieDetails()
             return
         }
+        self.updateFavouriteButtonIcon()
         taglineLabel.text = movieDetails.tagline
         statusLabel.text = movieDetails.status
         if let releaseDate = movieDetails.releaseDate {
@@ -177,23 +185,15 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
             releaseDateLabel.text = "Unknown"
         }
     }
-
-    var viewsThatHideOnLoading: [UIView] {
-        return [taglineLabel, statusLabel, releaseDateLabel]
-    }
-
-    func hideMovieDetails() {
-        viewsThatHideOnLoading.forEach { view in
-            view.isHidden = true
-        }
-    }
 }
 
 extension MovieDetailsViewController: MovieListingControllerDelegate {
     func didSelect(movie: Movie) {
-        let vc = self.storyboard!.instantiateViewController(identifier: "MovieDetailsViewController", creator: { coder in
+        let storyboard = self.storyboard!
+        let identifier = "MovieDetailsViewController"
+        let viewController = storyboard.instantiateViewController(identifier: identifier, creator: { coder in
             MovieDetailsViewController(coder: coder, for: movie)
         })
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
