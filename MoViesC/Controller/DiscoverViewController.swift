@@ -7,9 +7,9 @@
 
 import UIKit
 
-class DiscoverViewController: UIViewController, WithSegues {
+class DiscoverViewController: UIViewController, WithSegues, WithLoadingIndicator {
     @IBOutlet weak var genresTableView: UITableView!
-    @IBOutlet weak var pendingActivityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
 
     typealias SegueType = SeguesFromSelf
     enum SeguesFromSelf: String, PerformableSegue {
@@ -17,6 +17,7 @@ class DiscoverViewController: UIViewController, WithSegues {
         case toGenreDetailsViewControllerSegue
     }
 
+    var viewsThatHideOnLoading: [UIView] { [genresTableView] }
     private var genreMoviesControllers: [GenreMovieListingController]?
     private var selectedMovie: Movie?
     private var selectedGenre: Genre?
@@ -53,9 +54,7 @@ class DiscoverViewController: UIViewController, WithSegues {
     }
 
     private func loadGenres() {
-        pendingActivityIndicatorView.isHidden = false
-        pendingActivityIndicatorView.startAnimating()
-        genresTableView.isHidden = true
+        startLoadingIndicator()
         MovieManager.shared.loadGenres { genreMovies in
             self.genreMoviesControllers = genreMovies.map({ (genre, movies) in
                 let controller = GenreMovieListingController(for: genre)
@@ -65,14 +64,10 @@ class DiscoverViewController: UIViewController, WithSegues {
                 return controller
             })
             self.genresTableView.reloadData()
-            self.genresTableView.isHidden = false
-            self.pendingActivityIndicatorView.isHidden = true
-            self.pendingActivityIndicatorView.stopAnimating()
+            self.stopLoadingIndicator()
         } onError: {
             // TODO: Indicate that there was an error to the user
-            self.genresTableView.isHidden = false
-            self.pendingActivityIndicatorView.isHidden = true
-            self.pendingActivityIndicatorView.stopAnimating()
+            self.stopLoadingIndicator()
         }
     }
 }

@@ -92,8 +92,8 @@
                     <tabBarItem key="tabBarItem" title="" image="star" catalog="system" id="KTb-qf-EDp"/>
                     <navigationItem key="navigationItem" id="4Uc-Wo-XBw"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="MKn-Wy-Adv" id="aAZ-je-504"/>
                         <outlet property="genresTableView" destination="Vel-gR-w68" id="Rjn-yn-Hay"/>
-                        <outlet property="pendingActivityIndicatorView" destination="MKn-Wy-Adv" id="aAZ-je-504"/>
                         <segue destination="w6a-oe-kEE" kind="show" identifier="toMovieDetailsViewControllerSegue" destinationCreationSelector="makeDiscoverViewController:" id="ADG-Xy-seT"/>
                         <segue destination="Hfe-Zb-nRS" kind="show" identifier="toGenreDetailsViewControllerSegue" destinationCreationSelector="makeGenreDetailsViewController:" id="bTo-E8-ytV"/>
                     </connections>
