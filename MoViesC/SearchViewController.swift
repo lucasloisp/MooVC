@@ -8,32 +8,16 @@
 import UIKit
 
 class MovieSearchPager: MovieListingPager {
-    var totalItems: Int { return totalMovies }
-    var isFetchInProgress: Bool { return _isFetchInProgress }
-
     private let query: String
-    private var currentPage = 1
-    private var totalMovies = 0
-    private var _isFetchInProgress: Bool = false
 
     init(query: String) {
         self.query = query
     }
 
-    func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void)) {
-        guard !_isFetchInProgress, !query.isEmpty else {
-            return
-        }
-        _isFetchInProgress = true
-
-        let page = currentPage
+    func fetchPage(page: Int, onSuccess: @escaping ((MoviePage?) -> Void)) {
         MovieManager.shared.searchMovies(named: query, page: page) { response in
-            self._isFetchInProgress = false
-
             if let response = response {
-                self.currentPage += 1
-                self.totalMovies = response.totalResults
-                onSuccess(MoviePage(movies: response.movies, isFirst: response.page == 1))
+                onSuccess(MoviePage(movies: response.movies, totalResults: response.totalResults, isFirst: response.page == 1))
             } else {
                 onSuccess(nil)
             }
@@ -88,6 +72,7 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
         movieController.emptyMessage = "No results for \"\(query)\""
         movieController.restartWithPager(MovieSearchPager(query: query))
         movieController.fetchMovies()
+        moviesCollectionView.contentOffset.y = 0
     }
 
     fileprivate func emptyResults() {

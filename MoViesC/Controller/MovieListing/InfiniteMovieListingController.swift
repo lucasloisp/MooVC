@@ -12,32 +12,20 @@ protocol InfiniteMovieListingControllerDelegate: AnyObject {
     func onFetchFailed()
 }
 
-protocol MovieListingPager: AnyObject {
-    var totalItems: Int { get }
-    var isFetchInProgress: Bool { get }
-
-    func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void))
-    func restart()
-}
-
-extension MovieListingPager {
-    func restart() {}
-}
-
 class InfiniteMovieListingController: MovieListingController {
     weak var pagerDelegate: InfiniteMovieListingControllerDelegate?
 
-    private var pager: MovieListingPager
+    private var pager: MovieListingPageManager
 
     override var moviesCount: Int { return pager.totalItems }
 
     init(pager: MovieListingPager) {
-        self.pager = pager
+        self.pager = MovieListingPageManager(pager: pager)
         super.init()
     }
 
     func restartWithPager(_ pager: MovieListingPager) {
-        self.pager = pager
+        self.pager = MovieListingPageManager(pager: pager)
         self.movies = []
     }
 
