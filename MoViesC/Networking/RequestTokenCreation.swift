@@ -1,6 +1,6 @@
 //
-//  Todo.swift
-//  Test
+//  RequestTokenCreation.swift
+//  MoViesC
 //
 //  Created by Lucas Lois on 20/7/21.
 //
@@ -10,6 +10,11 @@ import ObjectMapper
 
 typealias AccessToken = String
 
+enum Keys: String {
+    case requestToken = "request_token"
+    case success
+}
+
 struct RequestTokenCreation: ImmutableMappable {
     let requestToken: AccessToken
     let success: Bool
@@ -18,9 +23,4 @@ struct RequestTokenCreation: ImmutableMappable {
         requestToken = try map.value(Keys.requestToken.rawValue)
         success = try map.value(Keys.success.rawValue)
     }
-}
-
-enum Keys: String {
-    case requestToken = "request_token"
-    case success
 }
