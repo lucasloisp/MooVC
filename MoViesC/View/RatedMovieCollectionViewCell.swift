@@ -18,6 +18,23 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        let view = UIView(frame: posterImageView.frame)
+        let gradient = CAGradientLayer()
+        gradient.frame = view.frame
+        gradient.colors = [UIColor.clear.cgColor, UIColor.white.cgColor]
+        gradient.locations = [0.0, 0.5]
+        view.layer.insertSublayer(gradient, at: 0)
+        posterImageView.addSubview(view)
+        posterImageView.bringSubviewToFront(view)
+
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if !posterImageView.isHidden {
+            posterImageView.layer.cornerRadius = posterImageView.bounds.size.width / 8.0
+            posterImageView.layer.masksToBounds = true
+        }
     }
 
     func configureAsLoading() {
