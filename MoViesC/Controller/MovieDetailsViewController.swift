@@ -46,6 +46,7 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var similarLabel: UILabel!
 
     var viewsThatHideOnLoading: [UIView] {
         return [taglineLabel, statusLabel, releaseDateLabel]
@@ -88,6 +89,17 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
         startLoadingIndicator()
         loadMovieDetails()
         loadSimilarMovies()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        let border = CALayer()
+        let frame = similarLabel.frame
+        border.backgroundColor = UIColor(named: "DarkAccent")!.cgColor
+
+        border.frame = CGRect(x: -frame.minX, y: frame.size.height - 2, width: self.view.frame.size.width, height: 2)
+        similarLabel.layer.addSublayer(border)
     }
 
     func hideMovieDetails() {
