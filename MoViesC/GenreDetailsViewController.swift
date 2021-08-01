@@ -10,6 +10,8 @@ import UIKit
 class GenreMoviesPager: MovieListingPager {
     private let genre: Genre
     private var currentPage = 1
+    private var totalMovies = 0
+    var totalItems: Int { return totalMovies }
 
     init(for genre: Genre) {
         self.genre = genre
@@ -20,6 +22,7 @@ class GenreMoviesPager: MovieListingPager {
         MovieManager.shared.loadMovies(for: genre, page: page) { response in
             if let response = response {
                 self.currentPage += 1
+                self.totalMovies = response.totalResults
                 onSuccess(MoviePage(movies: response.movies, page: response.page, total: response.totalResults))
             } else {
                 onSuccess(nil)

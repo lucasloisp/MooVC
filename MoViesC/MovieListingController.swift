@@ -107,16 +107,16 @@ protocol InfiniteMovieListingControllerDelegate: AnyObject {
 
 protocol MovieListingPager {
     func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void))
+    var totalItems: Int { get }
 }
 
 class InfiniteMovieListingController: MovieListingController {
     weak var pagerDelegate: InfiniteMovieListingControllerDelegate?
 
     private var isFetchInProgress: Bool = false
-    private var total: Int = 0
     private let pager: MovieListingPager
 
-    override var moviesCount: Int { return total }
+    override var moviesCount: Int { return pager.totalItems }
 
     init(pager: MovieListingPager) {
         self.pager = pager
@@ -158,7 +158,6 @@ class InfiniteMovieListingController: MovieListingController {
                 return
             }
             self.isFetchInProgress = false
-            self.total = moviePage.total
             self.movies.append(contentsOf: moviePage.movies)
 
             if moviePage.isFirst {
