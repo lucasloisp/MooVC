@@ -54,6 +54,9 @@
                             </stackView>
                         </subviews>
                     </stackView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="onw-vW-Grg">
+                        <rect key="frame" x="222" y="231.5" width="20" height="20"/>
+                    </activityIndicatorView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -61,13 +64,16 @@
                 <constraint firstItem="03u-qU-swK" firstAttribute="top" secondItem="wVz-qj-OZW" secondAttribute="bottom" id="3eL-Ws-FfK"/>
                 <constraint firstAttribute="trailing" secondItem="wVz-qj-OZW" secondAttribute="trailing" id="Fja-XO-10H"/>
                 <constraint firstItem="03u-qU-swK" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="QaH-Xv-UT8"/>
+                <constraint firstItem="onw-vW-Grg" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="ahi-dK-aYg"/>
                 <constraint firstAttribute="bottom" secondItem="03u-qU-swK" secondAttribute="bottom" id="mHB-1t-k0E"/>
                 <constraint firstAttribute="trailing" secondItem="03u-qU-swK" secondAttribute="trailing" constant="4" id="pJz-L3-3YM"/>
                 <constraint firstItem="wVz-qj-OZW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="uIx-NV-d8o"/>
                 <constraint firstItem="wVz-qj-OZW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="wxC-K9-BUQ"/>
+                <constraint firstItem="onw-vW-Grg" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="xRw-2e-yL1"/>
             </constraints>
             <size key="customSize" width="576" height="408"/>
             <connections>
+                <outlet property="activityIndicatorView" destination="onw-vW-Grg" id="Jox-Dx-zsa"/>
                 <outlet property="nameLabel" destination="3DB-l8-wPI" id="DMK-KM-MmI"/>
                 <outlet property="posterImageView" destination="wVz-qj-OZW" id="0pp-Wn-33Q"/>
                 <outlet property="ratingStackView" destination="oD8-A2-OEr" id="4Vb-pv-anp"/>
