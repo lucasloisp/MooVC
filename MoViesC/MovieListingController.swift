@@ -102,7 +102,7 @@ protocol InfiniteMovieListingControllerDelegate: AnyObject {
     func onFetchFailed()
 }
 
-protocol MovieListingPager {
+protocol MovieListingPager: AnyObject {
     func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void))
     var totalItems: Int { get }
     var isFetchInProgress: Bool { get }
@@ -111,13 +111,18 @@ protocol MovieListingPager {
 class InfiniteMovieListingController: MovieListingController {
     weak var pagerDelegate: InfiniteMovieListingControllerDelegate?
 
-    private let pager: MovieListingPager
+    private var pager: MovieListingPager
 
     override var moviesCount: Int { return pager.totalItems }
 
     init(pager: MovieListingPager) {
         self.pager = pager
         super.init()
+    }
+
+    func restartWithPager(_ pager: MovieListingPager) {
+        self.pager = pager
+        self.movies = []
     }
 
     override func bind(to collectionView: UICollectionView) {
@@ -142,8 +147,9 @@ class InfiniteMovieListingController: MovieListingController {
     }
 
     func fetchMovies() {
-        pager.fetchPage { moviePage in
-            guard let moviePage = moviePage else {
+        let thisPager = pager
+        thisPager.fetchPage { moviePage in
+            guard let moviePage = moviePage, self.pager === thisPager else {
                 self.pagerDelegate?.onFetchFailed()
                 return
             }
