@@ -173,6 +173,10 @@
 				C241A63C26AF979D008E4EC5 /* Protocols */,
 				C2D50BF426AC9AAB00FB6BF0 /* MovieDetailsViewController.swift */,
 				C256A27826B4DF3000E1B23D /* FavouritesViewController.swift */,
+				C21448E726A8E5E600E72E0E /* LoginViewController.swift */,
+				C250E46626AA2DE4008A95AF /* DiscoverViewController.swift */,
+				C28C45CD26AF8468005BE8AA /* GenreDetailsViewController.swift */,
+				C2FFB2F926B5A35D0008F3E9 /* MainTabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -206,14 +210,11 @@
 				C2A3023326A9068F008BBA7D /* Networking */,
 				C21448E326A8E5E600E72E0E /* AppDelegate.swift */,
 				C21448E526A8E5E600E72E0E /* SceneDelegate.swift */,
-				C21448E726A8E5E600E72E0E /* LoginViewController.swift */,
 				C21448E926A8E5E600E72E0E /* Auth.storyboard */,
 				C21448EC26A8E5E700E72E0E /* Assets.xcassets */,
 				C21448EE26A8E5E700E72E0E /* LaunchScreen.storyboard */,
 				C21448F126A8E5E700E72E0E /* Info.plist */,
 				C250E46426AA2D11008A95AF /* Main.storyboard */,
-				C250E46626AA2DE4008A95AF /* DiscoverViewController.swift */,
-				C28C45CD26AF8468005BE8AA /* GenreDetailsViewController.swift */,
 				C250E46826AA2E78008A95AF /* GenreTableViewCell.swift */,
 				C250E46926AA2E78008A95AF /* GenreTableViewCell.xib */,
 				C22E222126AB890300201EEC /* GenreMovieCollectionViewCell.swift */,
@@ -223,7 +224,6 @@
 				C273254826B0C803000D4AD0 /* SearchViewController.swift */,
 				C273254C26B0E335000D4AD0 /* RatedMovieCollectionViewCell.swift */,
 				C273254D26B0E335000D4AD0 /* RatedMovieCollectionViewCell.xib */,
-				C2FFB2F926B5A35D0008F3E9 /* MainTabBarController.swift */,
 			);
 			path = MoViesC;
 			sourceTree = "<group>";
@@ -241,9 +241,9 @@
 		C23D9DA526B7034D00A6308D /* MovieListing */ = {
 			isa = PBXGroup;
 			children = (
+				C23D9DA626B703BB00A6308D /* MoviePage.swift */,
 				C22E222526AB9DEF00201EEC /* MovieListingController.swift */,
 				C273254A26B0D7C9000D4AD0 /* GenreMovieListingController.swift */,
-				C23D9DA626B703BB00A6308D /* MoviePage.swift */,
 				C23D9DA826B7097700A6308D /* InfiniteMovieListingController.swift */,
 			);
 			path = MovieListing;
