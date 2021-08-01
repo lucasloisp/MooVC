@@ -18,6 +18,14 @@ class GenreMovieCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if !posterImageView.isHidden {
+            posterImageView.layer.cornerRadius = posterImageView.bounds.size.width / 8.0
+            posterImageView.layer.masksToBounds = true
+        }
+    }
+
     func configure(name: String, poster: URL?) {
         if let url = poster {
             configureWithPoster(url: url)

@@ -35,6 +35,7 @@ class GenreTableViewCell: UITableViewCell {
         moviesCollectionView.register(genreMovieFooterNib,
                                       forSupplementaryViewOfKind: footerKind,
                                       withReuseIdentifier: footerId)
+        moviesCollectionView.showsHorizontalScrollIndicator = false
     }
 
     func stopScrolling() {
@@ -43,7 +44,6 @@ class GenreTableViewCell: UITableViewCell {
 
     func configure(for genre: String) {
         nameLabel.text = genre
-        // TODO: Prepare the collection view for displaying movies
     }
 
 }

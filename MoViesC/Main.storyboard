@@ -70,31 +70,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vel-gR-w68">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vel-gR-w68">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="GzH-mA-K6b">
-                                <rect key="frame" x="0.0" y="426" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="MKn-Wy-Adv">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="GzH-mA-K6b" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="7Yk-uS-5MF"/>
+                            <constraint firstItem="MKn-Wy-Adv" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" constant="-2.5" id="7rd-8Z-xGI"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Vel-gR-w68" secondAttribute="trailing" id="L28-Qt-Nyg"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Vel-gR-w68" secondAttribute="bottom" id="bJB-NT-uqy"/>
                             <constraint firstItem="Vel-gR-w68" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="c5v-LC-g9w"/>
-                            <constraint firstItem="GzH-mA-K6b" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="cus-LY-8e9"/>
                             <constraint firstItem="Vel-gR-w68" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="fEt-jA-8Kq"/>
+                            <constraint firstItem="MKn-Wy-Adv" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="kme-Cw-eTR"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="star" catalog="system" id="KTb-qf-EDp"/>
                     <navigationItem key="navigationItem" id="4Uc-Wo-XBw"/>
                     <connections>
                         <outlet property="genresTableView" destination="Vel-gR-w68" id="Rjn-yn-Hay"/>
-                        <outlet property="pendingActivityIndicatorView" destination="GzH-mA-K6b" id="Erj-bH-x7s"/>
+                        <outlet property="pendingActivityIndicatorView" destination="MKn-Wy-Adv" id="aAZ-je-504"/>
                         <segue destination="w6a-oe-kEE" kind="show" identifier="toMovieDetailsViewControllerSegue" destinationCreationSelector="makeDiscoverViewController:" id="ADG-Xy-seT"/>
                         <segue destination="Hfe-Zb-nRS" kind="show" identifier="toGenreDetailsViewControllerSegue" destinationCreationSelector="makeGenreDetailsViewController:" id="bTo-E8-ytV"/>
                     </connections>
