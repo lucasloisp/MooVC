@@ -8,14 +8,14 @@
 import UIKit
 
 class DiscoverViewController: UIViewController, WithSegues {
+    @IBOutlet weak var genresTableView: UITableView!
+    @IBOutlet weak var pendingActivityIndicatorView: UIActivityIndicatorView!
+
     typealias SegueType = SeguesFromSelf
     enum SeguesFromSelf: String, PerformableSegue {
         case toMovieDetailsViewControllerSegue
         case toGenreDetailsViewControllerSegue
     }
-
-    @IBOutlet weak var genresTableView: UITableView!
-    @IBOutlet weak var pendingActivityIndicatorView: UIActivityIndicatorView!
 
     private var genreMoviesControllers: [GenreMovieListingController]?
     private var selectedMovie: Movie?
@@ -90,7 +90,6 @@ extension DiscoverViewController: GenreMovieListingControllerDelegate, MovieList
 }
 
 extension DiscoverViewController: UITableViewDataSource, UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return genreMoviesControllers?.count ?? 0
     }
