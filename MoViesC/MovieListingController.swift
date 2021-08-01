@@ -106,14 +106,13 @@ protocol InfiniteMovieListingControllerDelegate: AnyObject {
 }
 
 protocol MovieListingPager {
-    func fetchPage(page: Int, onSuccess: @escaping ((MoviePage?) -> Void))
+    func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void))
 }
 
 class InfiniteMovieListingController: MovieListingController {
     weak var pagerDelegate: InfiniteMovieListingControllerDelegate?
 
     private var isFetchInProgress: Bool = false
-    private var currentPage: Int = 1
     private var total: Int = 0
     private let pager: MovieListingPager
 
@@ -152,13 +151,12 @@ class InfiniteMovieListingController: MovieListingController {
 
         self.isFetchInProgress = true
 
-        pager.fetchPage(page: currentPage) { moviePage in
+        pager.fetchPage { moviePage in
             self.isFetchInProgress = false
             guard let moviePage = moviePage else {
                 self.pagerDelegate?.onFetchFailed()
                 return
             }
-            self.currentPage += 1
             self.isFetchInProgress = false
             self.total = moviePage.total
             self.movies.append(contentsOf: moviePage.movies)

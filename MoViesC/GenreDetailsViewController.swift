@@ -9,14 +9,17 @@ import UIKit
 
 class GenreMoviesPager: MovieListingPager {
     private let genre: Genre
+    private var currentPage = 1
 
     init(for genre: Genre) {
         self.genre = genre
     }
 
-    func fetchPage(page: Int, onSuccess: @escaping ((MoviePage?) -> Void)) {
+    func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void)) {
+        let page = currentPage
         MovieManager.shared.loadMovies(for: genre, page: page) { response in
             if let response = response {
+                self.currentPage += 1
                 onSuccess(MoviePage(movies: response.movies, page: response.page, total: response.totalResults))
             } else {
                 onSuccess(nil)
