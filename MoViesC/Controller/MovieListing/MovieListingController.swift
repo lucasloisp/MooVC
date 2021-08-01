@@ -11,21 +11,9 @@ protocol MovieListingControllerDelegate: AnyObject {
     func didSelect(movie: Movie)
 }
 
-protocol InfiniteMovieListingControllerDelegate: AnyObject {
-    func onFetchSucceeded(for indexes: [Int]?)
-    func onFetchFailed()
-}
-
-protocol MovieListingPager: AnyObject {
-    var totalItems: Int { get }
-    var isFetchInProgress: Bool { get }
-
-    func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void))
-}
-
 class MovieListingController: NSObject {
-    fileprivate var movies: [Movie] = []
-    fileprivate var moviesCount: Int { movies.count }
+    internal var movies: [Movie] = []
+    var moviesCount: Int { movies.count }
     var emptyMessage: String = ""
     var showingRating: Bool = true
 
@@ -55,79 +43,13 @@ class MovieListingController: NSObject {
         collectionView?.reloadData()
     }
 
-    fileprivate final func getRatedMovieCell(
+    internal final func getRatedMovieCell(
         _ collectionView: UICollectionView,
         _ indexPath: IndexPath) -> RatedMovieCollectionViewCell {
         let identifier = RatedMovieCollectionViewCell.identifier
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
         // swiftlint:disable:next force_cast
         return cell as! RatedMovieCollectionViewCell
-    }
-}
-
-class InfiniteMovieListingController: MovieListingController {
-    weak var pagerDelegate: InfiniteMovieListingControllerDelegate?
-
-    private var pager: MovieListingPager
-
-    override var moviesCount: Int { return pager.totalItems }
-
-    init(pager: MovieListingPager) {
-        self.pager = pager
-        super.init()
-    }
-
-    func restartWithPager(_ pager: MovieListingPager) {
-        self.pager = pager
-        self.movies = []
-    }
-
-    override func bind(to collectionView: UICollectionView) {
-        super.bind(to: collectionView)
-        collectionView.prefetchDataSource = self
-        collectionView.showsVerticalScrollIndicator = false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if isLoadingCell(for: indexPath) { return }
-        super.collectionView(collectionView, didSelectItemAt: indexPath)
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if isLoadingCell(for: indexPath) {
-            let cell = self.getRatedMovieCell(collectionView, indexPath)
-            cell.configureAsLoading()
-            return cell
-        } else {
-            return super.collectionView(collectionView, cellForItemAt: indexPath)
-        }
-    }
-
-    func fetchMovies() {
-        let thisPager = pager
-        thisPager.fetchPage { moviePage in
-            guard let moviePage = moviePage, self.pager === thisPager else {
-                self.pagerDelegate?.onFetchFailed()
-                return
-            }
-            self.movies.append(contentsOf: moviePage.movies)
-
-            if moviePage.isFirst {
-                self.pagerDelegate?.onFetchSucceeded(for: nil)
-            } else {
-                self.pagerDelegate?.onFetchSucceeded(for: self.calculateIndexesToReload(from: moviePage.movies))
-            }
-        }
-    }
-
-    fileprivate func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        return indexPath.row >= self.movies.count
-    }
-
-    private func calculateIndexesToReload(from newMovies: [Movie]) -> [Int] {
-      let startIndex = movies.count - newMovies.count
-      let endIndex = movies.count
-      return (startIndex..<endIndex).map { $0 }
     }
 }
 
@@ -173,14 +95,4 @@ extension MovieListingController: UICollectionViewDataSource, UICollectionViewDe
         let movie = movies[indexPath.row]
         delegate?.didSelect(movie: movie)
     }
-}
-
-extension InfiniteMovieListingController: UICollectionViewDataSourcePrefetching {
-
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        if indexPaths.contains(where: isLoadingCell) {
-            self.fetchMovies()
-        }
-    }
-
 }
