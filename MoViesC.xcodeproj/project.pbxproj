@@ -165,6 +165,7 @@
 		C20615C126AC7CBD0085DF6F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C23D9DA526B7034D00A6308D /* MovieListing */,
 				C241A63C26AF979D008E4EC5 /* Protocols */,
 				C2D50BF426AC9AAB00FB6BF0 /* MovieDetailsViewController.swift */,
 				C256A27826B4DF3000E1B23D /* FavouritesViewController.swift */,
@@ -213,11 +214,9 @@
 				C250E46926AA2E78008A95AF /* GenreTableViewCell.xib */,
 				C22E222126AB890300201EEC /* GenreMovieCollectionViewCell.swift */,
 				C22E222226AB890300201EEC /* GenreMovieCollectionViewCell.xib */,
-				C22E222526AB9DEF00201EEC /* MovieListingController.swift */,
 				C28C45C926AF7D0C005BE8AA /* GenreMovieCollectionReusableView.swift */,
 				C28C45CA26AF7D0C005BE8AA /* GenreMovieCollectionReusableView.xib */,
 				C273254826B0C803000D4AD0 /* SearchViewController.swift */,
-				C273254A26B0D7C9000D4AD0 /* GenreMovieListingController.swift */,
 				C273254C26B0E335000D4AD0 /* RatedMovieCollectionViewCell.swift */,
 				C273254D26B0E335000D4AD0 /* RatedMovieCollectionViewCell.xib */,
 				C2FFB2F926B5A35D0008F3E9 /* MainTabBarController.swift */,
@@ -233,6 +232,15 @@
 				C214491326A8EAD200E72E0E /* LoginViewControllerTests.swift */,
 			);
 			path = MoViesCTests;
+			sourceTree = "<group>";
+		};
+		C23D9DA526B7034D00A6308D /* MovieListing */ = {
+			isa = PBXGroup;
+			children = (
+				C22E222526AB9DEF00201EEC /* MovieListingController.swift */,
+				C273254A26B0D7C9000D4AD0 /* GenreMovieListingController.swift */,
+			);
+			path = MovieListing;
 			sourceTree = "<group>";
 		};
 		C241A63C26AF979D008E4EC5 /* Protocols */ = {
