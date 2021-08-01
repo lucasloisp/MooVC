@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class RatedMovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var posterImageView: UIImageView!
@@ -41,18 +40,9 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
         self.posterImageView.contentMode = .scaleAspectFit
         self.posterImageView.isHidden = false
         if let url = poster {
-            setImageFromUrl(url)
+            posterImageView.setImageFillFromURL(url)
         } else {
             self.posterImageView.image = UIImage(systemName: "xmark.rectangle.fill")
-        }
-    }
-
-    private func setImageFromUrl(_ url: URL) {
-        let placeholder = UIImage(systemName: "photo")
-        posterImageView.kf.setImage(with: url, placeholder: placeholder, options: nil) {
-            if case .success(_) = $0 {
-                self.posterImageView.contentMode = .scaleToFill
-            }
         }
     }
 
