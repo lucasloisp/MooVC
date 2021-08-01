@@ -40,7 +40,7 @@ class MovieListingController: NSObject {
         collectionView?.reloadData()
     }
 
-    fileprivate func getRatedMovieCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> RatedMovieCollectionViewCell {
+    fileprivate final func getRatedMovieCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> RatedMovieCollectionViewCell {
         let identifier = RatedMovieCollectionViewCell.identifier
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
         // swiftlint:disable:next force_cast
