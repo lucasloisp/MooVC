@@ -92,11 +92,6 @@ extension MovieListingController: UICollectionViewDataSource, UICollectionViewDe
     }
 }
 
-struct MoviePage {
-    let movies: [Movie]
-    let isFirst: Bool
-}
-
 protocol InfiniteMovieListingControllerDelegate: AnyObject {
     func onFetchSucceeded(for indexes: [Int]?)
     func onFetchFailed()
