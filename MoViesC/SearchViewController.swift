@@ -91,7 +91,6 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
     }
 
     fileprivate func emptyResults() {
-        movieController.updateData(movies: [])
         moviesCollectionView.isHidden = true
     }
 
