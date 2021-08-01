@@ -83,9 +83,19 @@ extension MovieListingController: UICollectionViewDataSource, UICollectionViewDe
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let availableWidth = collectionView.frame.width
         let itemsPerRow: Int = Int(availableWidth) / 100
-        let widthPerItem = availableWidth / CGFloat(itemsPerRow)
+        let widthPerItem = availableWidth / CGFloat(itemsPerRow) - 4
 
         return CGSize(width: widthPerItem, height: widthPerItem * 2)
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return CGFloat(4.0)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return CGFloat(4.0)
     }
 
     func collectionView(

@@ -18,10 +18,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Lw-uY-wR6">
-                        <rect key="frame" x="2" y="0.0" width="116" height="180"/>
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="180"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Forever Purge" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="mnG-WI-6MI">
-                        <rect key="frame" x="2" y="2" width="116" height="176"/>
+                        <rect key="frame" x="0.0" y="2" width="120" height="176"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -30,12 +30,12 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="8Lw-uY-wR6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="PAs-Fj-gb6"/>
-                <constraint firstAttribute="trailing" secondItem="8Lw-uY-wR6" secondAttribute="trailing" constant="2" id="VZZ-6L-MhZ"/>
+                <constraint firstItem="8Lw-uY-wR6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="PAs-Fj-gb6"/>
+                <constraint firstAttribute="trailing" secondItem="8Lw-uY-wR6" secondAttribute="trailing" id="VZZ-6L-MhZ"/>
                 <constraint firstItem="8Lw-uY-wR6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="YbZ-qf-zRF"/>
-                <constraint firstItem="mnG-WI-6MI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="bc1-qq-olq"/>
+                <constraint firstItem="mnG-WI-6MI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="bc1-qq-olq"/>
                 <constraint firstAttribute="bottom" secondItem="8Lw-uY-wR6" secondAttribute="bottom" id="jB4-ic-fnB"/>
-                <constraint firstAttribute="trailing" secondItem="mnG-WI-6MI" secondAttribute="trailing" constant="2" id="nHc-KR-Ycg"/>
+                <constraint firstAttribute="trailing" secondItem="mnG-WI-6MI" secondAttribute="trailing" id="nHc-KR-Ycg"/>
                 <constraint firstAttribute="bottom" secondItem="mnG-WI-6MI" secondAttribute="bottom" constant="2" id="rAN-x3-aq5"/>
                 <constraint firstItem="mnG-WI-6MI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="yuP-FR-tED"/>
             </constraints>
