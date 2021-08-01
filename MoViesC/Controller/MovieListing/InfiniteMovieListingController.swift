@@ -67,7 +67,9 @@ class InfiniteMovieListingController: MovieListingController {
         super.collectionView(collectionView, didSelectItemAt: indexPath)
     }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if isLoadingCell(for: indexPath) {
             let cell = self.getRatedMovieCell(collectionView, indexPath)
             cell.configureAsLoading()

@@ -78,7 +78,9 @@ extension MovieListingController: UICollectionViewDataSource, UICollectionViewDe
         return moviesCount
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let availableWidth = collectionView.frame.width
         let itemsPerRow: Int = Int(availableWidth) / 100
         let widthPerItem = availableWidth / CGFloat(itemsPerRow)
@@ -86,7 +88,9 @@ extension MovieListingController: UICollectionViewDataSource, UICollectionViewDe
         return CGSize(width: widthPerItem, height: widthPerItem * 2)
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let movie = movies[indexPath.row]
         return prepareMovieCell(collectionView, indexPath, movie)
     }
