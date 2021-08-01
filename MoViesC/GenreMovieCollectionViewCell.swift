@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class GenreMovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var posterImageView: UIImageView!
