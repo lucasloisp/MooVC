@@ -41,7 +41,9 @@ class MovieDBRouteTests: XCTestCase {
         apiClient
             .requestItem(request: MovieDBRoute.createRequestToken) { (result: Result<RequestTokenCreation, Error>) in
                 if case .success(let token) = result {
-                    let request = MovieDBRoute.validateTokenWithLogin(username: "lucasloisucudal", password: "AYNtGqxJ9UaagtN", accessToken: token.requestToken)
+                    let request = MovieDBRoute.validateTokenWithLogin(username: "lucasloisucudal",
+                                                                      password: "AYNtGqxJ9UaagtN",
+                                                                      accessToken: token.requestToken)
                     self.apiClient.requestItem(request: request) { (result: Result<TokenValidationResponse, Error>) in
                         response = result
                         expectation.fulfill()
@@ -68,7 +70,10 @@ class MovieDBRouteTests: XCTestCase {
             .requestItem(request: MovieDBRoute.createRequestToken) { (result: Result<RequestTokenCreation, Error>) in
                 if case .success(let requestTokenCreation) = result {
                     let token = requestTokenCreation.requestToken
-                    let request = MovieDBRoute.validateTokenWithLogin(username: "lucasloisucudal", password: "AYNtGqxJ9UaagtN", accessToken: token)
+                    let request = MovieDBRoute.validateTokenWithLogin(
+                        username: "lucasloisucudal",
+                        password: "AYNtGqxJ9UaagtN",
+                        accessToken: token)
                     self.apiClient.requestItem(request: request) { (result: Result<TokenValidationResponse, Error>) in
                         if case .success(_) = result {
                             let request = MovieDBRoute.createSession(accessToken: token)

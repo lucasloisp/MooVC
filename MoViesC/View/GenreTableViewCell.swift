@@ -30,7 +30,11 @@ class GenreTableViewCell: UITableViewCell {
         let genreMovieFooterNib = UINib(nibName: GenreMovieCollectionReusableView.identifier, bundle: nil)
         let identifier = GenreMovieCollectionViewCell.identifier
         moviesCollectionView.register(genreMovieNib, forCellWithReuseIdentifier: identifier)
-        moviesCollectionView.register(genreMovieFooterNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GenreMovieCollectionReusableView.identifier)
+        let footerKind = UICollectionView.elementKindSectionFooter
+        let footerId = GenreMovieCollectionReusableView.identifier
+        moviesCollectionView.register(genreMovieFooterNib,
+                                      forSupplementaryViewOfKind: footerKind,
+                                      withReuseIdentifier: footerId)
     }
 
     func stopScrolling() {
