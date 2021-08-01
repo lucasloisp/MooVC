@@ -14,6 +14,7 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var ratingStackView: UIStackView!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,14 +22,18 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
     }
 
     func configureAsLoading() {
-        self.nameLabel.isHidden = true
-        self.ratingStackView.isHidden = true
-        self.posterImageView.image = UIImage(systemName: "arrow.clockwise.icloud.fill")!
-        self.posterImageView.contentMode = .scaleAspectFit
+        nameLabel.isHidden = true
+        ratingStackView.isHidden = true
+        posterImageView.isHidden = true
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
     }
 
     func configure(name: String, poster: URL?, starCount: Int?) {
+        self.activityIndicatorView.isHidden = true
+        self.activityIndicatorView.stopAnimating()
         self.posterImageView.contentMode = .scaleAspectFit
+        self.posterImageView.isHidden = false
         if let url = poster {
             let placeholder = UIImage(systemName: "photo")
             posterImageView.kf.setImage(with: url, placeholder: placeholder, options: nil) { result in
