@@ -22,11 +22,6 @@ class MovieListingController: NSObject {
 
     override init() {}
 
-    func updateData(movies: [Movie]) {
-        self.movies = movies
-        collectionView?.reloadData()
-    }
-
     func bind(to collectionView: UICollectionView) {
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -38,6 +33,11 @@ class MovieListingController: NSObject {
         let starCount = showingRating ? movie.rating : nil
         cell.configure(name: movie.title, poster: movie.posterUrl, starCount: starCount)
         return cell
+    }
+
+    final func updateData(movies: [Movie]) {
+        self.movies = movies
+        collectionView?.reloadData()
     }
 
     fileprivate func getRatedMovieCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> RatedMovieCollectionViewCell {
