@@ -58,6 +58,10 @@ class GenreMovieListingController: MovieListingController {
         }
     }
 
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 120, height: 180)
+    }
+
     private func getFooterView(
         _ collectionView: UICollectionView,
         at indexPath: IndexPath) -> GenreMovieCollectionReusableView {
