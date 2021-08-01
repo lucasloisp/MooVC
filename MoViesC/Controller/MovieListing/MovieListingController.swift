@@ -11,6 +11,18 @@ protocol MovieListingControllerDelegate: AnyObject {
     func didSelect(movie: Movie)
 }
 
+protocol InfiniteMovieListingControllerDelegate: AnyObject {
+    func onFetchSucceeded(for indexes: [Int]?)
+    func onFetchFailed()
+}
+
+protocol MovieListingPager: AnyObject {
+    var totalItems: Int { get }
+    var isFetchInProgress: Bool { get }
+
+    func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void))
+}
+
 class MovieListingController: NSObject {
     fileprivate var movies: [Movie] = []
     fileprivate var moviesCount: Int { movies.count }
@@ -51,62 +63,6 @@ class MovieListingController: NSObject {
         // swiftlint:disable:next force_cast
         return cell as! RatedMovieCollectionViewCell
     }
-}
-
-extension MovieListingController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    var emptyStateLabel: UILabel? {
-        if self.emptyMessage.isEmpty {
-            return nil
-        }
-        let messageLabel = UILabel()
-        messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        messageLabel.textColor = .darkGray
-        messageLabel.numberOfLines = 0
-        messageLabel.textAlignment = .center
-        messageLabel.font = UIFont.systemFont(ofSize: 15)
-        messageLabel.sizeToFit()
-        messageLabel.text = self.emptyMessage
-        return messageLabel
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if movies.isEmpty {
-            collectionView.backgroundView = emptyStateLabel
-        } else {
-            collectionView.backgroundView = nil
-        }
-        return moviesCount
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let availableWidth = collectionView.frame.width
-        let itemsPerRow: Int = Int(availableWidth) / 100
-        let widthPerItem = availableWidth / CGFloat(itemsPerRow)
-
-        return CGSize(width: widthPerItem, height: widthPerItem * 2)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let movie = movies[indexPath.row]
-        return prepareMovieCell(collectionView, indexPath, movie)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let movie = movies[indexPath.row]
-        delegate?.didSelect(movie: movie)
-    }
-}
-
-protocol InfiniteMovieListingControllerDelegate: AnyObject {
-    func onFetchSucceeded(for indexes: [Int]?)
-    func onFetchFailed()
-}
-
-protocol MovieListingPager: AnyObject {
-    var totalItems: Int { get }
-    var isFetchInProgress: Bool { get }
-
-    func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void))
 }
 
 class InfiniteMovieListingController: MovieListingController {
@@ -172,6 +128,50 @@ class InfiniteMovieListingController: MovieListingController {
       let startIndex = movies.count - newMovies.count
       let endIndex = movies.count
       return (startIndex..<endIndex).map { $0 }
+    }
+}
+
+extension MovieListingController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    var emptyStateLabel: UILabel? {
+        if self.emptyMessage.isEmpty {
+            return nil
+        }
+        let messageLabel = UILabel()
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.textColor = .darkGray
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont.systemFont(ofSize: 15)
+        messageLabel.sizeToFit()
+        messageLabel.text = self.emptyMessage
+        return messageLabel
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if movies.isEmpty {
+            collectionView.backgroundView = emptyStateLabel
+        } else {
+            collectionView.backgroundView = nil
+        }
+        return moviesCount
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let availableWidth = collectionView.frame.width
+        let itemsPerRow: Int = Int(availableWidth) / 100
+        let widthPerItem = availableWidth / CGFloat(itemsPerRow)
+
+        return CGSize(width: widthPerItem, height: widthPerItem * 2)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let movie = movies[indexPath.row]
+        return prepareMovieCell(collectionView, indexPath, movie)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movies[indexPath.row]
+        delegate?.didSelect(movie: movie)
     }
 }
 
