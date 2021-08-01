@@ -10,6 +10,8 @@ import UIKit
 class MovieSearchPager: MovieListingPager {
     private var currentPage = 1
     private var query: String = "the"
+    private var totalMovies = 0
+    var totalItems: Int { return totalMovies }
 
     func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void)) {
         let page = currentPage
@@ -17,6 +19,7 @@ class MovieSearchPager: MovieListingPager {
             if let response = response {
                 let total = response.totalResults
                 self.currentPage += 1
+                self.totalMovies = response.totalResults
                 onSuccess(MoviePage(movies: response.movies, page: response.page, total: total))
             } else {
                 onSuccess(nil)
