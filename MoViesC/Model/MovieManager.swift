@@ -39,18 +39,22 @@ class MovieManager {
         }
     }
 
-    func loadMovies(for genre: Genre, completionHandler: @escaping Handle<[Movie]?>) {
-        let request = MovieDBRoute.discoverMoviesByGenre(genre: genre)
+    func loadMovies(for genre: Genre, page: Int, completionHandler: @escaping Handle<DiscoverMovieResponse?>) {
+        let request = MovieDBRoute.discoverMoviesByGenre(genre: genre, page: page)
         APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
             switch result {
             case .success(let response):
-                completionHandler(response.movies)
+                completionHandler(response)
             case .failure(let err):
                 // TODO: Show the error to the user
                 print(err)
                 completionHandler(nil)
             }
         }
+    }
+
+    func loadMovies(for genre: Genre, completionHandler: @escaping Handle<DiscoverMovieResponse?>) {
+        self.loadMovies(for: genre, page: 1, completionHandler: completionHandler)
     }
 
     func loadMovieDetails(of movie: Movie, completionHandler: @escaping Handle<MovieDetails?>) {
@@ -104,7 +108,7 @@ class MovieManager {
                     group.enter()
                     self.loadMovies(for: genre) {
                         if let apiMovies = $0 {
-                            movies[index] = Array(apiMovies.prefix(10))
+                            movies[index] = Array(apiMovies.movies.prefix(10))
                         }
                         group.leave()
                     }

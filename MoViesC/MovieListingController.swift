@@ -12,7 +12,8 @@ protocol MovieListingControllerDelegate: AnyObject {
 }
 
 class MovieListingController: NSObject {
-    private var movies: [Movie] = []
+    fileprivate var movies: [Movie] = []
+    fileprivate var moviesCount: Int { movies.count }
     var emptyMessage: String = ""
     var showingRating: Bool = true
 
@@ -39,7 +40,7 @@ class MovieListingController: NSObject {
         return cell
     }
 
-    private func getRatedMovieCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> RatedMovieCollectionViewCell {
+    fileprivate func getRatedMovieCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> RatedMovieCollectionViewCell {
         let identifier = RatedMovieCollectionViewCell.identifier
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
         // swiftlint:disable:next force_cast
@@ -69,7 +70,7 @@ extension MovieListingController: UICollectionViewDataSource, UICollectionViewDe
         } else {
             collectionView.backgroundView = nil
         }
-        return movies.count
+        return moviesCount
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -89,4 +90,99 @@ extension MovieListingController: UICollectionViewDataSource, UICollectionViewDe
         let movie = movies[indexPath.row]
         delegate?.didSelect(movie: movie)
     }
+}
+
+struct MoviePage {
+    let movies: [Movie]
+    let page: Int
+    let total: Int
+
+    var isFirst: Bool { return page == 1 }
+}
+
+protocol InfiniteMovieListingControllerDelegate: AnyObject {
+    func onFetchSucceeded(for indexes: [Int]?)
+    func onFetchFailed()
+}
+
+protocol MovieListingPager {
+    func fetchPage(page: Int, onSuccess: @escaping ((MoviePage?) -> Void))
+}
+
+class InfiniteMovieListingController: MovieListingController {
+    weak var pagerDelegate: InfiniteMovieListingControllerDelegate?
+
+    private var isFetchInProgress: Bool = false
+    private var currentPage: Int = 1
+    private var total: Int = 0
+    private let pager: MovieListingPager
+
+    override var moviesCount: Int { return total }
+
+    init(pager: MovieListingPager) {
+        self.pager = pager
+        super.init()
+    }
+
+    override func bind(to collectionView: UICollectionView) {
+        super.bind(to: collectionView)
+        collectionView.prefetchDataSource = self
+        collectionView.showsVerticalScrollIndicator = false
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if isLoadingCell(for: indexPath) {
+            let cell = self.getRatedMovieCell(collectionView, indexPath)
+            cell.configureAsLoading()
+            return cell
+        } else {
+            return super.collectionView(collectionView, cellForItemAt: indexPath)
+        }
+    }
+
+    func fetchMovies() {
+        guard !isFetchInProgress else {
+            return
+        }
+
+        self.isFetchInProgress = true
+
+        pager.fetchPage(page: currentPage) { moviePage in
+            self.isFetchInProgress = false
+            guard let moviePage = moviePage else {
+                self.pagerDelegate?.onFetchFailed()
+                return
+            }
+            self.currentPage += 1
+            self.isFetchInProgress = false
+            self.total = moviePage.total
+            self.movies.append(contentsOf: moviePage.movies)
+
+            if moviePage.isFirst {
+                self.pagerDelegate?.onFetchSucceeded(for: nil)
+            } else {
+                self.pagerDelegate?.onFetchSucceeded(for: self.calculateIndexesToReload(from: moviePage.movies))
+            }
+        }
+    }
+
+    fileprivate func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row >= self.movies.count
+    }
+
+    private func calculateIndexesToReload(from newMovies: [Movie]) -> [Int] {
+      let startIndex = movies.count - newMovies.count
+      let endIndex = movies.count
+      return (startIndex..<endIndex).map { $0 }
+    }
+}
+
+extension InfiniteMovieListingController: UICollectionViewDataSourcePrefetching {
+
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        if indexPaths.contains(where: isLoadingCell) {
+            self.fetchMovies()
+        }
+    }
+
 }
