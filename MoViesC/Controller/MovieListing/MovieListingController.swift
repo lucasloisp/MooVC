@@ -28,7 +28,10 @@ class MovieListingController: NSObject {
         self.collectionView = collectionView
     }
 
-    func prepareMovieCell(_ collectionView: UICollectionView, _ indexPath: IndexPath, _ movie: Movie) -> UICollectionViewCell {
+    func prepareMovieCell(
+        _ collectionView: UICollectionView,
+        _ indexPath: IndexPath,
+        _ movie: Movie) -> UICollectionViewCell {
         let cell = getRatedMovieCell(collectionView, indexPath)
         let starCount = showingRating ? movie.rating : nil
         cell.configure(name: movie.title, poster: movie.posterUrl, starCount: starCount)
@@ -40,7 +43,9 @@ class MovieListingController: NSObject {
         collectionView?.reloadData()
     }
 
-    fileprivate final func getRatedMovieCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> RatedMovieCollectionViewCell {
+    fileprivate final func getRatedMovieCell(
+        _ collectionView: UICollectionView,
+        _ indexPath: IndexPath) -> RatedMovieCollectionViewCell {
         let identifier = RatedMovieCollectionViewCell.identifier
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
         // swiftlint:disable:next force_cast
