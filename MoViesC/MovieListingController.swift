@@ -94,10 +94,7 @@ extension MovieListingController: UICollectionViewDataSource, UICollectionViewDe
 
 struct MoviePage {
     let movies: [Movie]
-    let page: Int
-    let total: Int
-
-    var isFirst: Bool { return page == 1 }
+    let isFirst: Bool
 }
 
 protocol InfiniteMovieListingControllerDelegate: AnyObject {
@@ -105,23 +102,27 @@ protocol InfiniteMovieListingControllerDelegate: AnyObject {
     func onFetchFailed()
 }
 
-protocol MovieListingPager {
-    func fetchPage(page: Int, onSuccess: @escaping ((MoviePage?) -> Void))
+protocol MovieListingPager: AnyObject {
+    func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void))
+    var totalItems: Int { get }
+    var isFetchInProgress: Bool { get }
 }
 
 class InfiniteMovieListingController: MovieListingController {
     weak var pagerDelegate: InfiniteMovieListingControllerDelegate?
 
-    private var isFetchInProgress: Bool = false
-    private var currentPage: Int = 1
-    private var total: Int = 0
-    private let pager: MovieListingPager
+    private var pager: MovieListingPager
 
-    override var moviesCount: Int { return total }
+    override var moviesCount: Int { return pager.totalItems }
 
     init(pager: MovieListingPager) {
         self.pager = pager
         super.init()
+    }
+
+    func restartWithPager(_ pager: MovieListingPager) {
+        self.pager = pager
+        self.movies = []
     }
 
     override func bind(to collectionView: UICollectionView) {
@@ -146,21 +147,12 @@ class InfiniteMovieListingController: MovieListingController {
     }
 
     func fetchMovies() {
-        guard !isFetchInProgress else {
-            return
-        }
-
-        self.isFetchInProgress = true
-
-        pager.fetchPage(page: currentPage) { moviePage in
-            self.isFetchInProgress = false
-            guard let moviePage = moviePage else {
+        let thisPager = pager
+        thisPager.fetchPage { moviePage in
+            guard let moviePage = moviePage, self.pager === thisPager else {
                 self.pagerDelegate?.onFetchFailed()
                 return
             }
-            self.currentPage += 1
-            self.isFetchInProgress = false
-            self.total = moviePage.total
             self.movies.append(contentsOf: moviePage.movies)
 
             if moviePage.isFirst {
