@@ -9,12 +9,12 @@ import UIKit
 import Kingfisher
 
 class RatedMovieCollectionViewCell: UICollectionViewCell {
-    static let identifier: String = "RatedMovieCollectionViewCell"
-
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var ratingStackView: UIStackView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+
+    static let identifier: String = "RatedMovieCollectionViewCell"
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,6 +32,12 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
     func configure(name: String, poster: URL?, starCount: Int?) {
         self.activityIndicatorView.isHidden = true
         self.activityIndicatorView.stopAnimating()
+        setUpPosterImageView(poster)
+        setUpNameLabel(name)
+        setUpRatingStackView(starCount: starCount)
+    }
+
+    private func setUpPosterImageView(_ poster: URL?) {
         self.posterImageView.contentMode = .scaleAspectFit
         self.posterImageView.isHidden = false
         if let url = poster {
@@ -47,8 +53,14 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
         } else {
             self.posterImageView.image = UIImage(systemName: "xmark.rectangle.fill")
         }
+    }
+
+    private func setUpNameLabel(_ name: String) {
         nameLabel.isHidden = false
         nameLabel.text = name
+    }
+
+    private func setUpRatingStackView(starCount: Int?) {
         guard let starCount = starCount else {
             ratingStackView.isHidden = true
             return
@@ -61,5 +73,4 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
             }
         }
     }
-
 }
