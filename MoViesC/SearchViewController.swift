@@ -27,10 +27,9 @@ class MovieSearchPager: MovieListingPager {
             self._isFetchInProgress = false
 
             if let response = response {
-                let total = response.totalResults
                 self.currentPage += 1
                 self.totalMovies = response.totalResults
-                onSuccess(MoviePage(movies: response.movies, page: response.page, total: total))
+                onSuccess(MoviePage(movies: response.movies, isFirst: response.page == 1))
             } else {
                 onSuccess(nil)
             }

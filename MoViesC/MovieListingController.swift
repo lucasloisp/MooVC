@@ -94,10 +94,7 @@ extension MovieListingController: UICollectionViewDataSource, UICollectionViewDe
 
 struct MoviePage {
     let movies: [Movie]
-    let page: Int
-    let total: Int
-
-    var isFirst: Bool { return page == 1 }
+    let isFirst: Bool
 }
 
 protocol InfiniteMovieListingControllerDelegate: AnyObject {

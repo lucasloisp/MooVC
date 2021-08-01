@@ -32,7 +32,7 @@ class GenreMoviesPager: MovieListingPager {
             if let response = response {
                 self.currentPage += 1
                 self.totalMovies = response.totalResults
-                onSuccess(MoviePage(movies: response.movies, page: response.page, total: response.totalResults))
+                onSuccess(MoviePage(movies: response.movies, isFirst: response.page == 1))
             } else {
                 onSuccess(nil)
             }
