@@ -15,13 +15,13 @@ class MovieManager {
 
     private init() {}
 
-    func loadFavourites(completionHandler: @escaping Handle<[Movie]?>) {
+    func loadFavourites(page: Int, completionHandler: @escaping Handle<DiscoverMovieResponse?>) {
         let accountId = SessionManager.share.session!.accountId
-        let request = MovieDBRoute.loadFavourites(accountId: accountId)
+        let request = MovieDBRoute.loadFavourites(accountId: accountId, page: page)
         APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
             switch result {
             case .success(let response):
-                completionHandler(response.movies)
+                completionHandler(response)
             case .failure(let err):
                 // TODO: Show the error to the user
                 print(err)
