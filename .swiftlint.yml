@@ -1,2 +1,22 @@
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
+opt_in_rules:
+  - file_types_order
+  - type_contents_order
+file_types_order:
+  order:
+    - supporting_type
+    - main_type
+    - extension
+type_contents_order:
+  order:
+    - case
+    - ib_outlet
+    - [type_alias, associated_type, subtype]
+    - [type_property, ib_inspectable, instance_property]
+    - initializer
+    - type_method
+    - view_life_cycle_method
+    - other_method
+    - ib_action
+    - subscript
