@@ -24,15 +24,16 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         posterImageView.layer.masksToBounds = true
+        posterImageView.layer.cornerRadius = 16
         let view = UIView(frame: posterImageView.frame)
         let gradient = CAGradientLayer()
         gradient.frame = view.frame
         gradient.colors = [UIColor.clear.cgColor, UIColor.white.cgColor]
-        gradient.locations = [0.25, 1.0]
+        gradient.locations = [0.5, 1.0]
+        view.layer.sublayers = []
         view.layer.insertSublayer(gradient, at: 0)
         posterImageView.addSubview(view)
         posterImageView.bringSubviewToFront(view)
-        posterImageView.layer.cornerRadius = 16
     }
 
     func configureAsLoading() {
