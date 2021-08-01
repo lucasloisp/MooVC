@@ -9,37 +9,35 @@ import UIKit
 import Kingfisher
 
 class GenreMovieCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
 
     static let identifier = "GenreMovieCollectionViewCell"
 
-    @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
     func configure(name: String, poster: URL?) {
-        guard let url = poster else {
-            posterImageView.image = nil
-            nameLabel.text = name
-            nameLabel.isHidden = false
-            posterImageView.isHidden = true
-            return
+        if let url = poster {
+            configureWithPoster(url: url)
+        } else {
+            configureWithName(name)
         }
-        let placeholder = UIImage(systemName: "photo")
-        self.posterImageView.contentMode = .scaleAspectFit
-        posterImageView.kf.setImage(with: url, placeholder: placeholder, options: nil) { result in
-            switch result {
-            case .success(_):
-                self.posterImageView.contentMode = .scaleAspectFill
-            default:
-                return
-            }
-        }
-        nameLabel.text = ""
-        nameLabel.isHidden = true
+    }
+
+    private func configureWithPoster(url: URL) {
         posterImageView.isHidden = false
+        nameLabel.isHidden = true
+        posterImageView.setImageFillFromURL(url)
+    }
+
+    private func configureWithName(_ name: String) {
+        nameLabel.isHidden = false
+        posterImageView.isHidden = true
+        posterImageView.image = nil
+        nameLabel.text = name
     }
 
 }
