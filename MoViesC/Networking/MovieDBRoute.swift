@@ -14,7 +14,7 @@ enum MovieDBRoute {
     case getGenres
     case discoverMoviesByGenre(genre: Genre, page: Int)
     case getMovieDetails(movie: Movie)
-    case searchMovies(named: String)
+    case searchMovies(named: String, page: Int)
     case createRequestToken
     case createSession(accessToken: AccessToken)
     case validateTokenWithLogin(username: String, password: String, accessToken: AccessToken)
@@ -69,8 +69,8 @@ extension MovieDBRoute: APIRoute {
             ])
         case .getMovieDetails(let movie):
             return try encoded(path: "/movie/\(movie.tmbdId)", params: ["append_to_response": "account_states"])
-        case .searchMovies(let named):
-            return try encoded(path: "/search/movie", params: ["query": named])
+        case .searchMovies(let named, let page):
+            return try encoded(path: "/search/movie", params: ["query": named, "page": page])
         case .loadFavourites(let accountId):
             return try encoded(path: "/account/\(accountId)/favorite/movies", params: [:])
         case .loadAccountDetails:
