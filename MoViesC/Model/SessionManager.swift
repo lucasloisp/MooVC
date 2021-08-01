@@ -43,10 +43,10 @@ class LocalKeychainManager {
     func getUserSession() -> Session? {
         let sessionId = defaults.string(forKey: sessionIDKey)
         let accountId = defaults.integer(forKey: accountIDKey)
-        guard let sessionId = sessionId, accountId != 0 else {
-            return nil
+        if let sessionId = sessionId, accountId != 0 {
+            return Session(sessionId: sessionId, accountId: accountId)
         }
-        return Session(sessionId: sessionId, accountId: accountId)
+        return nil
     }
 
     func clearStoredSession() {
