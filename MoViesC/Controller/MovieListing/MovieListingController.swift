@@ -94,7 +94,9 @@ extension MovieListingController: UICollectionViewDataSource, UICollectionViewDe
         return CGFloat(4.0)
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(4.0)
     }
 
