@@ -129,15 +129,21 @@ extension SearchViewController: MovieListingControllerDelegate {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        performSearch(query: searchBar.text!)
+        searchAfterDebounce(searchBar)
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            emptyResults()
+        emptyResults()
+        let selector = #selector(self.searchAfterDebounce(_:))
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: selector, object: searchBar)
+        perform(selector, with: searchBar, afterDelay: 1)
+    }
+
+    @objc private func searchAfterDebounce(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text, text.trimmingCharacters(in: .whitespaces) != "" else {
             return
         }
 
-        performSearch(query: searchBar.text!)
+        performSearch(query: text)
     }
 }
