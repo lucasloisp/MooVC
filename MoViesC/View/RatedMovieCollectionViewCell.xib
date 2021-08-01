@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wVz-qj-OZW">
-                        <rect key="frame" x="2" y="2" width="460" height="471"/>
+                        <rect key="frame" x="0.0" y="0.0" width="464" height="473"/>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="03u-qU-swK">
                         <rect key="frame" x="4" y="396" width="456" height="75"/>
@@ -62,13 +62,13 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="wVz-qj-OZW" secondAttribute="bottom" id="3eL-Ws-FfK"/>
-                <constraint firstAttribute="trailing" secondItem="wVz-qj-OZW" secondAttribute="trailing" constant="2" id="Fja-XO-10H"/>
+                <constraint firstAttribute="trailing" secondItem="wVz-qj-OZW" secondAttribute="trailing" id="Fja-XO-10H"/>
                 <constraint firstItem="03u-qU-swK" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="QaH-Xv-UT8"/>
                 <constraint firstItem="onw-vW-Grg" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="ahi-dK-aYg"/>
                 <constraint firstAttribute="bottom" secondItem="03u-qU-swK" secondAttribute="bottom" constant="2" id="mHB-1t-k0E"/>
                 <constraint firstAttribute="trailing" secondItem="03u-qU-swK" secondAttribute="trailing" constant="4" id="pJz-L3-3YM"/>
-                <constraint firstItem="wVz-qj-OZW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="uIx-NV-d8o"/>
-                <constraint firstItem="wVz-qj-OZW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="wxC-K9-BUQ"/>
+                <constraint firstItem="wVz-qj-OZW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="uIx-NV-d8o"/>
+                <constraint firstItem="wVz-qj-OZW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="wxC-K9-BUQ"/>
                 <constraint firstItem="onw-vW-Grg" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="xRw-2e-yL1"/>
             </constraints>
             <size key="customSize" width="576" height="408"/>
