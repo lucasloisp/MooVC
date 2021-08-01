@@ -8,14 +8,24 @@
 import UIKit
 
 class MovieSearchPager: MovieListingPager {
-    private var currentPage = 1
-    private var query: String = "the"
-    private var totalMovies = 0
     var totalItems: Int { return totalMovies }
+    var isFetchInProgress: Bool { return _isFetchInProgress }
+
+    private var query: String = "the"
+    private var currentPage = 1
+    private var totalMovies = 0
+    private var _isFetchInProgress: Bool = false
 
     func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void)) {
+        guard !_isFetchInProgress else {
+            return
+        }
+        _isFetchInProgress = true
+
         let page = currentPage
         MovieManager.shared.searchMovies(named: query, page: page) { response in
+            self._isFetchInProgress = false
+
             if let response = response {
                 let total = response.totalResults
                 self.currentPage += 1

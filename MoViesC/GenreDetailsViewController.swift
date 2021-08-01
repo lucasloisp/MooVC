@@ -8,18 +8,27 @@
 import UIKit
 
 class GenreMoviesPager: MovieListingPager {
+    var totalItems: Int { return totalMovies }
+    var isFetchInProgress: Bool { return _isFetchInProgress }
+
     private let genre: Genre
     private var currentPage = 1
     private var totalMovies = 0
-    var totalItems: Int { return totalMovies }
+    private var _isFetchInProgress: Bool = false
 
     init(for genre: Genre) {
         self.genre = genre
     }
 
     func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void)) {
+        guard !_isFetchInProgress else {
+            return
+        }
+        _isFetchInProgress = true
+
         let page = currentPage
         MovieManager.shared.loadMovies(for: genre, page: page) { response in
+            self._isFetchInProgress = false
             if let response = response {
                 self.currentPage += 1
                 self.totalMovies = response.totalResults
