@@ -121,7 +121,7 @@ class MovieDBRouteTests: XCTestCase {
         let expectation = self.expectation(description: "API Request")
         var response: Result<DiscoverMovieResponse, Error>!
 
-        let request = MovieDBRoute.discoverMoviesByGenre(genre: someGenre)
+        let request = MovieDBRoute.discoverMoviesByGenre(genre: someGenre, page: 1)
 
         apiClient
             .requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
