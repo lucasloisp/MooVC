@@ -84,7 +84,10 @@ class SessionManager {
         }
     }
 
-    private func obtainSessionId(_ accessToken: AccessToken, onSuccess: @escaping Handler<SessionID>, onError: @escaping VoidHandler) {
+    private func obtainSessionId(
+        _ accessToken: AccessToken,
+        onSuccess: @escaping Handler<SessionID>,
+        onError: @escaping VoidHandler) {
         let request = MovieDBRoute.createSession(accessToken: accessToken)
 
         APIClient.shared.requestItem(request: request) { (result: Result<SessionIdCreation, Error>) in
@@ -97,7 +100,10 @@ class SessionManager {
         }
     }
 
-    private func obtainValidatedRequestToken(credentials: UserCredentials, onError: @escaping Handler<String>, onSuccess: @escaping Handler<AccessToken>) {
+    private func obtainValidatedRequestToken(
+        credentials: UserCredentials,
+        onError: @escaping Handler<String>,
+        onSuccess: @escaping Handler<AccessToken>) {
         obtainRequestToken { accessToken in
             self.validateAccessToken(accessToken, credentials: credentials) {
                 onSuccess(accessToken)
@@ -110,8 +116,14 @@ class SessionManager {
 
     }
 
-    private func validateAccessToken(_ accessToken: AccessToken, credentials: UserCredentials, onSuccess: @escaping VoidHandler, onError: @escaping VoidHandler) {
-        let request = MovieDBRoute.validateTokenWithLogin(username: credentials.username, password: credentials.password, accessToken: accessToken)
+    private func validateAccessToken(
+        _ accessToken: AccessToken,
+        credentials: UserCredentials,
+        onSuccess: @escaping VoidHandler,
+        onError: @escaping VoidHandler) {
+        let request = MovieDBRoute.validateTokenWithLogin(username: credentials.username,
+                                                          password: credentials.password,
+                                                          accessToken: accessToken)
         APIClient.shared.requestItem(request: request) { (result: Result<TokenValidationResponse, Error>) in
             switch result {
             case .success:
@@ -124,7 +136,8 @@ class SessionManager {
     }
 
     private func obtainRequestToken(onSuccess: @escaping Handler<AccessToken>, onError: @escaping VoidHandler) {
-        APIClient.shared.requestItem(request: MovieDBRoute.createRequestToken) { (result: Result<RequestTokenCreation, Error>) in
+        APIClient.shared
+            .requestItem(request: MovieDBRoute.createRequestToken) {(result: Result<RequestTokenCreation, Error>) in
             switch result {
             case .success(let requestTokencreation):
                 onSuccess(requestTokencreation.requestToken)
