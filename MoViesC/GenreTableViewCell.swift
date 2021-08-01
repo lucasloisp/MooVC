@@ -8,20 +8,10 @@
 import UIKit
 
 class GenreTableViewCell: UITableViewCell {
-    static let identifier = "GenreTableViewCell"
-
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var moviesCollectionView: UICollectionView!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        let genreMovieNib = UINib(nibName: GenreMovieCollectionViewCell.identifier, bundle: nil)
-        let genreMovieFooterNib = UINib(nibName: GenreMovieCollectionReusableView.identifier, bundle: nil)
-        let identifier = GenreMovieCollectionViewCell.identifier
-        moviesCollectionView.register(genreMovieNib, forCellWithReuseIdentifier: identifier)
-        moviesCollectionView.register(genreMovieFooterNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GenreMovieCollectionReusableView.identifier)
-    }
+    static let identifier = "GenreTableViewCell"
 
     var collectionViewOffset: CGFloat {
         get {
@@ -31,6 +21,16 @@ class GenreTableViewCell: UITableViewCell {
         set {
             moviesCollectionView.contentOffset.x = newValue
         }
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        let genreMovieNib = UINib(nibName: GenreMovieCollectionViewCell.identifier, bundle: nil)
+        let genreMovieFooterNib = UINib(nibName: GenreMovieCollectionReusableView.identifier, bundle: nil)
+        let identifier = GenreMovieCollectionViewCell.identifier
+        moviesCollectionView.register(genreMovieNib, forCellWithReuseIdentifier: identifier)
+        moviesCollectionView.register(genreMovieFooterNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GenreMovieCollectionReusableView.identifier)
     }
 
     func stopScrolling() {
