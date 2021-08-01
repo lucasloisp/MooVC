@@ -98,9 +98,10 @@ protocol InfiniteMovieListingControllerDelegate: AnyObject {
 }
 
 protocol MovieListingPager: AnyObject {
-    func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void))
     var totalItems: Int { get }
     var isFetchInProgress: Bool { get }
+
+    func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void))
 }
 
 class InfiniteMovieListingController: MovieListingController {
