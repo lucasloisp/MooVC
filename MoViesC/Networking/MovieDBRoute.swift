@@ -38,9 +38,9 @@ extension MovieDBRoute: APIRoute {
 
     var sessionPolicy: APIRouteSessionPolicy {
         switch self {
-        case .loadAccountDetails,
-             .markAsFavourite,
+        case .markAsFavourite,
              .loadFavourites,
+             .loadAccountDetails,
              .getMovieDetails:
             return .privateDomain
         default:

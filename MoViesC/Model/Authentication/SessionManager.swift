@@ -14,8 +14,8 @@ class SessionManager {
     static let share = SessionManager()
 
     var session: Session? {
-        if let sessionId = sessionId, let accountId = accountId {
-            return Session(sessionId: sessionId, accountId: accountId)
+        if let sessionId = sessionId {
+            return Session(sessionId: sessionId, accountId: accountId ?? 0)
         }
         return nil
     }

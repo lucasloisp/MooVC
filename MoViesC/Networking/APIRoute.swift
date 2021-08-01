@@ -36,17 +36,18 @@ extension APIRoute {
         let encodedPath = path.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         var params = params
         var url = URL(string: baseURL + encodedPath)!
-        let sessionId = SessionManager.share.session!.sessionId
         switch self.method {
         case .get, .delete, .patch:
             params["api_key"] = apiKey
             if sessionPolicy == .privateDomain {
+                let sessionId = SessionManager.share.session!.sessionId
                 params["session_id"] = sessionId
             }
         default:
             var urlComponents = URLComponents(string: baseURL + encodedPath)!
             urlComponents.queryItems = [URLQueryItem(name: "api_key", value: apiKey)]
             if sessionPolicy == .privateDomain {
+                let sessionId = SessionManager.share.session!.sessionId
                 urlComponents.queryItems?.append(URLQueryItem(name: "session_id", value: sessionId))
             }
             url = try urlComponents.asURL()
