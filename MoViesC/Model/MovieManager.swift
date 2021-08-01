@@ -16,7 +16,7 @@ class MovieManager {
     private init() {}
 
     func loadFavourites(completionHandler: @escaping Handle<[Movie]?>) {
-        let accountId = SessionManager.share.accountId!
+        let accountId = SessionManager.share.session!.accountId
         let request = MovieDBRoute.loadFavourites(accountId: accountId)
         APIClient.shared.requestItem(request: request) { (result: Result<DiscoverMovieResponse, Error>) in
             switch result {
@@ -74,7 +74,7 @@ class MovieManager {
     }
 
     func markMovieAsFavourite(_ movie: Movie, as favourite: Bool, onSuccess: @escaping VoidHandler, onError: @escaping VoidHandler) {
-        let accountId = SessionManager.share.accountId!
+        let accountId = SessionManager.share.session!.accountId
         let request: MovieDBRoute = .markAsFavourite(movie: movie, accountId: accountId, mark: favourite)
         APIClient.shared.requestItem(request: request) { (result: Result<MarkFavouriteResponse, Error>) in
             if case .success = result {

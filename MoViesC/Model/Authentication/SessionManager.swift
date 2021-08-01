@@ -7,70 +7,31 @@
 
 import Foundation
 
-extension Notification.Name {
-    static let didLogout = Notification.Name("didRequestLogout")
-    static let didAuthenticate = Notification.Name("didAuthenticate")
-}
-
-struct UserCredentials {
-    let username: String
-    let password: String
-}
-
-typealias SessionID = String
-typealias AccountID = Int
-
-struct Session {
-    let sessionId: SessionID
-    let accountId: AccountID
-}
-
-class LocalKeychainManager {
-    static let shared = LocalKeychainManager()
-
-    private let defaults = UserDefaults.standard
-
-    private init() {}
-
-    private let sessionIDKey = "SessionID"
-    private let accountIDKey = "AccountID"
-
-    func storeUserSession(_ session: Session) {
-        defaults.setValue(session.sessionId, forKey: sessionIDKey)
-        defaults.setValue(session.accountId, forKey: accountIDKey)
-    }
-
-    func getUserSession() -> Session? {
-        let sessionId = defaults.string(forKey: sessionIDKey)
-        let accountId = defaults.integer(forKey: accountIDKey)
-        if let sessionId = sessionId, accountId != 0 {
-            return Session(sessionId: sessionId, accountId: accountId)
-        }
-        return nil
-    }
-
-    func clearStoredSession() {
-        defaults.removeObject(forKey: sessionIDKey)
-        defaults.removeObject(forKey: accountIDKey)
-    }
-}
-
 class SessionManager {
     typealias VoidHandler = () -> Void
     typealias Handler<T> = (T) -> Void
 
     static let share = SessionManager()
 
-    private let keychain = LocalKeychainManager.shared
+    var session: Session? {
+        if let sessionId = sessionId, let accountId = accountId {
+            return Session(sessionId: sessionId, accountId: accountId)
+        }
+        return nil
+    }
+    var isLoggedIn: Bool {
+        return sessionId != nil
+    }
 
+    private let keychain = LocalKeychainManager.shared
     private let errorMessageInvalidCredentials = "Invalid credentials"
 
-    var sessionId: SessionID? {
+    private var sessionId: SessionID? {
         didSet {
             onSessionIDChange()
         }
     }
-    var accountId: AccountID?
+    private var accountId: AccountID?
 
     fileprivate init() {
         if let session = keychain.getUserSession() {
@@ -87,10 +48,6 @@ class SessionManager {
                 onError(self.errorMessageInvalidCredentials)
             }
         }
-    }
-
-    func checkIsLoggedIn() -> Bool {
-        return sessionId != nil
     }
 
     func logout() {

@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
 
-        if SessionManager.share.checkIsLoggedIn() {
+        if SessionManager.share.isLoggedIn {
             prepareStoryboardAsRoot(named: .main)
         } else {
             prepareStoryboardAsRoot(named: .authentication)
