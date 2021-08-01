@@ -4,6 +4,7 @@
 //
 //  Created by Lucas Lois on 21/7/21.
 //
+// swiftlint:disable cyclomatic_complexity
 
 import Foundation
 import Alamofire

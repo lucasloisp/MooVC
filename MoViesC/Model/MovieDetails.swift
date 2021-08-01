@@ -11,7 +11,7 @@ import ObjectMapper
 struct MovieDetails {
     let movie: Movie
     let tagline: String
-    let status: String // TODO: one of: Rumored, Planned, In Production, Post Production, Released, Canceled
+    let status: String
     let releaseDate: Date?
     let isFavourite: Bool
 }
