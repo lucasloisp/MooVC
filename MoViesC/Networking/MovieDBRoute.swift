@@ -55,11 +55,17 @@ extension MovieDBRoute: APIRoute {
         case .createRequestToken:
             return try encoded(path: "/authentication/token/new", params: [:])
         case .markAsFavourite(let movie, let accountId, let mark):
-            return try encoded(path: "/account/\(accountId)/favorite", params: ["media_type": "movie", "media_id": movie.tmbdId, "favorite": mark])
+            return try encoded(path: "/account/\(accountId)/favorite",
+                               params: [ "media_type": "movie",
+                                         "media_id": movie.tmbdId,
+                                         "favorite": mark])
         case .createSession(let accessToken):
             return try encoded(path: "/authentication/session/new", params: ["request_token": accessToken])
         case .validateTokenWithLogin(let username, let password, let accessToken):
-        return try encoded(path: "/authentication/token/validate_with_login", params: ["username": username, "password": password, "request_token": accessToken])
+        return try encoded(path: "/authentication/token/validate_with_login",
+                           params: ["username": username,
+                                    "password": password,
+                                    "request_token": accessToken])
         case .getGenres:
             return try encoded(path: "/genre/movie/list", params: [:])
         case .discoverMoviesByGenre(let genre, let page):
