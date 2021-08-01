@@ -22,9 +22,9 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
     }
 
     func configureAsLoading() {
+        posterImageView.isHidden = true
         nameLabel.isHidden = true
         ratingStackView.isHidden = true
-        posterImageView.isHidden = true
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
     }
@@ -41,17 +41,18 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
         self.posterImageView.contentMode = .scaleAspectFit
         self.posterImageView.isHidden = false
         if let url = poster {
-            let placeholder = UIImage(systemName: "photo")
-            posterImageView.kf.setImage(with: url, placeholder: placeholder, options: nil) { result in
-                switch result {
-                case .success(_):
-                    self.posterImageView.contentMode = .scaleAspectFill
-                default:
-                    return
-                }
-            }
+            setImageFromUrl(url)
         } else {
             self.posterImageView.image = UIImage(systemName: "xmark.rectangle.fill")
+        }
+    }
+
+    private func setImageFromUrl(_ url: URL) {
+        let placeholder = UIImage(systemName: "photo")
+        posterImageView.kf.setImage(with: url, placeholder: placeholder, options: nil) {
+            if case .success(_) = $0 {
+                self.posterImageView.contentMode = .scaleToFill
+            }
         }
     }
 
