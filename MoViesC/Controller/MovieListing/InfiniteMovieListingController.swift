@@ -17,6 +17,11 @@ protocol MovieListingPager: AnyObject {
     var isFetchInProgress: Bool { get }
 
     func fetchPage(onSuccess: @escaping ((MoviePage?) -> Void))
+    func restart()
+}
+
+extension MovieListingPager {
+    func restart() {}
 }
 
 class InfiniteMovieListingController: MovieListingController {
@@ -34,6 +39,11 @@ class InfiniteMovieListingController: MovieListingController {
     func restartWithPager(_ pager: MovieListingPager) {
         self.pager = pager
         self.movies = []
+    }
+
+    func restart() {
+        self.movies = []
+        self.pager.restart()
     }
 
     override func bind(to collectionView: UICollectionView) {
