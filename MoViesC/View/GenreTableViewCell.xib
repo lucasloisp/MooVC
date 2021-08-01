@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -19,8 +19,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJx-xl-EHN">
-                        <rect key="frame" x="4" y="4" width="214" height="33"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="4" y="8" width="214" height="25"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -42,10 +42,10 @@
                     <constraint firstAttribute="bottom" secondItem="0qE-rU-qdO" secondAttribute="bottom" id="E9S-ut-OHV"/>
                     <constraint firstAttribute="trailing" secondItem="nJx-xl-EHN" secondAttribute="trailing" constant="4" id="Km7-Hy-yH3"/>
                     <constraint firstItem="nJx-xl-EHN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="ahb-1Q-ka0"/>
-                    <constraint firstItem="nJx-xl-EHN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="cjb-v0-KG4"/>
+                    <constraint firstItem="nJx-xl-EHN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="cjb-v0-KG4"/>
                     <constraint firstAttribute="trailing" secondItem="0qE-rU-qdO" secondAttribute="trailing" id="lw6-Vd-Iml"/>
                     <constraint firstItem="0qE-rU-qdO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mMe-og-98r"/>
-                    <constraint firstItem="0qE-rU-qdO" firstAttribute="top" secondItem="nJx-xl-EHN" secondAttribute="bottom" constant="4" id="uEZ-bv-uVI"/>
+                    <constraint firstItem="0qE-rU-qdO" firstAttribute="top" secondItem="nJx-xl-EHN" secondAttribute="bottom" constant="8" id="uEZ-bv-uVI"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
