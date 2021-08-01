@@ -12,7 +12,7 @@ import AlamofireObjectMapper
 
 enum MovieDBRoute {
     case getGenres
-    case discoverMoviesByGenre(genre: Genre)
+    case discoverMoviesByGenre(genre: Genre, page: Int)
     case getMovieDetails(movie: Movie)
     case searchMovies(named: String)
     case createRequestToken
@@ -62,8 +62,11 @@ extension MovieDBRoute: APIRoute {
         return try encoded(path: "/authentication/token/validate_with_login", params: ["username": username, "password": password, "request_token": accessToken])
         case .getGenres:
             return try encoded(path: "/genre/movie/list", params: [:])
-        case .discoverMoviesByGenre(let genre):
-            return try encoded(path: "/discover/movie", params: ["with_genres": "\(genre.tmbdId)"])
+        case .discoverMoviesByGenre(let genre, let page):
+            return try encoded(path: "/discover/movie", params: [
+                                "with_genres": "\(genre.tmbdId)",
+                                "page": String(page)
+            ])
         case .getMovieDetails(let movie):
             return try encoded(path: "/movie/\(movie.tmbdId)", params: ["append_to_response": "account_states"])
         case .searchMovies(let named):

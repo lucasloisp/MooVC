@@ -20,6 +20,13 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
 
+    func configureAsLoading() {
+        self.nameLabel.isHidden = true
+        self.ratingStackView.isHidden = true
+        self.posterImageView.image = UIImage(systemName: "arrow.clockwise.icloud.fill")!
+        self.posterImageView.contentMode = .scaleAspectFit
+    }
+
     func configure(name: String, poster: URL?, starCount: Int?) {
         self.posterImageView.contentMode = .scaleAspectFit
         if let url = poster {
@@ -35,11 +42,13 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
         } else {
             self.posterImageView.image = UIImage(systemName: "xmark.rectangle.fill")
         }
+        nameLabel.isHidden = false
         nameLabel.text = name
         guard let starCount = starCount else {
             ratingStackView.isHidden = true
             return
         }
+        ratingStackView.isHidden = false
         ratingStackView.arrangedSubviews.enumerated().forEach { (index, view) in
             let thisStarIsMet = index < starCount
             if let starImageView = view as? UIImageView {
