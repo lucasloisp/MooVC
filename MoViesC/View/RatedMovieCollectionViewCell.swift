@@ -18,22 +18,16 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
         posterImageView.layer.masksToBounds = true
         posterImageView.layer.cornerRadius = 16
-        let view = UIView(frame: posterImageView.frame)
-        let gradient = CAGradientLayer()
-        gradient.frame = view.frame
-        gradient.colors = [UIColor.clear.cgColor, UIColor.white.cgColor]
-        gradient.locations = [0.5, 1.0]
-        view.layer.sublayers = []
-        view.layer.insertSublayer(gradient, at: 0)
-        posterImageView.addSubview(view)
-        posterImageView.bringSubviewToFront(view)
+
+        if !posterImageView.isHidden {
+            addAnOverlayToTheImageView()
+        }
     }
 
     func configureAsLoading() {
@@ -79,5 +73,18 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
                 starImageView.image = UIImage(systemName: thisStarIsMet ? "star.fill" : "star")
             }
         }
+    }
+
+    private func addAnOverlayToTheImageView() {
+        posterImageView.subviews.first?.removeFromSuperview()
+        let posterOverlayView = UIView(frame: posterImageView.frame)
+        let gradient = CAGradientLayer()
+        gradient.name = "GradientOverlay"
+        gradient.frame = posterOverlayView.frame
+        gradient.colors = [UIColor.clear.cgColor, UIColor.white.cgColor]
+        gradient.locations = [0.0, 1]
+        posterOverlayView.layer.insertSublayer(gradient, at: 0)
+        posterImageView.addSubview(posterOverlayView)
+        posterImageView.bringSubviewToFront(posterOverlayView)
     }
 }
