@@ -47,9 +47,11 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var similarLabel: UILabel!
+    @IBOutlet weak var releaseDateContainerView: UIView!
+    @IBOutlet weak var statusContainerView: UIView!
 
     var viewsThatHideOnLoading: [UIView] {
-        return [taglineLabel, statusLabel, releaseDateLabel]
+        return [taglineLabel, statusContainerView, releaseDateContainerView]
     }
     private let movie: Movie
     private let formatter: DateFormatter
@@ -94,12 +96,11 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        let border = CALayer()
-        let frame = similarLabel.frame
-        border.backgroundColor = UIColor(named: "DarkAccent")!.cgColor
-
-        border.frame = CGRect(x: -frame.minX, y: frame.size.height - 2, width: self.view.frame.size.width, height: 2)
-        similarLabel.layer.addSublayer(border)
+        posterImageView.layer.cornerRadius = 8.0
+        statusContainerView.layer.cornerRadius = 4.0
+        statusContainerView.layer.masksToBounds = true
+        releaseDateContainerView.layer.cornerRadius = 4.0
+        releaseDateContainerView.layer.masksToBounds = true
     }
 
     func hideMovieDetails() {
