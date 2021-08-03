@@ -21,7 +21,7 @@ enum FavouriteImages {
         }
     }
 
-    var toggle: Self {
+    var invert: Self {
         switch self {
         case .markedFavourite:
             return .notMarkedFavourite
@@ -49,6 +49,7 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     @IBOutlet weak var similarLabel: UILabel!
     @IBOutlet weak var releaseDateContainerView: UIView!
     @IBOutlet weak var statusContainerView: UIView!
+    @IBOutlet weak var likeBarButtonItem: UIBarButtonItem!
 
     var viewsThatHideOnLoading: [UIView] {
         return [taglineLabel, statusContainerView, releaseDateContainerView]
@@ -87,6 +88,8 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
         movieController.delegate = self
         movieController.bind(to: moviesCollectionView)
 
+        likeBarButtonItem.isEnabled = false
+
         loadPosterImage()
         startLoadingIndicator()
         loadMovieDetails()
@@ -112,39 +115,6 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     private func loadSimilarMovies() {
         MovieManager.shared.loadSimilarMovies(to: movie) { movies in
             self.movieController.updateData(movies: movies)
-        }
-    }
-
-    private func updateFavouriteButtonIcon() {
-        let favImage = FavouriteImages.select(isFavourite: movieDetails!.isFavourite)
-        let image = favImage.uiImage
-        guard let buttonItem = navigationItem.rightBarButtonItem else {
-            setUpTheMarkAsFavouriteButton()
-            return
-        }
-        buttonItem.image = image
-    }
-
-    private func setUpTheMarkAsFavouriteButton() {
-        let favouriteIcon = FavouriteImages.select(isFavourite: movieDetails!.isFavourite)
-        let image = favouriteIcon.uiImage
-        let button = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(toggleIsFavourite))
-        navigationItem.rightBarButtonItem = button
-    }
-
-    private func toggleFavouriteButtonImage() {
-        let favImage = FavouriteImages.select(isFavourite: movieDetails!.isFavourite).toggle
-        let image = favImage.uiImage
-        navigationItem.rightBarButtonItem?.image = image
-    }
-
-    @objc private func toggleIsFavourite() {
-        toggleFavouriteButtonImage()
-        MovieManager.shared.markMovieAsFavourite(movie, as: !movieDetails!.isFavourite) {
-            self.loadMovieDetails()
-        } onError: {
-            // TODO: Show an error prompt
-            print("Error during marking movie as favourite")
         }
     }
 
@@ -198,6 +168,30 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
             releaseDateLabel.text = "Unknown"
         }
     }
+
+    private func updateFavouriteButtonIcon() {
+        let favImage = FavouriteImages.select(isFavourite: movieDetails!.isFavourite)
+        let image = favImage.uiImage
+        likeBarButtonItem.image = image
+        likeBarButtonItem.isEnabled = true
+    }
+
+    private func invertLikeButtonImage() {
+        let favImage = FavouriteImages.select(isFavourite: movieDetails!.isFavourite)
+        let image = favImage.invert.uiImage
+        likeBarButtonItem.image = image
+    }
+
+    @IBAction func toggleIsFavourite(_ sender: Any) {
+        invertLikeButtonImage()
+        MovieManager.shared.markMovieAsFavourite(movie, as: !movieDetails!.isFavourite) {
+            self.loadMovieDetails()
+        } onError: {
+            // TODO: Show an error prompt
+            print("Error during marking movie as favourite")
+        }
+    }
+
 }
 
 extension MovieDetailsViewController: MovieListingControllerDelegate {
