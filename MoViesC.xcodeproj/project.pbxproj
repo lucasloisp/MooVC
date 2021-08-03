@@ -40,6 +40,8 @@
 		C256A27526B4C06900E1B23D /* SessionIdCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C256A27426B4C06900E1B23D /* SessionIdCreation.swift */; };
 		C256A27726B4C38700E1B23D /* TokenValidationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C256A27626B4C38700E1B23D /* TokenValidationResponse.swift */; };
 		C256A27926B4DF3000E1B23D /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C256A27826B4DF3000E1B23D /* FavouritesViewController.swift */; };
+		C26DBA8226B8BE340053DBD5 /* PeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26DBA8126B8BE340053DBD5 /* PeerViewController.swift */; };
+		C26DBA8426B8C6720053DBD5 /* MovieSharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26DBA8326B8C6720053DBD5 /* MovieSharing.swift */; };
 		C270630F26ADB5F7005F1470 /* WithSegues.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270630E26ADB5F7005F1470 /* WithSegues.swift */; };
 		C273254926B0C803000D4AD0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273254826B0C803000D4AD0 /* SearchViewController.swift */; };
 		C273254B26B0D7C9000D4AD0 /* GenreMovieListingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C273254A26B0D7C9000D4AD0 /* GenreMovieListingController.swift */; };
@@ -114,6 +116,9 @@
 		C256A27426B4C06900E1B23D /* SessionIdCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionIdCreation.swift; sourceTree = "<group>"; };
 		C256A27626B4C38700E1B23D /* TokenValidationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenValidationResponse.swift; sourceTree = "<group>"; };
 		C256A27826B4DF3000E1B23D /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
+		C26DBA8126B8BE340053DBD5 /* PeerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerViewController.swift; sourceTree = "<group>"; };
+		C26DBA8326B8C6720053DBD5 /* MovieSharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSharing.swift; sourceTree = "<group>"; };
+		C26DBA8526B8C7F60053DBD5 /* MoViesC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoViesC.entitlements; sourceTree = "<group>"; };
 		C270630E26ADB5F7005F1470 /* WithSegues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithSegues.swift; sourceTree = "<group>"; };
 		C273254826B0C803000D4AD0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		C273254A26B0D7C9000D4AD0 /* GenreMovieListingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreMovieListingController.swift; sourceTree = "<group>"; };
@@ -188,6 +193,8 @@
 				C28C45CD26AF8468005BE8AA /* GenreDetailsViewController.swift */,
 				C273254826B0C803000D4AD0 /* SearchViewController.swift */,
 				C2FFB2F926B5A35D0008F3E9 /* MainTabBarController.swift */,
+				C26DBA8126B8BE340053DBD5 /* PeerViewController.swift */,
+				C26DBA8326B8C6720053DBD5 /* MovieSharing.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -227,6 +234,7 @@
 				C21448EE26A8E5E700E72E0E /* LaunchScreen.storyboard */,
 				C21448F126A8E5E700E72E0E /* Info.plist */,
 				C250E46426AA2D11008A95AF /* Main.storyboard */,
+				C26DBA8526B8C7F60053DBD5 /* MoViesC.entitlements */,
 			);
 			path = MoViesC;
 			sourceTree = "<group>";
@@ -519,6 +527,7 @@
 				C27F0B7326B6FAD500D602D2 /* Session.swift in Sources */,
 				C250E46726AA2DE4008A95AF /* DiscoverViewController.swift in Sources */,
 				C2A3023E26A909A8008BBA7D /* RequestTokenCreation.swift in Sources */,
+				C26DBA8226B8BE340053DBD5 /* PeerViewController.swift in Sources */,
 				C21448E826A8E5E600E72E0E /* LoginViewController.swift in Sources */,
 				C21448E426A8E5E600E72E0E /* AppDelegate.swift in Sources */,
 				C2A3023726A90698008BBA7D /* APIRoute.swift in Sources */,
@@ -533,6 +542,7 @@
 				C250E47126AA3F86008A95AF /* Movie.swift in Sources */,
 				C250E46A26AA2E78008A95AF /* GenreTableViewCell.swift in Sources */,
 				C256A27926B4DF3000E1B23D /* FavouritesViewController.swift in Sources */,
+				C26DBA8426B8C6720053DBD5 /* MovieSharing.swift in Sources */,
 				C23D9DA426B7018700A6308D /* UIImageView+Extensions.swift in Sources */,
 				C250E46D26AA38CC008A95AF /* GenresResponse.swift in Sources */,
 				C23D9DA926B7097700A6308D /* InfiniteMovieListingController.swift in Sources */,
@@ -716,6 +726,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MoViesC/MoViesC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MoViesC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -736,6 +747,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MoViesC/MoViesC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MoViesC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

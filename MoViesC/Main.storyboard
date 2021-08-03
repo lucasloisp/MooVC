@@ -148,6 +148,45 @@
             </objects>
             <point key="canvasLocation" x="1952" y="806"/>
         </scene>
+        <!--Peer View Controller-->
+        <scene sceneID="vo6-pT-NjF">
+            <objects>
+                <viewController id="Kel-qm-FSf" customClass="PeerViewController" customModule="MoViesC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cm4-eE-Jun">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TS3-Is-wLr">
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="SUi-Gh-8Gh">
+                                    <size key="itemSize" width="64" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="o4r-Xe-ttR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="o4r-Xe-ttR" firstAttribute="bottom" secondItem="TS3-Is-wLr" secondAttribute="bottom" id="FsX-fA-EWr"/>
+                            <constraint firstItem="TS3-Is-wLr" firstAttribute="top" secondItem="o4r-Xe-ttR" secondAttribute="top" id="HrT-xo-sC0"/>
+                            <constraint firstItem="TS3-Is-wLr" firstAttribute="leading" secondItem="o4r-Xe-ttR" secondAttribute="leading" id="XWt-4r-wS7"/>
+                            <constraint firstItem="o4r-Xe-ttR" firstAttribute="trailing" secondItem="TS3-Is-wLr" secondAttribute="trailing" id="dZ0-pG-h7J"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" image="person.2.fill" catalog="system" id="Bdx-Cv-kBB"/>
+                    <connections>
+                        <outlet property="moviesCollectionView" destination="TS3-Is-wLr" id="6dy-rg-xhR"/>
+                        <segue destination="w6a-oe-kEE" kind="show" identifier="toMovieDetailsViewControllerSegue" destinationCreationSelector="makeMovieDetailsViewController:" id="lhT-zw-uR5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8K3-7I-A4q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1473.75" y="1528.5211267605634"/>
+        </scene>
         <!--Movie-->
         <scene sceneID="nYN-Z2-Q4j">
             <objects>
@@ -356,6 +395,7 @@
                         <segue destination="Y6W-OH-hqX" kind="relationship" relationship="viewControllers" id="XAb-hy-HmG"/>
                         <segue destination="wgB-Kv-E8u" kind="relationship" relationship="viewControllers" id="xuP-0m-afo"/>
                         <segue destination="Il4-bj-YL0" kind="relationship" relationship="viewControllers" id="NWq-lx-9vN"/>
+                        <segue destination="Kel-qm-FSf" kind="relationship" relationship="viewControllers" id="V1c-FM-iSJ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HNb-oj-JLS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -364,11 +404,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ADG-Xy-seT"/>
+        <segue reference="lhT-zw-uR5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="person.2.fill" catalog="system" width="128" height="80"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="PrimaryAccent">
             <color red="0.1803921568627451" green="0.36862745098039218" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
