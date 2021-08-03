@@ -294,9 +294,18 @@
                             <constraint firstItem="PkJ-4I-PAt" firstAttribute="bottom" secondItem="hug-TF-OCY" secondAttribute="bottom" id="yKx-uF-q1T"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Movie" id="J5v-E1-pEz"/>
+                    <navigationItem key="navigationItem" title="Movie" id="J5v-E1-pEz">
+                        <rightBarButtonItems>
+                            <barButtonItem image="heart" catalog="system" style="plain" id="dr9-HZ-PKS">
+                                <connections>
+                                    <action selector="toggleIsFavourite:" destination="w6a-oe-kEE" id="UdD-3g-rfP"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorView" destination="PkJ-4I-PAt" id="5iT-3b-Vxi"/>
+                        <outlet property="likeBarButtonItem" destination="dr9-HZ-PKS" id="2Vw-rv-7sf"/>
                         <outlet property="moviesCollectionView" destination="kbb-3N-zSH" id="1NC-bF-m2r"/>
                         <outlet property="posterImageView" destination="hug-TF-OCY" id="0Og-hj-ewA"/>
                         <outlet property="releaseDateContainerView" destination="2b8-NF-nAv" id="cDa-yf-xbT"/>
@@ -407,6 +416,7 @@
         <segue reference="lhT-zw-uR5"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.2.fill" catalog="system" width="128" height="80"/>
