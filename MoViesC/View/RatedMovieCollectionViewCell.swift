@@ -25,9 +25,7 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
         posterImageView.layer.masksToBounds = true
         posterImageView.layer.cornerRadius = 16
 
-        if !posterImageView.isHidden {
-            addAnOverlayToTheImageView()
-        }
+        addAnOverlayToTheImageView()
     }
 
     func configureAsLoading() {
@@ -76,7 +74,10 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
     }
 
     private func addAnOverlayToTheImageView() {
+        guard !posterImageView.isHidden else { return }
+
         posterImageView.subviews.first?.removeFromSuperview()
+
         let posterOverlayView = UIView(frame: posterImageView.frame)
         let gradient = CAGradientLayer()
         gradient.name = "GradientOverlay"
