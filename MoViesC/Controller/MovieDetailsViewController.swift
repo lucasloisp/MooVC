@@ -49,6 +49,7 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
     @IBOutlet weak var similarLabel: UILabel!
     @IBOutlet weak var releaseDateContainerView: UIView!
     @IBOutlet weak var statusContainerView: UIView!
+    @IBOutlet weak var shareBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var likeBarButtonItem: UIBarButtonItem!
 
     var viewsThatHideOnLoading: [UIView] {
@@ -104,6 +105,11 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
         statusContainerView.layer.masksToBounds = true
         releaseDateContainerView.layer.cornerRadius = 4.0
         releaseDateContainerView.layer.masksToBounds = true
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        let movieSharingEnabled = MovieSharing.shared.isInitialized
+        shareBarButtonItem.isEnabled = movieSharingEnabled
     }
 
     func hideMovieDetails() {
@@ -192,6 +198,9 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
         }
     }
 
+    @IBAction func onDidTapShare(_ sender: Any) {
+        MovieSharing.shared.share(movie: movie)
+    }
 }
 
 extension MovieDetailsViewController: MovieListingControllerDelegate {
