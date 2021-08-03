@@ -40,6 +40,7 @@
 		C256A27526B4C06900E1B23D /* SessionIdCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C256A27426B4C06900E1B23D /* SessionIdCreation.swift */; };
 		C256A27726B4C38700E1B23D /* TokenValidationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C256A27626B4C38700E1B23D /* TokenValidationResponse.swift */; };
 		C256A27926B4DF3000E1B23D /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C256A27826B4DF3000E1B23D /* FavouritesViewController.swift */; };
+		C25A6B1C26BA0373006A7EB5 /* AppendingMovieListingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25A6B1B26BA0373006A7EB5 /* AppendingMovieListingController.swift */; };
 		C26DBA8226B8BE340053DBD5 /* PeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26DBA8126B8BE340053DBD5 /* PeerViewController.swift */; };
 		C26DBA8426B8C6720053DBD5 /* MovieSharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26DBA8326B8C6720053DBD5 /* MovieSharing.swift */; };
 		C270630F26ADB5F7005F1470 /* WithSegues.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270630E26ADB5F7005F1470 /* WithSegues.swift */; };
@@ -116,6 +117,7 @@
 		C256A27426B4C06900E1B23D /* SessionIdCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionIdCreation.swift; sourceTree = "<group>"; };
 		C256A27626B4C38700E1B23D /* TokenValidationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenValidationResponse.swift; sourceTree = "<group>"; };
 		C256A27826B4DF3000E1B23D /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
+		C25A6B1B26BA0373006A7EB5 /* AppendingMovieListingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendingMovieListingController.swift; sourceTree = "<group>"; };
 		C26DBA8126B8BE340053DBD5 /* PeerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerViewController.swift; sourceTree = "<group>"; };
 		C26DBA8326B8C6720053DBD5 /* MovieSharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSharing.swift; sourceTree = "<group>"; };
 		C26DBA8526B8C7F60053DBD5 /* MoViesC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoViesC.entitlements; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			children = (
 				C23D9DA626B703BB00A6308D /* MoviePage.swift */,
 				C22E222526AB9DEF00201EEC /* MovieListingController.swift */,
+				C25A6B1B26BA0373006A7EB5 /* AppendingMovieListingController.swift */,
 				C273254A26B0D7C9000D4AD0 /* GenreMovieListingController.swift */,
 				C23D9DA826B7097700A6308D /* InfiniteMovieListingController.swift */,
 				C23D9DAA26B7200400A6308D /* MovieListingPageManager.swift */,
@@ -551,6 +554,7 @@
 				C256A27526B4C06900E1B23D /* SessionIdCreation.swift in Sources */,
 				C2A3023926A90698008BBA7D /* APIClient.swift in Sources */,
 				C27F0B7126B6FAB400D602D2 /* LocalKeychainManager.swift in Sources */,
+				C25A6B1C26BA0373006A7EB5 /* AppendingMovieListingController.swift in Sources */,
 				C23D9DB526B723D600A6308D /* InfiniteMovieListingControllerDelegate.swift in Sources */,
 				C273254926B0C803000D4AD0 /* SearchViewController.swift in Sources */,
 				C250E46326AA2994008A95AF /* Genre.swift in Sources */,
