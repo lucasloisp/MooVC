@@ -24,13 +24,10 @@ class MovieSharing {
 
     weak var delegate: MovieSharingDelegate?
 
-    let someMovie = Movie(title: "The Little Rascals", tmbdId: 10897, posterUrl: URL(string: "https://image.tmdb.org/t/p/w500/bYpc0diOR3nk9yZeDXEHmsjuKjI.jpg"), rating: 3)
-    let movies: [Movie]
     private let multiPeer: MultiPeer
 
     private init() {
         self.multiPeer = MultiPeer.instance
-        self.movies = Array(repeating: someMovie, count: 20)
     }
 
     func share(movie: Movie) {

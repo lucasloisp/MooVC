@@ -15,7 +15,7 @@ class PeerViewController: UIViewController, WithSegues {
         case toMovieDetailsViewControllerSegue
     }
 
-    private let movieController = MovieListingController()
+    private let movieController = AppendingMovieListingController()
     private let movieSharing = MovieSharing.shared
     private var selectedMovie: Movie?
 
@@ -32,8 +32,6 @@ class PeerViewController: UIViewController, WithSegues {
         movieController.delegate = self
         movieController.bind(to: moviesCollectionView)
 
-        movieController.updateData(movies: movieSharing.movies)
-
         movieSharing.delegate = self
         movieSharing.startSharing()
     }
@@ -49,8 +47,7 @@ extension PeerViewController: MovieSharingDelegate {
         let movieStub = Movie(title: "", tmbdId: movieId, posterUrl: nil, rating: 0)
         MovieManager.shared.loadMovieDetails(of: movieStub) { details in
             if let movieDetails = details {
-                self.selectedMovie = movieDetails.movie
-                self.perform(segue: .toMovieDetailsViewControllerSegue)
+                self.movieController.append(movie: movieDetails.movie)
             } else {
                 // FIXME: Handle the error
             }
