@@ -24,7 +24,9 @@ class MovieSharing {
 
     weak var delegate: MovieSharingDelegate?
 
+    var isInitialized: Bool { _isInitialized }
     private let multiPeer: MultiPeer
+    private var _isInitialized: Bool = false
 
     private init() {
         self.multiPeer = MultiPeer.instance
@@ -38,6 +40,7 @@ class MovieSharing {
         multiPeer.initialize(serviceType: Self.serviceType)
         multiPeer.autoConnect()
         multiPeer.delegate = self
+        self._isInitialized = true
     }
 
     private func onReceive(movieId: Int) {

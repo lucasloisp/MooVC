@@ -296,7 +296,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="Movie" id="J5v-E1-pEz">
                         <rightBarButtonItems>
-                            <barButtonItem image="heart" catalog="system" style="plain" id="dr9-HZ-PKS">
+                            <barButtonItem image="square.and.arrow.up" catalog="system" id="xx9-HX-hec">
+                                <connections>
+                                    <action selector="onDidTapShare:" destination="w6a-oe-kEE" id="sSc-0R-h1x"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="heart" catalog="system" id="dr9-HZ-PKS">
                                 <connections>
                                     <action selector="toggleIsFavourite:" destination="w6a-oe-kEE" id="UdD-3g-rfP"/>
                                 </connections>
@@ -310,6 +315,7 @@
                         <outlet property="posterImageView" destination="hug-TF-OCY" id="0Og-hj-ewA"/>
                         <outlet property="releaseDateContainerView" destination="2b8-NF-nAv" id="cDa-yf-xbT"/>
                         <outlet property="releaseDateLabel" destination="P1d-Sq-b8f" id="8X8-nu-yQO"/>
+                        <outlet property="shareBarButtonItem" destination="xx9-HX-hec" id="qFW-a5-1fQ"/>
                         <outlet property="similarLabel" destination="xGE-zV-x2t" id="83K-W3-P8Z"/>
                         <outlet property="statusContainerView" destination="KeN-rH-lD7" id="LzV-9B-LNI"/>
                         <outlet property="statusLabel" destination="oKx-vc-pMY" id="ghj-ZV-LIe"/>
@@ -420,6 +426,7 @@
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.2.fill" catalog="system" width="128" height="80"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="PrimaryAccent">
             <color red="0.1803921568627451" green="0.36862745098039218" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
