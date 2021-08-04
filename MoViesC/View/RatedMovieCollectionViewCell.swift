@@ -12,6 +12,7 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var ratingStackView: UIStackView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var posterOverlayView: UIView!
 
     static let identifier: String = "RatedMovieCollectionViewCell"
 
@@ -24,14 +25,12 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         posterImageView.layer.masksToBounds = true
         posterImageView.layer.cornerRadius = 16
-
-        if !posterImageView.isHidden {
-            addAnOverlayToTheImageView()
-        }
+        posterOverlayView.layer.cornerRadius = 16
     }
 
     func configureAsLoading() {
         posterImageView.isHidden = true
+        posterOverlayView.isHidden = true
         nameLabel.isHidden = true
         ratingStackView.isHidden = true
         activityIndicatorView.isHidden = false
@@ -49,6 +48,7 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
     private func setUpPosterImageView(_ poster: URL?) {
         self.posterImageView.contentMode = .scaleAspectFit
         self.posterImageView.isHidden = false
+        self.posterOverlayView.isHidden = false
         if let url = poster {
             posterImageView.setImageFillFromURL(url)
         } else {
@@ -75,16 +75,4 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    private func addAnOverlayToTheImageView() {
-        posterImageView.subviews.first?.removeFromSuperview()
-        let posterOverlayView = UIView(frame: posterImageView.frame)
-        let gradient = CAGradientLayer()
-        gradient.name = "GradientOverlay"
-        gradient.frame = posterOverlayView.frame
-        gradient.colors = [UIColor.clear.cgColor, UIColor.white.cgColor]
-        gradient.locations = [0.0, 1]
-        posterOverlayView.layer.insertSublayer(gradient, at: 0)
-        posterImageView.addSubview(posterOverlayView)
-        posterImageView.bringSubviewToFront(posterOverlayView)
-    }
 }
