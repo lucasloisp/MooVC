@@ -34,6 +34,12 @@ class PeerViewController: UIViewController, WithSegues {
 
         movieSharing.delegate = self
         movieSharing.startSharing()
+
+        tabBarItem.image = UIImage(systemName: "person.2.fill")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.title = "Peers"
     }
 
     @IBSegueAction func makeMovieDetailsViewController(_ coder: NSCoder) -> MovieDetailsViewController? {
@@ -43,6 +49,14 @@ class PeerViewController: UIViewController, WithSegues {
 }
 
 extension PeerViewController: MovieSharingDelegate {
+    func connectedToCount(peerCount: Int) {
+        guard peerCount > 0 else {
+            tabBarItem.badgeValue = nil
+            return
+        }
+        tabBarItem.badgeValue = String(peerCount)
+    }
+
     func receivedFromPeer(movieId: Int) {
         let movieStub = Movie(title: "", tmbdId: movieId, posterUrl: nil, rating: 0)
         MovieManager.shared.loadMovieDetails(of: movieStub) { details in
