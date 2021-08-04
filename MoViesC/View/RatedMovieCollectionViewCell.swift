@@ -12,6 +12,7 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var ratingStackView: UIStackView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var posterOverlayView: UIView!
 
     static let identifier: String = "RatedMovieCollectionViewCell"
 
@@ -75,16 +76,29 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
         }
     }
 
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        // TODO: Still figuring out WHY the frame needs to be
+        // adjusted at `draw`, and why `layoutSubvies` is not
+        // sufficient.
+        // The adjustment NEEDS to be made in both calls.
+        posterOverlayView.layer.sublayers?.first?.frame = posterImageView.bounds
+    }
+
     private func addAnOverlayToTheImageView() {
-        posterImageView.subviews.first?.removeFromSuperview()
-        let posterOverlayView = UIView(frame: posterImageView.frame)
+        guard !posterImageView.isHidden else { return }
+
+        posterOverlayView.layer.sublayers?.first?.removeFromSuperlayer()
+
         let gradient = CAGradientLayer()
         gradient.name = "GradientOverlay"
-        gradient.frame = posterOverlayView.frame
+        gradient.frame = posterImageView.bounds
         gradient.colors = [UIColor.clear.cgColor, UIColor.white.cgColor]
         gradient.locations = [0.0, 1]
-        posterOverlayView.layer.insertSublayer(gradient, at: 0)
-        posterImageView.addSubview(posterOverlayView)
-        posterImageView.bringSubviewToFront(posterOverlayView)
+
+        self.posterOverlayView.layer.insertSublayer(gradient, at: 0)
+        posterOverlayView.layer.masksToBounds = true
+
     }
+
 }
