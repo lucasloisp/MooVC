@@ -20,6 +20,9 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wVz-qj-OZW">
                         <rect key="frame" x="0.0" y="0.0" width="464" height="473"/>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1x-Li-tv0">
+                        <rect key="frame" x="0.0" y="0.0" width="464" height="473"/>
+                    </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="03u-qU-swK">
                         <rect key="frame" x="4" y="396" width="456" height="75"/>
                         <subviews>
@@ -61,24 +64,29 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="n1x-Li-tv0" secondAttribute="bottom" id="0dF-hP-ouD"/>
                 <constraint firstAttribute="bottom" secondItem="wVz-qj-OZW" secondAttribute="bottom" id="3eL-Ws-FfK"/>
                 <constraint firstAttribute="trailing" secondItem="wVz-qj-OZW" secondAttribute="trailing" id="Fja-XO-10H"/>
+                <constraint firstAttribute="trailing" secondItem="n1x-Li-tv0" secondAttribute="trailing" id="HRC-xc-fF0"/>
                 <constraint firstItem="03u-qU-swK" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="QaH-Xv-UT8"/>
                 <constraint firstItem="onw-vW-Grg" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="ahi-dK-aYg"/>
                 <constraint firstAttribute="bottom" secondItem="03u-qU-swK" secondAttribute="bottom" constant="2" id="mHB-1t-k0E"/>
                 <constraint firstAttribute="trailing" secondItem="03u-qU-swK" secondAttribute="trailing" constant="4" id="pJz-L3-3YM"/>
                 <constraint firstItem="wVz-qj-OZW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="uIx-NV-d8o"/>
+                <constraint firstItem="n1x-Li-tv0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="v6y-Na-vt9"/>
                 <constraint firstItem="wVz-qj-OZW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="wxC-K9-BUQ"/>
                 <constraint firstItem="onw-vW-Grg" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="xRw-2e-yL1"/>
+                <constraint firstItem="n1x-Li-tv0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="xv2-Yz-DTC"/>
             </constraints>
             <size key="customSize" width="576" height="408"/>
             <connections>
                 <outlet property="activityIndicatorView" destination="onw-vW-Grg" id="Jox-Dx-zsa"/>
                 <outlet property="nameLabel" destination="3DB-l8-wPI" id="DMK-KM-MmI"/>
                 <outlet property="posterImageView" destination="wVz-qj-OZW" id="0pp-Wn-33Q"/>
+                <outlet property="posterOverlayView" destination="n1x-Li-tv0" id="L8f-rm-yNF"/>
                 <outlet property="ratingStackView" destination="oD8-A2-OEr" id="4Vb-pv-anp"/>
             </connections>
-            <point key="canvasLocation" x="271.01449275362319" y="213.28125"/>
+            <point key="canvasLocation" x="269.56521739130437" y="213.28125"/>
         </collectionViewCell>
     </objects>
     <resources>
