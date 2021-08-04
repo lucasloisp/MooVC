@@ -8,7 +8,10 @@
 import Foundation
 
 class AppendingMovieListingController: MovieListingController {
-    func append(movie: Movie) {
+    func appendIfNotRepeated(movie: Movie) {
+        guard !self.movies.contains(where: { $0.tmbdId == movie.tmbdId }) else {
+            return
+        }
         self.movies.append(movie)
         collectionView?.reloadData()
     }
