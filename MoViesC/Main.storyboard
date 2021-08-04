@@ -177,7 +177,7 @@
                             <constraint firstItem="o4r-Xe-ttR" firstAttribute="trailing" secondItem="TS3-Is-wLr" secondAttribute="trailing" id="dZ0-pG-h7J"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" image="person.2.fill" catalog="system" id="Bdx-Cv-kBB"/>
+                    <tabBarItem key="tabBarItem" image="person.2" catalog="system" id="Bdx-Cv-kBB"/>
                     <connections>
                         <outlet property="moviesCollectionView" destination="TS3-Is-wLr" id="6dy-rg-xhR"/>
                         <segue destination="w6a-oe-kEE" kind="show" identifier="toMovieDetailsViewControllerSegue" destinationCreationSelector="makeMovieDetailsViewController:" id="lhT-zw-uR5"/>
@@ -425,7 +425,7 @@
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="person.2.fill" catalog="system" width="128" height="80"/>
+        <image name="person.2" catalog="system" width="128" height="81"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="PrimaryAccent">

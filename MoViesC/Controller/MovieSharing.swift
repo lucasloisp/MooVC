@@ -11,6 +11,7 @@ import MultiPeer
 
 protocol MovieSharingDelegate: AnyObject {
     func receivedFromPeer(movieId: Int)
+    func connectedToCount(peerCount: Int)
 }
 
 class MovieSharing {
@@ -72,5 +73,6 @@ extension MovieSharing: MultiPeerDelegate {
 
     func multiPeer(connectedDevicesChanged devices: [String]) {
         print("Connected to \(devices.count) devices")
+        delegate?.connectedToCount(peerCount: devices.count)
     }
 }
