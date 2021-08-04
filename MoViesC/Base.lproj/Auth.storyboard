@@ -18,20 +18,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="qpJ-aA-AZs">
-                                <rect key="frame" x="0.0" y="16" width="320" height="120"/>
+                                <rect key="frame" x="0.0" y="16" width="320" height="240"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LUg-r5-n4b">
-                                <rect key="frame" x="20" y="156" width="280" height="34"/>
+                                <rect key="frame" x="20" y="276" width="280" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="username"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4zh-eK-rnm">
-                                <rect key="frame" x="20" y="210" width="280" height="34"/>
+                                <rect key="frame" x="20" y="330" width="280" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnr-vy-O7r">
-                                <rect key="frame" x="136.5" y="264" width="47" height="30"/>
+                                <rect key="frame" x="136.5" y="384" width="47" height="30"/>
                                 <state key="normal" title="Sign In"/>
                                 <connections>
                                     <action selector="loginButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0dQ-lc-qx0"/>
@@ -41,7 +41,7 @@
                                 <rect key="frame" x="141.5" y="221.5" width="37" height="37"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid credentials..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzz-f5-7gP">
-                                <rect key="frame" x="8" y="310" width="304" height="17"/>
+                                <rect key="frame" x="8" y="430" width="304" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
@@ -50,7 +50,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="qpJ-aA-AZs" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.25" id="991-f9-Cgv"/>
+                            <constraint firstItem="qpJ-aA-AZs" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.5" id="991-f9-Cgv"/>
                             <constraint firstItem="LUg-r5-n4b" firstAttribute="top" secondItem="qpJ-aA-AZs" secondAttribute="bottom" constant="20" id="9EW-ZU-h8P"/>
                             <constraint firstItem="rzz-f5-7gP" firstAttribute="top" secondItem="Vnr-vy-O7r" secondAttribute="bottom" constant="16" id="Akl-3t-Kl8"/>
                             <constraint firstItem="LUg-r5-n4b" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="H2w-ZY-9ah"/>
