@@ -61,7 +61,7 @@ extension PeerViewController: MovieSharingDelegate {
         let movieStub = Movie(title: "", tmbdId: movieId, posterUrl: nil, rating: 0)
         MovieManager.shared.loadMovieDetails(of: movieStub) { details in
             if let movieDetails = details {
-                self.movieController.append(movie: movieDetails.movie)
+                self.movieController.appendIfNotRepeated(movie: movieDetails.movie)
             } else {
                 // FIXME: Handle the error
             }
