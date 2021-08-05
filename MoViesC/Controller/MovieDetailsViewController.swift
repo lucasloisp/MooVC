@@ -147,7 +147,7 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
             case .success(let movieDetails):
                 self.movieDetails = movieDetails
             case .failure(_):
-                // TODO: Implement
+                ErrorMessageManager.shared.showError(message: "There was an error loading the details of this movie")
                 break
             }
             self.stopLoadingIndicator()
@@ -159,7 +159,7 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
             hideMovieDetails()
             return
         }
-        self.updateFavouriteButtonIcon()
+        self.refreshFavouriteButtonIcon()
         taglineLabel.text = movieDetails.tagline
         statusLabel.text = movieDetails.status
         if let releaseDate = movieDetails.releaseDate {
@@ -169,7 +169,7 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
         }
     }
 
-    private func updateFavouriteButtonIcon() {
+    private func refreshFavouriteButtonIcon() {
         let favImage = FavouriteImages.select(isFavourite: movieDetails!.isFavourite)
         let image = favImage.uiImage
         likeBarButtonItem.image = image
@@ -184,10 +184,12 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
 
     @IBAction func toggleIsFavourite(_ sender: Any) {
         invertLikeButtonImage()
-        MovieManager.shared.markMovieAsFavourite(movie, as: !movieDetails!.isFavourite) {
+        let willBeFavourite: Bool = !movieDetails!.isFavourite
+        MovieManager.shared.markMovieAsFavourite(movie, as: willBeFavourite) {
             self.loadMovieDetails()
         } onError: {
-            // TODO: Show an error prompt
+            self.refreshFavouriteButtonIcon()
+            ErrorMessageManager.shared.showError(message: "There was a problem \(willBeFavourite ? "" : "un")marking this movie as a favourite")
         }
     }
 
