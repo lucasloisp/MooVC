@@ -200,8 +200,8 @@
 				C273254826B0C803000D4AD0 /* SearchViewController.swift */,
 				C2FFB2F926B5A35D0008F3E9 /* MainTabBarController.swift */,
 				C26DBA8126B8BE340053DBD5 /* PeerViewController.swift */,
-				C26DBA8326B8C6720053DBD5 /* MovieSharing.swift */,
 				C29034DC26BB6E7500A521E1 /* ErrorMessageManager.swift */,
+				C26DBA8326B8C6720053DBD5 /* MovieSharing.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

@@ -9,6 +9,7 @@ import UIKit
 
 class PeerViewController: UIViewController, WithSegues {
     @IBOutlet weak var moviesCollectionView: UICollectionView!
+    @IBOutlet weak var instructionsView: UIView!
 
     typealias SegueType = SeguesFromSelf
     enum SeguesFromSelf: String, PerformableSegue {
@@ -32,10 +33,10 @@ class PeerViewController: UIViewController, WithSegues {
         movieController.delegate = self
         movieController.bind(to: moviesCollectionView)
 
-        movieSharing.delegate = self
-        movieSharing.startSharing()
+        moviesCollectionView.isHidden = true
+        instructionsView.isHidden = false
 
-        tabBarItem.image = UIImage(systemName: "person.2.fill")
+        movieSharing.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +46,14 @@ class PeerViewController: UIViewController, WithSegues {
     @IBSegueAction func makeMovieDetailsViewController(_ coder: NSCoder) -> MovieDetailsViewController? {
         guard let selectedMovie = selectedMovie else { return nil }
         return MovieDetailsViewController(coder: coder, for: selectedMovie)
+    }
+
+    @IBAction func didRequestStartSharing(_ sender: Any) {
+        movieSharing.startSharing()
+
+        tabBarItem.image = UIImage(systemName: "person.2.fill")
+        moviesCollectionView.isHidden = false
+        instructionsView.isHidden = true
     }
 }
 
@@ -63,7 +72,8 @@ extension PeerViewController: MovieSharingDelegate {
             if let movieDetails = details {
                 self.movieController.appendIfNotRepeated(movie: movieDetails.movie)
             } else {
-                // FIXME: Handle the error
+                let message = "There was an error loading the movie just shared with you"
+                ErrorMessageManager.shared.showError(message: message)
             }
         }
     }
