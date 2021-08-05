@@ -50,12 +50,6 @@ class MovieSharing {
     }
 
     private func sendToPeers(object: Any, type: DataType) {
-        multiPeer.stopSearching()
-
-        defer {
-            multiPeer.autoConnect()
-        }
-
         multiPeer.send(object: object, type: type.rawValue)
     }
 }
