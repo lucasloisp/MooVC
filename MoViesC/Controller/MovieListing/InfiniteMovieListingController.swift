@@ -55,7 +55,8 @@ class InfiniteMovieListingController: MovieListingController {
     func fetchMovies() {
         let thisPager = pager
         thisPager.fetchPage { moviePage in
-            guard let moviePage = moviePage, self.pager === thisPager else {
+            guard self.pager === thisPager else { return }
+            guard let moviePage = moviePage else {
                 self.pagerDelegate?.onFetchFailed()
                 return
             }

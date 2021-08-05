@@ -30,6 +30,6 @@ extension InfiniteMovieListingControllerDelegate {
     }
 
     func onFetchFailed() {
-        // TODO: Indicate the error to the user
+        ErrorMessageManager.shared.showError(message: "Error loading additional results")
     }
 }
