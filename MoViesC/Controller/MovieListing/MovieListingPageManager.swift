@@ -29,7 +29,7 @@ class MovieListingPageManager {
         totalMovies = 0
     }
 
-    func fetchPage(completionHandler: @escaping ((MoviePage?) -> Void)) {
+    func fetchPage(currentCount: Int, completionHandler: @escaping ((MoviePage?) -> Void)) {
         guard !_isFetchInProgress else {
             return
         }
@@ -42,6 +42,8 @@ class MovieListingPageManager {
             if let moviePage = moviePage {
                 self.currentPage += 1
                 self.totalMovies = moviePage.totalResults
+            } else {
+                self.totalMovies = currentCount
             }
             completionHandler(moviePage)
         }
