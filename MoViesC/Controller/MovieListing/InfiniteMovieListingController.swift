@@ -54,10 +54,11 @@ class InfiniteMovieListingController: MovieListingController {
 
     func fetchMovies() {
         let thisPager = pager
-        thisPager.fetchPage { moviePage in
+        thisPager.fetchPage(currentCount: self.movies.count) { moviePage in
             guard self.pager === thisPager else { return }
             guard let moviePage = moviePage else {
                 self.pagerDelegate?.onFetchFailed()
+                self.collectionView?.reloadData()
                 return
             }
             self.movies.append(contentsOf: moviePage.movies)
