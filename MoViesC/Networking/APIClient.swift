@@ -30,16 +30,11 @@ class APIClient {
         AF.request(request).validate().responseObject { (response: DataResponse<T, AFError>) in
             switch response.result {
             case .success(let object): onCompletion(.success(object))
-            case .failure(let error as Error): onCompletion(.failure(error))
-            }
-        }
-    }
-
-    func requestItems<T: BaseMappable>(request: APIRoute, responseKey: String? = nil, onCompletion: @escaping (Result<[T], Error>) -> Void) {
-        AF.request(request).validate().responseArray { (response: DataResponse<[T], AFError>) in
-            switch response.result {
-            case .success(let array): onCompletion(.success(array))
-            case .failure(let error as Error): onCompletion(.failure(error))
+            case .failure(let error as Error):
+                if response.response?.statusCode == 403 || response.response?.statusCode == 401 {
+                    SessionManager.share.invalidateSession()
+                }
+                onCompletion(.failure(error))
             }
         }
     }
@@ -50,7 +45,7 @@ class APIClient {
             onCompletion(.success(value))
         case .failure(let error as NSError):
             if response.response?.statusCode == 403 || response.response?.statusCode == 401 {
-                // Handle auth failure
+                SessionManager.share.invalidateSession()
             } else {
                 onCompletion(.failure(error))
             }

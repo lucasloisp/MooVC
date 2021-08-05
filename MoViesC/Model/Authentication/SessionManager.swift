@@ -23,6 +23,7 @@ class SessionManager {
         return sessionId != nil
     }
 
+    private(set) var authenticationError: String?
     private let keychain = LocalKeychainManager.shared
     private let errorMessageInvalidCredentials = "Invalid credentials"
 
@@ -41,6 +42,7 @@ class SessionManager {
     }
 
     func login(with credentials: UserCredentials, onError: @escaping Handler<String?>) {
+        authenticationError = nil
         obtainValidatedRequestToken(credentials: credentials, onError: onError) { accessToken in
             self.obtainSessionId(accessToken) { sessionId in
                 self.sessionId = sessionId
@@ -48,6 +50,14 @@ class SessionManager {
                 onError(self.errorMessageInvalidCredentials)
             }
         }
+    }
+
+    func invalidateSession() {
+        guard sessionId != nil, accountId != nil else {
+            return
+        }
+        self.authenticationError = "Session expired"
+        self.sessionId = nil
     }
 
     func logout() {
