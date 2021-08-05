@@ -81,6 +81,7 @@ extension PeerViewController: MovieSharingDelegate {
 
 extension PeerViewController: MovieListingControllerDelegate {
     func didSelect(movie: Movie) {
-        movieSharing.share(movie: movie)
+        selectedMovie = movie
+        perform(segue: .toMovieDetailsViewControllerSegue)
     }
 }
