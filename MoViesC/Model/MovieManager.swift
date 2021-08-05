@@ -62,7 +62,6 @@ class MovieManager {
             case .success(let movieDetails):
                 completionHandler(movieDetails)
             case .failure(_):
-                // TODO: Implement
                 completionHandler(nil)
             }
         }
