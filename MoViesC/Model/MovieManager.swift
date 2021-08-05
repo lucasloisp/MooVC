@@ -23,7 +23,6 @@ class MovieManager {
             case .success(let response):
                 completionHandler(response)
             case .failure(_):
-                // TODO: Show the error to the user
                 completionHandler(nil)
             }
         }
