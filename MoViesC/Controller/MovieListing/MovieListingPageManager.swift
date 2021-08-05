@@ -14,6 +14,7 @@ protocol MovieListingPager: AnyObject {
 class MovieListingPageManager {
     var totalItems: Int { return totalMovies }
     var isFetchInProgress: Bool { return _isFetchInProgress }
+    var isInFirstPage: Bool { return currentPage == 1 }
 
     private let pager: MovieListingPager
     private var currentPage = 1
@@ -29,7 +30,7 @@ class MovieListingPageManager {
         totalMovies = 0
     }
 
-    func fetchPage(completionHandler: @escaping ((MoviePage?) -> Void)) {
+    func fetchPage(currentCount: Int, completionHandler: @escaping ((MoviePage?) -> Void)) {
         guard !_isFetchInProgress else {
             return
         }
@@ -42,6 +43,8 @@ class MovieListingPageManager {
             if let moviePage = moviePage {
                 self.currentPage += 1
                 self.totalMovies = moviePage.totalResults
+            } else {
+                self.totalMovies = currentCount
             }
             completionHandler(moviePage)
         }

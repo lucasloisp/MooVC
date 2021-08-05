@@ -22,9 +22,7 @@ class MovieManager {
             switch result {
             case .success(let response):
                 completionHandler(response)
-            case .failure(let err):
-                // TODO: Show the error to the user
-                print(err)
+            case .failure(_):
                 completionHandler(nil)
             }
         }
@@ -45,9 +43,7 @@ class MovieManager {
             switch result {
             case .success(let response):
                 completionHandler(response)
-            case .failure(let err):
-                // TODO: Show the error to the user
-                print(err)
+            case .failure(_):
                 completionHandler(nil)
             }
         }
@@ -65,9 +61,7 @@ class MovieManager {
             switch result {
             case .success(let movieDetails):
                 completionHandler(movieDetails)
-            case .failure(let err):
-                // TODO: Implement
-                print(err)
+            case .failure(_):
                 completionHandler(nil)
             }
         }
@@ -95,9 +89,7 @@ class MovieManager {
             switch result {
             case .success(let response):
                 completionHandler(response)
-            case .failure(let err):
-                // TODO: Show the error to the user
-                print(err)
+            case .failure(_):
                 completionHandler(nil)
             }
         }
@@ -115,6 +107,9 @@ class MovieManager {
                     self.loadMovies(for: genre) {
                         if let apiMovies = $0 {
                             movies[index] = Array(apiMovies.prefix(10))
+                        } else {
+                            onError()
+                            return
                         }
                         group.leave()
                     }
