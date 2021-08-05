@@ -146,9 +146,9 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
             switch result {
             case .success(let movieDetails):
                 self.movieDetails = movieDetails
-            case .failure(let err):
+            case .failure(_):
                 // TODO: Implement
-                print(err)
+                break
             }
             self.stopLoadingIndicator()
         }
@@ -188,7 +188,6 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
             self.loadMovieDetails()
         } onError: {
             // TODO: Show an error prompt
-            print("Error during marking movie as favourite")
         }
     }
 
