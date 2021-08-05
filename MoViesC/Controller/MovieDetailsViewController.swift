@@ -139,16 +139,8 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
         MovieManager.shared.loadMovieDetails(of: movie) { movieDetails in
             if let movieDetails = movieDetails {
                 self.movieDetails = movieDetails
-            }
-        }
-        let request = MovieDBRoute.getMovieDetails(movie: movie)
-        APIClient.shared.requestItem(request: request) { (result: Result<MovieDetails, Error>) in
-            switch result {
-            case .success(let movieDetails):
-                self.movieDetails = movieDetails
-            case .failure(_):
+            } else {
                 ErrorMessageManager.shared.showError(message: "There was an error loading the details of this movie")
-                break
             }
             self.stopLoadingIndicator()
         }
