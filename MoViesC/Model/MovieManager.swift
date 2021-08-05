@@ -22,9 +22,8 @@ class MovieManager {
             switch result {
             case .success(let response):
                 completionHandler(response)
-            case .failure(let err):
+            case .failure(_):
                 // TODO: Show the error to the user
-                print(err)
                 completionHandler(nil)
             }
         }
@@ -45,9 +44,8 @@ class MovieManager {
             switch result {
             case .success(let response):
                 completionHandler(response)
-            case .failure(let err):
+            case .failure(_):
                 // TODO: Show the error to the user
-                print(err)
                 completionHandler(nil)
             }
         }
@@ -65,9 +63,8 @@ class MovieManager {
             switch result {
             case .success(let movieDetails):
                 completionHandler(movieDetails)
-            case .failure(let err):
+            case .failure(_):
                 // TODO: Implement
-                print(err)
                 completionHandler(nil)
             }
         }
@@ -95,9 +92,8 @@ class MovieManager {
             switch result {
             case .success(let response):
                 completionHandler(response)
-            case .failure(let err):
+            case .failure(_):
                 // TODO: Show the error to the user
-                print(err)
                 completionHandler(nil)
             }
         }
