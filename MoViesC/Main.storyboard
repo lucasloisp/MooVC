@@ -256,13 +256,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Movie" id="J5v-E1-pEz">
-                        <rightBarButtonItems>
-                            <barButtonItem image="heart" catalog="system" style="plain" id="dr9-HZ-PKS">
-                                <connections>
-                                    <action selector="toggleIsFavourite:" destination="w6a-oe-kEE" id="UdD-3g-rfP"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="heart" catalog="system" id="dr9-HZ-PKS">
+                            <connections>
+                                <action selector="toggleIsFavourite:" destination="w6a-oe-kEE" id="UdD-3g-rfP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorView" destination="PkJ-4I-PAt" id="5iT-3b-Vxi"/>
