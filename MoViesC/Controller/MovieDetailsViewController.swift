@@ -189,7 +189,8 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
             self.loadMovieDetails()
         } onError: {
             self.refreshFavouriteButtonIcon()
-            ErrorMessageManager.shared.showError(message: "There was a problem \(willBeFavourite ? "" : "un")marking this movie as a favourite")
+            let message = "There was a problem \(willBeFavourite ? "" : "un")marking this movie as a favourite"
+            ErrorMessageManager.shared.showError(message: message)
         }
     }
 
