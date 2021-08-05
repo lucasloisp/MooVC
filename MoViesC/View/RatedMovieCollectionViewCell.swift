@@ -25,12 +25,12 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         posterImageView.layer.masksToBounds = true
         posterImageView.layer.cornerRadius = 16
-
-        addAnOverlayToTheImageView()
+        posterOverlayView.layer.cornerRadius = 16
     }
 
     func configureAsLoading() {
         posterImageView.isHidden = true
+        posterOverlayView.isHidden = true
         nameLabel.isHidden = true
         ratingStackView.isHidden = true
         activityIndicatorView.isHidden = false
@@ -48,6 +48,7 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
     private func setUpPosterImageView(_ poster: URL?) {
         self.posterImageView.contentMode = .scaleAspectFit
         self.posterImageView.isHidden = false
+        self.posterOverlayView.isHidden = false
         if let url = poster {
             posterImageView.setImageFillFromURL(url)
         } else {
@@ -73,30 +74,4 @@ class RatedMovieCollectionViewCell: UICollectionViewCell {
             }
         }
     }
-
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        // TODO: Still figuring out WHY the frame needs to be
-        // adjusted at `draw`, and why `layoutSubvies` is not
-        // sufficient.
-        // The adjustment NEEDS to be made in both calls.
-        posterOverlayView.layer.sublayers?.first?.frame = posterImageView.bounds
-    }
-
-    private func addAnOverlayToTheImageView() {
-        guard !posterImageView.isHidden else { return }
-
-        posterOverlayView.layer.sublayers?.first?.removeFromSuperlayer()
-
-        let gradient = CAGradientLayer()
-        gradient.name = "GradientOverlay"
-        gradient.frame = posterImageView.bounds
-        gradient.colors = [UIColor.clear.cgColor, UIColor.white.cgColor]
-        gradient.locations = [0.0, 1]
-
-        self.posterOverlayView.layer.insertSublayer(gradient, at: 0)
-        posterOverlayView.layer.masksToBounds = true
-
-    }
-
 }

@@ -25,9 +25,15 @@ class LoginViewController: UIViewController, WithLoadingIndicator {
         activityIndicatorView.isHidden = true
         usernameTextField.delegate = self
         passwordTextField.delegate = self
+
+        if let authenticationError = SessionManager.share.authenticationError {
+            errorLabel.isHidden = false
+            errorLabel.text = authenticationError
+        }
     }
 
     @IBAction func loginButtonPress(_ sender: Any) {
+        errorLabel.isHidden = true
         let username = usernameTextField.text!
         let password = passwordTextField.text!
         errorLabel.isHidden = true

@@ -66,7 +66,7 @@ class DiscoverViewController: UIViewController, WithSegues, WithLoadingIndicator
             self.genresTableView.reloadData()
             self.stopLoadingIndicator()
         } onError: {
-            // TODO: Indicate that there was an error to the user
+            ErrorMessageManager.shared.showError(message: "There was an error loading the genres")
             self.stopLoadingIndicator()
         }
     }

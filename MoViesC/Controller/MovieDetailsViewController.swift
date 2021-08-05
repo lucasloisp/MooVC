@@ -145,16 +145,8 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
         MovieManager.shared.loadMovieDetails(of: movie) { movieDetails in
             if let movieDetails = movieDetails {
                 self.movieDetails = movieDetails
-            }
-        }
-        let request = MovieDBRoute.getMovieDetails(movie: movie)
-        APIClient.shared.requestItem(request: request) { (result: Result<MovieDetails, Error>) in
-            switch result {
-            case .success(let movieDetails):
-                self.movieDetails = movieDetails
-            case .failure(let err):
-                // TODO: Implement
-                print(err)
+            } else {
+                ErrorMessageManager.shared.showError(message: "There was an error loading the details of this movie")
             }
             self.stopLoadingIndicator()
         }
@@ -165,7 +157,7 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
             hideMovieDetails()
             return
         }
-        self.updateFavouriteButtonIcon()
+        self.refreshFavouriteButtonIcon()
         taglineLabel.text = movieDetails.tagline
         statusLabel.text = movieDetails.status
         if let releaseDate = movieDetails.releaseDate {
@@ -175,7 +167,7 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
         }
     }
 
-    private func updateFavouriteButtonIcon() {
+    private func refreshFavouriteButtonIcon() {
         let favImage = FavouriteImages.select(isFavourite: movieDetails!.isFavourite)
         let image = favImage.uiImage
         likeBarButtonItem.image = image
@@ -190,11 +182,13 @@ class MovieDetailsViewController: UIViewController, WithLoadingIndicator {
 
     @IBAction func toggleIsFavourite(_ sender: Any) {
         invertLikeButtonImage()
-        MovieManager.shared.markMovieAsFavourite(movie, as: !movieDetails!.isFavourite) {
+        let willBeFavourite: Bool = !movieDetails!.isFavourite
+        MovieManager.shared.markMovieAsFavourite(movie, as: willBeFavourite) {
             self.loadMovieDetails()
         } onError: {
-            // TODO: Show an error prompt
-            print("Error during marking movie as favourite")
+            self.refreshFavouriteButtonIcon()
+            let message = "There was a problem \(willBeFavourite ? "" : "un")marking this movie as a favourite"
+            ErrorMessageManager.shared.showError(message: message)
         }
     }
 
