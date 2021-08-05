@@ -14,6 +14,7 @@ protocol MovieListingPager: AnyObject {
 class MovieListingPageManager {
     var totalItems: Int { return totalMovies }
     var isFetchInProgress: Bool { return _isFetchInProgress }
+    var isInFirstPage: Bool { return currentPage == 1 }
 
     private let pager: MovieListingPager
     private var currentPage = 1
