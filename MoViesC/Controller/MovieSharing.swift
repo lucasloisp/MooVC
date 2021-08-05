@@ -34,6 +34,7 @@ class MovieSharing {
     }
 
     func share(movie: Movie) {
+        delegate?.receivedFromPeer(movieId: movie.tmbdId)
         sendToPeers(object: movie.tmbdId, type: .movie)
     }
 
