@@ -57,7 +57,7 @@ class InfiniteMovieListingController: MovieListingController {
         thisPager.fetchPage(currentCount: self.movies.count) { moviePage in
             guard self.pager === thisPager else { return }
             guard let moviePage = moviePage else {
-                self.pagerDelegate?.onFetchFailed()
+                self.pagerDelegate?.onFetchFailed(isFirstPage: thisPager.isInFirstPage)
                 self.collectionView?.reloadData()
                 return
             }

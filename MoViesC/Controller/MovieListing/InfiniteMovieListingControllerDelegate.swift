@@ -29,8 +29,8 @@ extension InfiniteMovieListingControllerDelegate {
         return Array(indexPathsIntersection)
     }
 
-    func onFetchFailed() {
+    func onFetchFailed(isFirstPage: Bool) {
         stopLoadingIndicator()
-        ErrorMessageManager.shared.showError(message: "Error loading additional results")
+        ErrorMessageManager.shared.showError(message: "Error loading \(isFirstPage ? "" : "additional ")results")
     }
 }
