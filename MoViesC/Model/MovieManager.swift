@@ -44,7 +44,6 @@ class MovieManager {
             case .success(let response):
                 completionHandler(response)
             case .failure(_):
-                // TODO: Show the error to the user
                 completionHandler(nil)
             }
         }
@@ -110,6 +109,9 @@ class MovieManager {
                     self.loadMovies(for: genre) {
                         if let apiMovies = $0 {
                             movies[index] = Array(apiMovies.prefix(10))
+                        } else {
+                            onError()
+                            return
                         }
                         group.leave()
                     }
