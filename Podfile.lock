@@ -5,6 +5,7 @@ PODS:
     - ObjectMapper (~> 3.5.1)
   - IQKeyboardManagerSwift (6.5.6)
   - Kingfisher (6.3.0)
+  - MultiPeer (0.2.0)
   - ObjectMapper (3.5.3)
   - SwiftLint (0.43.1)
   - SwiftMessages (9.0.3):
@@ -16,6 +17,7 @@ DEPENDENCIES:
   - AlamofireObjectMapper
   - IQKeyboardManagerSwift
   - Kingfisher (~> 6.0)
+  - MultiPeer (~> 0.2.0)
   - ObjectMapper
   - SwiftLint
   - SwiftMessages
@@ -26,6 +28,7 @@ SPEC REPOS:
     - AlamofireObjectMapper
     - IQKeyboardManagerSwift
     - Kingfisher
+    - MultiPeer
     - ObjectMapper
     - SwiftLint
     - SwiftMessages
@@ -35,10 +38,11 @@ SPEC CHECKSUMS:
   AlamofireObjectMapper: 74d1440c92c42bbcc2b5f4dc81654ac095ec669f
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
+  MultiPeer: f57282174c0a5cef25de4ba94dec066eb0f17437
   ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   SwiftMessages: 077f19126c24033fe24042237ecc20261adb46e4
 
-PODFILE CHECKSUM: 65d672c586186fe1e2e872eef25e14b7facb95c1
+PODFILE CHECKSUM: 1a28c1f0da81d548e6fd396d58d9167de141f4e6
 
 COCOAPODS: 1.10.1

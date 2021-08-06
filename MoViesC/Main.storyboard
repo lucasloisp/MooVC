@@ -148,6 +148,88 @@
             </objects>
             <point key="canvasLocation" x="1952" y="806"/>
         </scene>
+        <!--Peer View Controller-->
+        <scene sceneID="vo6-pT-NjF">
+            <objects>
+                <viewController id="Kel-qm-FSf" customClass="PeerViewController" customModule="MoViesC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cm4-eE-Jun">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TS3-Is-wLr">
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="SUi-Gh-8Gh">
+                                    <size key="itemSize" width="64" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z72-iE-u4d">
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't know what to watch? Come up with a suggestion list with your friends!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41f-MD-ahF">
+                                        <rect key="frame" x="8" y="196.5" width="304" height="41"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oue-iD-0DK">
+                                        <rect key="frame" x="120" y="253.5" width="80" height="30"/>
+                                        <state key="normal" title="Get Started"/>
+                                        <connections>
+                                            <action selector="didRequestStartSharing:" destination="Kel-qm-FSf" eventType="touchUpInside" id="1Pu-PL-9wt"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agL-b2-8yg">
+                                        <rect key="frame" x="8" y="299.5" width="304" height="81.5"/>
+                                        <string key="text">Here you can build a list of movies that you share with any iPhones near you, so you can finally decide what y'all re watching tonight</string>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="Oue-iD-0DK" firstAttribute="centerX" secondItem="41f-MD-ahF" secondAttribute="centerX" id="0w6-ee-NHR"/>
+                                    <constraint firstItem="agL-b2-8yg" firstAttribute="leading" secondItem="z72-iE-u4d" secondAttribute="leading" constant="8" id="CJx-UM-YnW"/>
+                                    <constraint firstItem="agL-b2-8yg" firstAttribute="top" secondItem="Oue-iD-0DK" secondAttribute="bottom" constant="16" id="E62-bY-zzu"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="agL-b2-8yg" secondAttribute="bottom" constant="16" id="QPf-tW-tmf"/>
+                                    <constraint firstItem="41f-MD-ahF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="z72-iE-u4d" secondAttribute="top" constant="16" id="RWE-aS-a02"/>
+                                    <constraint firstAttribute="trailing" secondItem="41f-MD-ahF" secondAttribute="trailing" constant="8" id="XC8-it-nzh"/>
+                                    <constraint firstItem="Oue-iD-0DK" firstAttribute="top" secondItem="41f-MD-ahF" secondAttribute="bottom" constant="16" id="dUe-Ce-xKK"/>
+                                    <constraint firstAttribute="bottom" secondItem="41f-MD-ahF" secondAttribute="bottom" multiplier="2" id="gwq-sR-m25"/>
+                                    <constraint firstAttribute="trailing" secondItem="agL-b2-8yg" secondAttribute="trailing" constant="8" id="med-oW-xvC"/>
+                                    <constraint firstItem="41f-MD-ahF" firstAttribute="leading" secondItem="z72-iE-u4d" secondAttribute="leading" constant="8" id="pDX-0p-1JP"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="o4r-Xe-ttR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="z72-iE-u4d" firstAttribute="leading" secondItem="o4r-Xe-ttR" secondAttribute="leading" id="6GL-jl-6EX"/>
+                            <constraint firstItem="o4r-Xe-ttR" firstAttribute="bottom" secondItem="TS3-Is-wLr" secondAttribute="bottom" id="FsX-fA-EWr"/>
+                            <constraint firstItem="o4r-Xe-ttR" firstAttribute="trailing" secondItem="z72-iE-u4d" secondAttribute="trailing" id="GVc-Uj-dBd"/>
+                            <constraint firstItem="TS3-Is-wLr" firstAttribute="top" secondItem="o4r-Xe-ttR" secondAttribute="top" id="HrT-xo-sC0"/>
+                            <constraint firstItem="z72-iE-u4d" firstAttribute="top" secondItem="o4r-Xe-ttR" secondAttribute="top" id="OJK-5B-Unf"/>
+                            <constraint firstItem="TS3-Is-wLr" firstAttribute="leading" secondItem="o4r-Xe-ttR" secondAttribute="leading" id="XWt-4r-wS7"/>
+                            <constraint firstItem="o4r-Xe-ttR" firstAttribute="bottom" secondItem="z72-iE-u4d" secondAttribute="bottom" id="Yv0-qk-38r"/>
+                            <constraint firstItem="o4r-Xe-ttR" firstAttribute="trailing" secondItem="TS3-Is-wLr" secondAttribute="trailing" id="dZ0-pG-h7J"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" image="person.2" catalog="system" id="Bdx-Cv-kBB"/>
+                    <connections>
+                        <outlet property="instructionsView" destination="z72-iE-u4d" id="8I6-03-Ciy"/>
+                        <outlet property="moviesCollectionView" destination="TS3-Is-wLr" id="6dy-rg-xhR"/>
+                        <segue destination="w6a-oe-kEE" kind="show" identifier="toMovieDetailsViewControllerSegue" destinationCreationSelector="makeMovieDetailsViewController:" id="lhT-zw-uR5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8K3-7I-A4q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1473.75" y="1528.5211267605634"/>
+        </scene>
         <!--Movie-->
         <scene sceneID="nYN-Z2-Q4j">
             <objects>
@@ -256,11 +338,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Movie" id="J5v-E1-pEz">
-                        <barButtonItem key="rightBarButtonItem" image="heart" catalog="system" id="dr9-HZ-PKS">
-                            <connections>
-                                <action selector="toggleIsFavourite:" destination="w6a-oe-kEE" id="UdD-3g-rfP"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="square.and.arrow.up" catalog="system" id="xx9-HX-hec">
+                                <connections>
+                                    <action selector="onDidTapShare:" destination="w6a-oe-kEE" id="sSc-0R-h1x"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="heart" catalog="system" id="dr9-HZ-PKS">
+                                <connections>
+                                    <action selector="toggleIsFavourite:" destination="w6a-oe-kEE" id="UdD-3g-rfP"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorView" destination="PkJ-4I-PAt" id="5iT-3b-Vxi"/>
@@ -269,6 +358,7 @@
                         <outlet property="posterImageView" destination="hug-TF-OCY" id="0Og-hj-ewA"/>
                         <outlet property="releaseDateContainerView" destination="2b8-NF-nAv" id="cDa-yf-xbT"/>
                         <outlet property="releaseDateLabel" destination="P1d-Sq-b8f" id="8X8-nu-yQO"/>
+                        <outlet property="shareBarButtonItem" destination="xx9-HX-hec" id="qFW-a5-1fQ"/>
                         <outlet property="similarLabel" destination="xGE-zV-x2t" id="83K-W3-P8Z"/>
                         <outlet property="statusContainerView" destination="KeN-rH-lD7" id="LzV-9B-LNI"/>
                         <outlet property="statusLabel" destination="oKx-vc-pMY" id="ghj-ZV-LIe"/>
@@ -363,6 +453,7 @@
                         <segue destination="Y6W-OH-hqX" kind="relationship" relationship="viewControllers" id="XAb-hy-HmG"/>
                         <segue destination="wgB-Kv-E8u" kind="relationship" relationship="viewControllers" id="xuP-0m-afo"/>
                         <segue destination="Il4-bj-YL0" kind="relationship" relationship="viewControllers" id="NWq-lx-9vN"/>
+                        <segue destination="Kel-qm-FSf" kind="relationship" relationship="viewControllers" id="V1c-FM-iSJ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HNb-oj-JLS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -371,16 +462,21 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ADG-Xy-seT"/>
+        <segue reference="lhT-zw-uR5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="person.2" catalog="system" width="128" height="81"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="PrimaryAccent">
             <color red="0.1803921568627451" green="0.36862745098039218" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
