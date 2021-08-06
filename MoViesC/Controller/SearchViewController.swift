@@ -38,6 +38,12 @@ class SearchViewController: UIViewController, WithLoadingIndicator, WithSegues {
         tabBarController?.title = "Search"
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        movieController.restartWithPager(MovieSearchPager(query: ""))
+        moviesCollectionView.isHidden = true
+        searchBar.text = ""
+    }
+
     @IBSegueAction func makeMovieDetailsViewController(_ coder: NSCoder) -> MovieDetailsViewController? {
         guard let movie = selectedMovie else { return nil }
         return MovieDetailsViewController(coder: coder, for: movie)
