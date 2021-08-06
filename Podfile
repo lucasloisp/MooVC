@@ -12,6 +12,7 @@ target 'MoViesC' do
 
   pod 'SwiftLint'
   pod 'Kingfisher', '~> 6.0'
+  pod 'MultiPeer', '~> 0.2.0'
   pod 'IQKeyboardManagerSwift'
   pod 'SwiftMessages'
 
