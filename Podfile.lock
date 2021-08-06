@@ -7,6 +7,7 @@ PODS:
   - Kingfisher (6.3.0)
   - MultiPeer (0.2.0)
   - ObjectMapper (3.5.3)
+  - SwiftKeychainWrapper (4.0.1)
   - SwiftLint (0.43.1)
   - SwiftMessages (9.0.3):
     - SwiftMessages/App (= 9.0.3)
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - Kingfisher (~> 6.0)
   - MultiPeer (~> 0.2.0)
   - ObjectMapper
+  - SwiftKeychainWrapper
   - SwiftLint
   - SwiftMessages
 
@@ -30,6 +32,7 @@ SPEC REPOS:
     - Kingfisher
     - MultiPeer
     - ObjectMapper
+    - SwiftKeychainWrapper
     - SwiftLint
     - SwiftMessages
 
@@ -40,9 +43,10 @@ SPEC CHECKSUMS:
   Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
   MultiPeer: f57282174c0a5cef25de4ba94dec066eb0f17437
   ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
+  SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   SwiftMessages: 077f19126c24033fe24042237ecc20261adb46e4
 
-PODFILE CHECKSUM: 1a28c1f0da81d548e6fd396d58d9167de141f4e6
+PODFILE CHECKSUM: b7bd18c9e0e34b88667f6bca7d804f56a0926a61
 
 COCOAPODS: 1.10.1
