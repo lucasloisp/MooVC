@@ -15,5 +15,6 @@ target 'MoViesC' do
   pod 'MultiPeer', '~> 0.2.0'
   pod 'IQKeyboardManagerSwift'
   pod 'SwiftMessages'
+  pod 'SwiftKeychainWrapper'
 
 end
