@@ -9,29 +9,25 @@ import UIKit
 
 class GradientOverlayView: UIView {
 
-   override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        // TODO: Still figuring out WHY the frame needs to be
-        // adjusted at `draw`, and why `layoutSubvies` is not
-        // sufficient.
-        // The adjustment NEEDS to be made in both calls.
-        self.layer.sublayers?.first?.frame = self.bounds
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        self.layer.sublayers?.first?.removeFromSuperlayer()
-        guard !self.isHidden else { return }
-
+    private lazy var gradientLayer: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.name = "GradientOverlay"
         gradient.frame = self.bounds
         gradient.colors = [UIColor.clear.cgColor, UIColor.white.cgColor]
         gradient.locations = [0.0, 1]
+        return gradient
+    }()
 
-        self.layer.insertSublayer(gradient, at: 0)
-        self.layer.masksToBounds = true
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.layer.addSublayer(gradientLayer)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        guard !self.isHidden else { return }
+        gradientLayer.frame = self.bounds
     }
 
 }
