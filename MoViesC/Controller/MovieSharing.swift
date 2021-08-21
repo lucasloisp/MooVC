@@ -58,9 +58,9 @@ extension MovieSharing: MultiPeerDelegate {
     func multiPeer(didReceiveData data: Data, ofType type: UInt32, from peerID: MCPeerID) {
         switch type {
         case DataType.movie.rawValue:
-            // swiftlint:disable:next force_cast
-            let movieId = data.convert() as! Int
-            onReceive(movieId: movieId)
+            if let movieId = data.convert() as? Int {
+                onReceive(movieId: movieId)
+            }
         default:
             break
         }
