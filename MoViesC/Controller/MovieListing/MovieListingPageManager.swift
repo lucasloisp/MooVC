@@ -13,13 +13,12 @@ protocol MovieListingPager: AnyObject {
 
 class MovieListingPageManager {
     var totalItems: Int { return totalMovies }
-    var isFetchInProgress: Bool { return _isFetchInProgress }
     var isInFirstPage: Bool { return currentPage == 1 }
+    private(set) var isFetchInProgress: Bool = false
 
     private let pager: MovieListingPager
     private var currentPage = 1
     private var totalMovies = 0
-    private var _isFetchInProgress: Bool = false
 
     init(pager: MovieListingPager) {
         self.pager = pager
@@ -31,15 +30,15 @@ class MovieListingPageManager {
     }
 
     func fetchPage(currentCount: Int, completionHandler: @escaping ((MoviePage?) -> Void)) {
-        guard !_isFetchInProgress else {
+        guard !isFetchInProgress else {
             return
         }
-        _isFetchInProgress = true
+        isFetchInProgress = true
 
         let page = currentPage
 
         self.pager.fetchPage(page: page) { moviePage in
-            self._isFetchInProgress = false
+            self.isFetchInProgress = false
             if let moviePage = moviePage {
                 self.currentPage += 1
                 self.totalMovies = moviePage.totalResults
