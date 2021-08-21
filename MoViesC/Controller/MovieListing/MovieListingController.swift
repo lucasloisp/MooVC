@@ -14,8 +14,8 @@ protocol MovieListingControllerDelegate: AnyObject {
 class MovieListingController: NSObject {
     internal var movies: [Movie] = []
     var moviesCount: Int { movies.count }
-    var emptyMessage: String = ""
-    var showingRating: Bool = true
+    var emptyMessage = ""
+    var showingRating = true
 
     weak var delegate: MovieListingControllerDelegate?
     weak var collectionView: UICollectionView?
@@ -82,7 +82,7 @@ extension MovieListingController: UICollectionViewDataSource, UICollectionViewDe
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let availableWidth = collectionView.frame.width
-        let itemsPerRow: Int = Int(availableWidth) / 100
+        let itemsPerRow = Int(availableWidth) / 100
         let widthPerItem = availableWidth / CGFloat(itemsPerRow) - 4
 
         return CGSize(width: widthPerItem, height: widthPerItem * 2)
