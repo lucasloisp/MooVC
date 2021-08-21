@@ -27,7 +27,7 @@ class MovieSharing {
 
     var isInitialized: Bool { _isInitialized }
     private let multiPeer: MultiPeer
-    private var _isInitialized: Bool = false
+    private var _isInitialized = false
 
     private init() {
         self.multiPeer = MultiPeer.instance
