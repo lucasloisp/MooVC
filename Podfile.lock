@@ -3,25 +3,25 @@ PODS:
   - AlamofireObjectMapper (6.2.0):
     - Alamofire (= 5.0.0-rc.2)
     - ObjectMapper (~> 3.5.1)
-  - IQKeyboardManagerSwift (6.5.6)
-  - Kingfisher (6.3.0)
+  - IQKeyboardManagerSwift (6.5.16)
+  - Kingfisher (6.3.1)
   - MultiPeer (0.2.0)
   - ObjectMapper (3.5.3)
   - SwiftKeychainWrapper (4.0.1)
   - SwiftLint (0.43.1)
-  - SwiftMessages (9.0.3):
-    - SwiftMessages/App (= 9.0.3)
-  - SwiftMessages/App (9.0.3)
+  - SwiftMessages (10.0.0):
+    - SwiftMessages/App (= 10.0.0)
+  - SwiftMessages/App (10.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-rc.2)
   - AlamofireObjectMapper
-  - IQKeyboardManagerSwift
+  - IQKeyboardManagerSwift (~> 6.0)
   - Kingfisher (~> 6.0)
   - MultiPeer (~> 0.2.0)
   - ObjectMapper
   - SwiftKeychainWrapper
-  - SwiftLint
+  - SwiftLint (= 0.43.1)
   - SwiftMessages
 
 SPEC REPOS:
@@ -39,14 +39,14 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: f9450d3c7f6bea2ad62e7a541c3e9b186c7991d6
   AlamofireObjectMapper: 74d1440c92c42bbcc2b5f4dc81654ac095ec669f
-  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
+  IQKeyboardManagerSwift: 12d89768845bb77b55cc092ecc2b1f9370f06b76
+  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   MultiPeer: f57282174c0a5cef25de4ba94dec066eb0f17437
   ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
-  SwiftMessages: 077f19126c24033fe24042237ecc20261adb46e4
+  SwiftMessages: d3540f0f981dfbac25bd2ae9a662effa48f76f92
 
-PODFILE CHECKSUM: b7bd18c9e0e34b88667f6bca7d804f56a0926a61
+PODFILE CHECKSUM: 6994eb073c2d7bd746d320fc264cd3dec486740d
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.15.2
