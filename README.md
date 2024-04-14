@@ -69,7 +69,7 @@ be seen on the "favorite movies" tab, controlled by the
 
 ### Peer-to-peer sharing
 
-![A video demo of peer-to-peer sharing](demo/sharing.mov)
+![A video demo of peer-to-peer sharing](demo/sharing.webm)
 
 By hopping onto the final tab, users can enable "peer to peer" sharing, to build
 a list of movies together with close-by friends or family. While the screen is
