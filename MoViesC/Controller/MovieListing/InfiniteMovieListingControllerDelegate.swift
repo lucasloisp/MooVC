@@ -20,7 +20,7 @@ extension InfiniteMovieListingControllerDelegate {
         }
         let newIndexPathsToReload = indexes.map { IndexPath(row: $0, section: 0) }
         let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
-        moviesCollectionView.reloadItems(at: indexPathsToReload)
+        moviesCollectionView.reloadData()
     }
 
     private func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {

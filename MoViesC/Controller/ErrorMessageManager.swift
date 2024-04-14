@@ -13,10 +13,12 @@ class ErrorMessageManager {
     private init() {}
 
     func showError(message: String) {
-        let errorMessageView = MessageView.viewFromNib(layout: .cardView)
-        errorMessageView.configureTheme(.error)
-        errorMessageView.configureContent(title: "Oopsie", body: message)
-        errorMessageView.button?.isHidden = true
-        SwiftMessages.show(view: errorMessageView)
+        DispatchQueue.main.async {
+            let errorMessageView = MessageView.viewFromNib(layout: .cardView)
+            errorMessageView.configureTheme(.error)
+            errorMessageView.configureContent(title: "Oopsie", body: message)
+            errorMessageView.button?.isHidden = true
+            SwiftMessages.show(view: errorMessageView)
+        }
     }
 }
