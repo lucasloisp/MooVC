@@ -76,3 +76,73 @@ a list of movies together with close-by friends or family. While the screen is
 controlled by the `PeerViewController` class the underlying logic of talking to
 other devices through the Multipeer connectivity framework is abstracted away by
 the MovieSharing class, to hide the details of peer finding and encoding.
+
+## Architecture
+
+To correctly follow the MVC architecture, and because the sectioned grid
+displayed on the Discovery screen was implemented with a `UITableView` for the
+sections, and a horizontal `UICollectionView` for each row, secondary classes
+had to be introduced in the controller layer, to make sure that the view layer
+(through the `UITableViewCell`) did not take care of its collection view data
+source or delegate. Additionally, because we wanted taps on each movie card to
+navigate the user into the "details" screen, and because navigation was
+ultimately managed at the higher level of the `DiscoverViewController` itself,
+we had to create some indirection to propagate taps up to the controller layer
+too.
+
+The class introduced would then be generalized to handle collection views of
+movie titles more broadly, be it by genre, search, or favorites, whether horizontal
+or in a wrapping grid. This is the MovieListingController, a class that is bound
+to a given collection view and is charged with populating its cells. The class
+links as a delegate to the collection view but forwards the `didSelectItemAt`
+message to a delegate of its own, of protocol `MovieListingControllerDelegate`
+so the view controller at the higher level could navigate accordingly.
+
+Different extensions to the `MovieListingController` manage the list a bit
+differently. `AppendingMovieListingController` allows for the manual addition of
+films, by peers, and the `InfiniteMovieListingController`, in collaboration with
+the `MovieListingPageManager` and `MovieListingPager`, handles a paged infinite
+scroll.
+
+```mermaid
+classDiagram
+    direction LR
+    namespace ViewControllers {
+        class DiscoverViewController
+        class SearchViewController
+        class FavouritesViewController
+        class PeerViewController
+    }
+
+    DiscoverViewController --> "*" GenreMovieListingController
+    PeerViewController --> AppendingMovieListingController
+    FavouritesViewController --> InfiniteMovieListingController
+    SearchViewController --> InfiniteMovieListingController
+
+    GenreMovieListingController --|> MovieListingController
+    AppendingMovieListingController --|> MovieListingController
+    InfiniteMovieListingController --|> MovieListingController
+
+    class MovieListingController {
+        -movies: [Movie]
+    }
+
+    MovieListingController --> MovieListingControllerDelegate
+
+    class MovieListingControllerDelegate {
+        <<Interface>>
+        didSelect(movie: Movie)
+    }
+
+    InfiniteMovieListingController *-- MovieListingPageManager
+    class MovieListingPageManager {
+        isInFirstPage: Bool
+        restart()
+        fetchPage()
+    }
+    MovieListingPageManager *-- MovieListingPager
+    class MovieListingPager {
+        <<Interface>>
+        fetchPage()
+    }
+```
