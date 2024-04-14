@@ -44,7 +44,14 @@ a sign-up flow. The `LoginViewController` is responsible for the flow, in
 collaboration with the `SessionManager` singleton in order to call the "Create
 Request Token", "Create Session (with login)" and "Create Session" endpoints.
 
+<img width="200" src="demo/login.png">
+
 ### Discovery, Search and Favorites
+
+<img width="200" src="demo/discover_tab.png">
+<img width="200" src="demo/search_tab.png">
+<img width="200" src="demo/favourites_tab.png">
+<img width="200" src="demo/details_screen.png">
 
 The main tab of MooVC is the Discovery screen. Here users can see the most
 popular movies in each genre, with the option to load more films on a particular
@@ -61,6 +68,8 @@ be seen on the "favorite movies" tab, controlled by the
 `FavouritesViewController` class.
 
 ### Peer-to-peer sharing
+
+![A video demo of peer-to-peer sharing](demo/sharing.mov)
 
 By hopping onto the final tab, users can enable "peer to peer" sharing, to build
 a list of movies together with close-by friends or family. While the screen is
